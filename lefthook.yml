@@ -8,3 +8,8 @@ pre-commit:
       glob: '*.{ts,tsx,css}'
       run: yarn prettier -w {staged_files}
       stage_fixed: true
+
+commit-msg:
+  commands:
+    lint-commit-msg:
+      run: npx commitlint --edit
