@@ -1,7 +1,7 @@
 module.exports = {
   env: {
     browser: true,
-    es2020: true,
+    es2024: true,
     node: true,
   },
   extends: [
@@ -17,5 +17,8 @@ module.exports = {
   plugins: ['@typescript-eslint'],
   rules: {
     '@typescript-eslint/ban-ts-comment': 1,
+    'unicorn/prevent-abbreviations': 'off',
+    'unicorn/no-null': 'off',
+    'unicorn/prefer-module': 'off',
   },
 }
