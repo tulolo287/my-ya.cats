@@ -1,0 +1,21 @@
+.input {
+  height: 33px;
+  border: 4px solid var(--primary-text-color);
+  padding: 0 10px;
+}
+
+.input:focus-visible {
+  outline: none;
+}
+
+.label {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+}
+
+.error {
+  font-size: 0.75rem;
+  height: 12px;
+  color: #ac3232;
+}
