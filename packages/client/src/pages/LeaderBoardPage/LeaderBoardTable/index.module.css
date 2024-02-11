@@ -1,0 +1,35 @@
+.recordList {
+  padding: 50px 155px;
+  margin: 0;
+  margin-bottom: 60px;
+  width: 100%;
+  /* 500px - высота всех элементов и отступов*/
+  max-height: calc(100% - 500px);
+  background-color: rgba(var(--neutral-color), 0.3);
+  backdrop-filter: blur(30px);
+  box-shadow: 8px 8px 0 var(--dark-color);
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-gap: 50px 100px;
+  list-style: none;
+  counter-reset: record-counter;
+}
+
+.record {
+  display: flex;
+  counter-increment: record-counter;
+
+  &::before {
+    content: counter(record-counter);
+    margin-right: 20px;
+  }
+}
+
+.name {
+  margin-right: 30px;
+  width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
