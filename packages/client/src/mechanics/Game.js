@@ -26,7 +26,7 @@ export class Game {
   }
 
   draw(ctx) {
-
+    ctx.clearRect(0, 0, this.gameScreen.width, this.gameScreen.height)
     this.gameScreen.draw(ctx)
     this.player.draw(ctx)
   }

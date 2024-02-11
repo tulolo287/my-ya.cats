@@ -10,10 +10,9 @@ export class GameScreen {
     this.bg2_x = 0;
     this.bg3_x = 0;
 
-    this.widthOffset = this.width - 2;
-    this.bg1_2_x = this.widthOffset;
-    this.bg2_2_x = this.widthOffset;
-    this.bg3_2_x = this.widthOffset;
+    this.bg1_2_x = this.width;
+    this.bg2_2_x = this.width;
+    this.bg3_2_x = this.width;
 
     this.bg1_xv = 1
     this.bg2_xv = 1.3
@@ -50,23 +49,23 @@ export class GameScreen {
     this.bg2_2_x -= this.bg2_xv * this.gameSettings.gameSpeed * dt;
     this.bg3_2_x -= this.bg3_xv * this.gameSettings.gameSpeed * dt;
 
-    if (this.bg1_x <= -this.widthOffset) {
-      this.bg1_x = this.widthOffset;
+    if (this.bg1_x <= -this.width) {
+      this.bg1_x = this.width - (this.bg1_2_x * -1);
     }
-    if (this.bg1_2_x <= -this.widthOffset) {
-      this.bg1_2_x = this.widthOffset;
+    if (this.bg1_2_x <= -this.width) {
+      this.bg1_2_x = this.width - (this.bg1_x * -1);
     }
-    if (this.bg2_x <= -this.widthOffset) {
-      this.bg2_x = this.widthOffset;
+    if (this.bg2_x <= -this.width) {
+      this.bg2_x = this.width - (this.bg2_2_x * -1);
     }
-    if (this.bg2_2_x <= -this.widthOffset) {
-      this.bg2_2_x = this.widthOffset;
+    if (this.bg2_2_x <= -this.width) {
+      this.bg2_2_x = this.width - (this.bg2_x * -1);
     }
-    if (this.bg3_x <= -this.widthOffset) {
-      this.bg3_x = this.widthOffset;
+    if (this.bg3_x <= -this.width) {
+      this.bg3_x = this.width - (this.bg3_2_x * -1);
     }
-    if (this.bg3_2_x <= -this.widthOffset) {
-      this.bg3_2_x = this.widthOffset;
+    if (this.bg3_2_x <= -this.width) {
+      this.bg3_2_x = this.width - (this.bg3_x * -1);
     }
   }
 }
