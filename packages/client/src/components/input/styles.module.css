@@ -1,6 +1,7 @@
 .input {
   border: 4px solid var(--primary-text-color);
   padding: 0 10px;
+  font-size: 1em;
 }
 
 .input:focus-visible {
