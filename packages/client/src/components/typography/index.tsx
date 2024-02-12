@@ -1,4 +1,4 @@
-interface ITypographyProps {
+type TypographyProps = {
   size: 'xl' | 'l' | 'm' | 's'
   children: React.ReactNode
   align?: 'center' | 'left' | 'right'
@@ -11,10 +11,10 @@ enum FontSize {
   's' = '14px',
 }
 
-export const Typography = (props: ITypographyProps) => {
+export const Typography = (props: TypographyProps) => {
   const fontStyles = {
     fontSize: FontSize[props.size],
     textAlign: props.align || 'right',
   }
-  return <span style={fontStyles}>{props.children}</span>
+  return <p style={fontStyles}>{props.children}</p>
 }

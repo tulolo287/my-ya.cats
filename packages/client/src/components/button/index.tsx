@@ -1,11 +1,11 @@
 import styles from './styles.module.css'
 
-interface IButtonProps {
+type ButtonProps = {
   color?: 'orange' | 'white'
 }
 
 export const Button = (
-  props: React.ComponentPropsWithoutRef<'button'> & IButtonProps
+  props: React.ComponentPropsWithoutRef<'button'> & ButtonProps
 ) => {
   const { children, className, color = 'white' } = props
   return (

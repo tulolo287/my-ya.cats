@@ -1,5 +1,4 @@
 .input {
-  height: 33px;
   border: 4px solid var(--primary-text-color);
   padding: 0 10px;
 }
@@ -9,7 +8,6 @@
 }
 
 .label {
-  width: 200px;
   display: flex;
   flex-direction: column;
 }

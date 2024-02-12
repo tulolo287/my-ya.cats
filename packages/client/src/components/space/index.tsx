@@ -1,12 +1,12 @@
 import styles from './styles.module.css'
 
-interface ISpaceProps {
+type SpaceProps = {
   direction?: 'column' | 'row'
   gap?: string
 }
 
 export const Space = (
-  props: React.ComponentPropsWithoutRef<'div'> & ISpaceProps
+  props: React.ComponentPropsWithoutRef<'div'> & SpaceProps
 ) => {
   const { direction = 'column', gap } = props
   const spaceStyle = {

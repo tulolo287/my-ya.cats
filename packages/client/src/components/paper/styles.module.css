@@ -2,7 +2,7 @@
   --image: url('../../../public/background_layer_1.png');
   --paper-background-color: rgba(255, 255, 255, 0.3);
 }
-.display {
+/* .display {
   position: absolute;
   left: 0;
   top: 0;
@@ -12,7 +12,7 @@
   justify-content: center;
   flex-direction: column;
   background-image: var(--image);
-}
+} */
 
 .paper {
   padding: 70px;

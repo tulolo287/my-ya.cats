@@ -1,0 +1,15 @@
+.center {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.center > * {
+  margin-left: auto;
+  margin-right: auto;
+}

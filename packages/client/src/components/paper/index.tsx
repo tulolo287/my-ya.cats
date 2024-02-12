@@ -1,8 +1,7 @@
 import styles from './styles.module.css'
 
-interface IPaperProps {
+type PaperProps = {
   children: React.ReactNode
-  image?: string[]
   background?: 'blue' | 'transparent'
 }
 
@@ -11,15 +10,7 @@ enum backroundColors {
   transparent = 'rgba(255, 255, 255, 0.3)',
 }
 
-export const Paper = (props: IPaperProps) => {
-  if (props.image) {
-    const urls = props.image
-      .reduce((acc, el) => acc + `url('../../../public/${el}') `, '')
-      .trim()
-      .replaceAll(' ', ', ')
-    const root = document.documentElement
-    root.style.setProperty('--image', urls)
-  }
+export const Paper = (props: PaperProps) => {
   if (props.background) {
     const root = document.documentElement
     root.style.setProperty(
@@ -28,9 +19,5 @@ export const Paper = (props: IPaperProps) => {
     )
   }
 
-  return (
-    <div className={styles.display}>
-      <div className={styles.paper}>{props.children}</div>
-    </div>
-  )
+  return <div className={styles.paper}>{props.children}</div>
 }
