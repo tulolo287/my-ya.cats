@@ -9,7 +9,7 @@ export class Player {
     this.scaleHeight = 120;
     this.x = this.gameSettings.width / 2 - this.width / 2;
     this.y = this.gameSettings.height / 2 - this.height;
-    this.gravity = 1 * this.gameSettings.gameSpeed;
+    this.gravity = .5;
     this.y_velocity = 0;
     this.x_velocity = 5;
     this.friction = 0.5;
@@ -22,16 +22,14 @@ export class Player {
     this.acceleration = 3;
     this.image = new Image();
     this.image.src = "./Cat-Sheet_1.png";
-    this.animationSpeed = Math.floor(100 / this.gameSettings.gameSpeed);
+    this.animationSpeed = Math.floor(4 / this.gameSettings.gameSpeed);
     this.frameCount = 0;
     this.currentAnimation = "walk";
   }
 
-  update(dt) {
-    this.animate(dt);
-    //this.gravity = 0.5 * this.gameSettings.gameSpeed;
-    //this.maxY_velocity = 30 * this.gameSettings.gameSpeed;
-    //this.animationSpeed = Math.floor(150 / this.gameSettings.gameSpeed);
+  update() {
+    this.animate();
+    this.animationSpeed = Math.floor(4 / this.gameSettings.gameSpeed);
     this.y_velocity += this.gravity;
     if (this.y_velocity > this.maxY_velocity) {
       this.y_velocity = this.maxY_velocity;
@@ -40,7 +38,7 @@ export class Player {
     if (InputController.KEYS.space) {
       this.jump();
     }
-    this.y += this.y_velocity * dt;
+    this.y += this.y_velocity;
   }
 
   animate = () => {

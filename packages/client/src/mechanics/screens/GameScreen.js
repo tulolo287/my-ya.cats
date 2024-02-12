@@ -15,8 +15,8 @@ export class GameScreen {
     this.bg3_2_x = this.width;
 
     this.bg1_xv = 1
-    this.bg2_xv = 1.3
-    this.bg3_xv = 2;
+    this.bg2_xv = 2
+    this.bg3_xv = 4;
 
     this.bg1 = new Image();
     this.bg2 = new Image();
@@ -40,14 +40,14 @@ export class GameScreen {
     ctx.drawImage(this.bg3, Math.floor(this.bg3_2_x), 0, this.width, this.height);
   }
 
-  update(dt) {
-    this.bg1_x -= this.bg1_xv * this.gameSettings.gameSpeed * dt;
-    this.bg2_x -= this.bg2_xv * this.gameSettings.gameSpeed * dt;
-    this.bg3_x -= this.bg3_xv * this.gameSettings.gameSpeed * dt;
+  update() {
+    this.bg1_x -= this.bg1_xv * this.gameSettings.gameSpeed;
+    this.bg2_x -= this.bg2_xv * this.gameSettings.gameSpeed;
+    this.bg3_x -= this.bg3_xv * this.gameSettings.gameSpeed;
 
-    this.bg1_2_x -= this.bg1_xv * this.gameSettings.gameSpeed * dt;
-    this.bg2_2_x -= this.bg2_xv * this.gameSettings.gameSpeed * dt;
-    this.bg3_2_x -= this.bg3_xv * this.gameSettings.gameSpeed * dt;
+    this.bg1_2_x -= this.bg1_xv * this.gameSettings.gameSpeed;
+    this.bg2_2_x -= this.bg2_xv * this.gameSettings.gameSpeed;
+    this.bg3_2_x -= this.bg3_xv * this.gameSettings.gameSpeed;
 
     if (this.bg1_x <= -this.width) {
       this.bg1_x = this.width - (this.bg1_2_x * -1);

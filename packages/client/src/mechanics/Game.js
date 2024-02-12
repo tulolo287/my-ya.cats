@@ -15,14 +15,16 @@ export class Game {
     this.lastRun = 0
 
     setInterval(() => {
-      //this.gameSettings.gameSpeed += 5;
+      if(this.gameSettings.gameSpeed < 3.9) {
+        this.gameSettings.gameSpeed += .01;
+      } 
       //this.levelUp();
-    }, 2000)
+    }, 1000)
   }
 
-  update(delta) {
-    this.player.update(delta)
-    this.gameScreen.update(delta)
+  update() {
+    this.player.update()
+    this.gameScreen.update()
   }
 
   draw(ctx) {

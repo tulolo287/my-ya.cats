@@ -13,20 +13,27 @@ const GamePage = () => {
     canvas.width = gameSettings.width
     canvas.height = gameSettings.height
     let loopId = 0
-    let lastTime = performance.now()
+    let prevTime = performance.now()
+    let accTime = 0
+    const msPerFrame = 14
 
     const game = new Game()
 
     const loop = () => {
-      //const fps = 1 / 60
       const nowTime = performance.now()
-      const delta = (nowTime - lastTime) / 1000
-      lastTime = nowTime
+      const delta = nowTime - prevTime
+      prevTime = nowTime
 
-      //console.log(fps)
-      //console.log('FPS', 1 / delta)
+      accTime = delta
 
-      game.update(delta)
+      if (accTime > msPerFrame) {
+        while (accTime > msPerFrame) {
+          accTime -= msPerFrame
+          game.update()
+        }
+      }
+      console.log('FPS', 1000 / delta)
+
       game.draw(context)
       loopId = window.requestAnimationFrame(loop)
     }
