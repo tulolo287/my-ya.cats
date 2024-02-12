@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './styles.module.css'
 
 type InputProps = {
-  type?: 'text' | 'password' | 'email' | 'tel' | 'numder'
+  type?: 'text' | 'password' | 'email' | 'tel' | 'number'
   label?: string
   errorMessage?: string
   w?: string

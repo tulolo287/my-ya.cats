@@ -2,14 +2,10 @@
   position: absolute;
   left: 0;
   top: 0;
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   display: flex;
   justify-content: center;
   flex-direction: column;
-}
-
-.center > * {
-  margin-left: auto;
-  margin-right: auto;
+  align-items: center;
 }

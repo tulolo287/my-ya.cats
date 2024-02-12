@@ -2,6 +2,7 @@ type TypographyProps = {
   size: 'xl' | 'l' | 'm' | 's'
   children: React.ReactNode
   align?: 'center' | 'left' | 'right'
+  tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'p'
 }
 
 enum FontSize {
@@ -12,9 +13,10 @@ enum FontSize {
 }
 
 export const Typography = (props: TypographyProps) => {
+  const CustomTag = props.tag || 'p'
   const fontStyles = {
     fontSize: FontSize[props.size],
     textAlign: props.align || 'right',
   }
-  return <p style={fontStyles}>{props.children}</p>
+  return <CustomTag style={fontStyles}>{props.children}</CustomTag>
 }
