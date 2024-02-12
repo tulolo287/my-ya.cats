@@ -2,7 +2,7 @@ import stylesFontSize from '@style/font-size.module.css'
 import { TFontSize } from '@core/types'
 
 type TypographyProps = {
-  fontSize: TFontSize
+  fontSize?: TFontSize
   children: React.ReactNode
   align?: 'center' | 'left' | 'right'
   tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'p'

@@ -1,8 +1,9 @@
+import { DimensionsProp } from '@/core/types'
 import styles from './styles.module.css'
 
 type SpaceProps = {
   direction?: 'column' | 'row'
-  gap?: string
+  gap?: DimensionsProp
 }
 
 export const Space = (

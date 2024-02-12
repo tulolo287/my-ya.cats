@@ -1,14 +1,14 @@
 import React from 'react'
 import styles from './styles.module.css'
 import stylesFontSize from '@style/font-size.module.css'
-import { TFontSize } from '@core/types'
+import { DimensionsProp, TFontSize } from '@core/types'
 
 type InputProps = {
   type?: 'text' | 'password' | 'email' | 'tel' | 'number'
   label?: string
   errorMessage?: string
-  w?: string
-  h?: string
+  w?: DimensionsProp
+  h?: DimensionsProp
   fontSize?: TFontSize
 }
 
