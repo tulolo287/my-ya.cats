@@ -1,22 +1,23 @@
+import stylesFontSize from '@style/font-size.module.css'
+import { TFontSize } from '@core/types'
+
 type TypographyProps = {
-  size: 'xl' | 'l' | 'm' | 's'
+  fontSize: TFontSize
   children: React.ReactNode
   align?: 'center' | 'left' | 'right'
   tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'p'
 }
 
-enum FontSize {
-  'xl' = '95px',
-  'l' = '40px',
-  'm' = '28px',
-  's' = '14px',
-}
-
 export const Typography = (props: TypographyProps) => {
   const CustomTag = props.tag || 'p'
   const fontStyles = {
-    fontSize: FontSize[props.size],
-    textAlign: props.align || 'right',
+    textAlign: props.align || 'left',
   }
-  return <CustomTag style={fontStyles}>{props.children}</CustomTag>
+  return (
+    <CustomTag
+      style={fontStyles}
+      className={stylesFontSize[props.fontSize || 'm']}>
+      {props.children}
+    </CustomTag>
+  )
 }
