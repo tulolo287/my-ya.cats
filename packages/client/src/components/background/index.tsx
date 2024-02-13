@@ -3,6 +3,11 @@ import styles from './styles.module.css'
 type BackgroundProps = {
   children: React.ReactNode
   className?: string
+  /**
+   * массив картинок фона страницы
+   * должна находлиться в папке public
+   * если указать несколько самой верхней будет первая
+   */
   images?: string[]
 }
 

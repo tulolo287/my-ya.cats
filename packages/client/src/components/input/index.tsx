@@ -4,11 +4,32 @@ import stylesFontSize from '@style/font-size.module.css'
 import { DimensionsProp, TFontSize } from '@core/types'
 
 type InputProps = {
+  /**
+   * тип инпута
+   */
   type?: 'text' | 'password' | 'email' | 'tel' | 'number'
+  /**
+   * текст лейбла
+   */
   label?: string
+  /**
+   * текст ошибки
+   */
   errorMessage?: string
+  /**
+   * ширина импута
+   * @default '200px'
+   */
   w?: DimensionsProp
+  /**
+   * высота импута
+   * @default '33px'
+   */
   h?: DimensionsProp
+  /**
+   * размер тектса лейбла и внутри импута
+   * @default 'm'
+   */
   fontSize?: TFontSize
 }
 

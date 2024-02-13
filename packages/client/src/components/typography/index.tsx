@@ -2,9 +2,21 @@ import stylesFontSize from '@style/font-size.module.css'
 import { TFontSize } from '@core/types'
 
 type TypographyProps = {
+  /**
+   * размер текста
+   * @default 'm'
+   */
   fontSize?: TFontSize
   children: React.ReactNode
+  /**
+   * выранивание текста по центру, справа или слева
+   * @default 'left'
+   */
   align?: 'center' | 'left' | 'right'
+  /**
+   * тэг
+   * @default 'p'
+   */
   tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'p'
 }
 

@@ -2,6 +2,10 @@ import styles from './styles.module.css'
 
 type PaperProps = {
   children: React.ReactNode
+  /**
+   * фон контейнера
+   * @default 'transparent'
+   */
   background?: 'blue' | 'transparent'
 }
 

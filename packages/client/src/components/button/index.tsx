@@ -3,9 +3,25 @@ import styles from './styles.module.css'
 import stylesFontSize from '@style/font-size.module.css'
 
 type ButtonProps = {
+  /**
+   * цвет кнопки
+   * @default 'white'
+   */
   color?: 'orange' | 'white'
+  /**
+   * размер текста внутри кнопки
+   * @default 'l'
+   */
   fontSize?: TFontSize
+  /**
+   * ширина кнопки
+   * @default '200px'
+   */
   w?: DimensionsProp
+  /**
+   * высота кнопки
+   * @default '41px'
+   */
   h?: DimensionsProp
 }
 
