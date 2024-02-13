@@ -16,7 +16,7 @@ export class Player {
 
     this.collisionArea = {
       y: this.y + 60,
-      x: this.x + 40,
+      x: this.x + 30,
       width: this.scaleWidth * 0.5,
       height: this.scaleHeight * 0.5,
     }
