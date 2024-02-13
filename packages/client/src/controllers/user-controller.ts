@@ -1,7 +1,7 @@
-import { UserAPI } from '../services/user-api'
+import { UserAPI } from '@services/user-api'
 
-import { ServerError } from '../types/server-error'
-import { UserPasswordData } from '../types/user-password-data'
+import { ServerError } from '@core/types'
+import { UserPasswordData } from '@core/types'
 
 class UserController {
   private api = new UserAPI()
