@@ -1,0 +1,16 @@
+.topicItem {
+  align-items: center;
+}
+
+.name {
+  flex-grow: 1;
+  min-width: 250px;
+  max-width: 600px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-wrap: nowrap;
+}
+
+.number {
+  color: var(--orange);
+}
