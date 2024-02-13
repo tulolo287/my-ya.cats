@@ -22,7 +22,9 @@
       "@assets/*": ["src/assets/*"],
       "@core/*": ["src/core/*"],
       "@pages/*": ["src/pages/*"],
-      "@syyle/*": ["src/style/*"]
+      "@style/*": ["src/style/*"],
+      "@controllers/*": ["src/controllers/*"],
+      "@services/*": ["src/services/*"],
     }
   },
   "include": ["src"],

@@ -5,7 +5,6 @@ import path from 'node:path'
 dotenv.config({ path: '../../.env' })
 
 export default ({ mode }) => {
-  // Load app-level env vars to node-level env vars.
   process.env = { ...process.env, ...loadEnv(mode, process.cwd()) }
 
   return defineConfig({
@@ -23,6 +22,8 @@ export default ({ mode }) => {
         '@core': path.resolve(__dirname, './src/core'),
         '@pages': path.resolve(__dirname, './src/pages'),
         '@style': path.resolve(__dirname, './src/style'),
+        '@controllers': path.resolve(__dirname, './src/controllers'),
+        '@services': path.resolve(__dirname, './src/services'),
       },
     },
     plugins: [react()],
