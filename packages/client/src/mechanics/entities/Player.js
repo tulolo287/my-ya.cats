@@ -1,14 +1,26 @@
 import { InputController } from "../controllers/InputController";
+import { isCollided } from "../utils";
 
 export class Player {
-  constructor(gameSettings) {
-    this.gameSettings = gameSettings;
+  constructor(game) {
+    this.game = game;
+    this.gameSettings = game.gameSettings;
+
     this.width = 618 / 8;
-    this.height = 618 / 8;
+    this.height = 3940 / 51;
     this.scaleWidth = 120;
     this.scaleHeight = 120;
+
     this.x = this.gameSettings.width / 2 - this.width / 2;
     this.y = this.gameSettings.height / 2 - this.height;
+
+    this.collisionArea = {
+      y: this.y + 60,
+      x: this.x + 40,
+      width: this.scaleWidth * 0.5,
+      height: this.scaleHeight * 0.5,
+    }
+
     this.gravity = .5;
     this.y_velocity = 0;
     this.x_velocity = 5;
@@ -39,10 +51,16 @@ export class Player {
       this.jump();
     }
     this.y += this.y_velocity;
+    this.collisionArea.y = this.y + 60;
   }
 
   animate = () => {
-    if (this.y_velocity > 0) this.currentAnimation = "fall";
+    if (this.y_velocity > 0) {
+      this.currentAnimation = "fall";
+    }
+    if (this.frameX > this.gameSettings.playerAnimation[this.currentAnimation].totalFrames) {
+      this.frameX = 0;
+    }
 
     this.frameY =
       this.gameSettings.playerAnimation[this.currentAnimation].frameY;
@@ -66,7 +84,8 @@ export class Player {
   };
 
   jump() {
-    //InputController.KEYS.space = false;
+    InputController.KEYS.space = false;
+
     if (!this.isGround()) {
       return;
     }
@@ -83,11 +102,15 @@ export class Player {
   }
 
   isGround() {
-    if (this.y + this.scaleHeight >= this.gameSettings.height) {
-      this.y = this.gameSettings.height - this.scaleHeight;
-      this.y_velocity = 0;
-      this.currentAnimation = "walk";
-      return true;
+
+    for (let i = 0; i < this.game.platforms.length; i++) {
+      let obstacle = isCollided(this, this.game.platforms[i])
+      if (obstacle) {
+        this.y_velocity = 0;
+        this.y = obstacle.y - this.scaleHeight
+        this.currentAnimation = "walk";
+        return true;
+      }
     }
     return false;
   }
@@ -98,7 +121,7 @@ export class Player {
       this.frameX * this.width,
       this.frameY * this.height,
       this.width,
-      this.width,
+      this.height,
       Math.floor(this.x),
       Math.floor(this.y),
       this.scaleWidth,
@@ -106,7 +129,17 @@ export class Player {
     );
   }
 
+  drawCollisionArea(ctx) {
+    ctx.beginPath();
+    ctx.lineWidth = "4";
+    ctx.strokeStyle = "green";
+    ctx.rect(this.collisionArea.x, this.collisionArea.y, this.collisionArea.width, this.collisionArea.height);
+    ctx.stroke();
+    ctx.closePath();
+  }
+
   draw(ctx) {
     this.drawPlayer(ctx);
+    //this.drawCollisionArea(ctx);
   }
 }

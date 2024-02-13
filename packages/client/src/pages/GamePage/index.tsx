@@ -32,7 +32,7 @@ const GamePage = () => {
           game.update()
         }
       }
-      console.log('FPS', 1000 / delta)
+      //console.log('FPS', 1000 / delta)
 
       game.draw(context)
       loopId = window.requestAnimationFrame(loop)

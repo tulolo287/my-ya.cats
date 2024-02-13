@@ -1,7 +1,7 @@
 export default {
   width: 1600,
   height: 700,
-  gameSpeed: .5,
+  gameSpeed: 1,
   parallaxBackground: [
     {
       src: "./images/background_layer_1.png",
