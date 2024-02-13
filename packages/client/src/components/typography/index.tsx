@@ -18,6 +18,7 @@ type TypographyProps = {
    * @default 'p'
    */
   tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'p'
+  className?: string
 }
 
 export const Typography = (props: TypographyProps) => {
@@ -28,7 +29,9 @@ export const Typography = (props: TypographyProps) => {
   return (
     <CustomTag
       style={fontStyles}
-      className={stylesFontSize[props.fontSize || 'm']}>
+      className={`${stylesFontSize[props.fontSize || 'm']} ${
+        props.className || ''
+      }`}>
       {props.children}
     </CustomTag>
   )
