@@ -1,8 +1,11 @@
 import { SyntheticEvent } from 'react'
-import { Button } from '../../../components/button'
-import { Input } from '../../../components/input'
-import { UserPasswordData } from '../../../types/user-password-data'
-import UserController from '../../../controllers/user-controller'
+
+import { Button } from '@components/button'
+import { Input } from '@components/input'
+import { Space } from '@components/space'
+import { Typography } from '@components/typography'
+import UserController from '@controllers/user-controller'
+import { UserPasswordData } from '@core/types'
 
 import styles from './styles.module.css'
 
@@ -27,22 +30,38 @@ const onSubmit = async (e: SyntheticEvent) => {
 
 export const EditPasswordModalContent = () => {
   return (
-    <>
-      <h2 className={styles.title}>изменение пароля</h2>
+    <Space gap="32px">
+      <Typography align="center" tag="h2" fontSize="xl" color="white">
+        Изменение пароля
+      </Typography>
 
       <form className={styles.form} onSubmit={onSubmit}>
-        <Input type="password" label="Старый пароль" name="oldPassword" />
-        <Input type="password" label="Новый пароль" name="newPassword" />
-        <Input
-          type="password"
-          label="Новый пароль (еще раз)"
-          name="repeatPassword"
-        />
+        <Space gap="24px" className={styles.content}>
+          <Input
+            type="password"
+            label="Старый пароль"
+            name="oldPassword"
+            w="100%"
+            h="48px"
+          />
+          <Input
+            type="password"
+            label="Новый пароль"
+            name="newPassword"
+            w="100%"
+            h="48px"
+          />
+          <Input
+            type="password"
+            label="Новый пароль (еще раз)"
+            name="repeatPassword"
+            w="100%"
+            h="48px"
+          />
 
-        <Button className={styles.button} color="orange">
-          Сохранить
-        </Button>
+          <Button color="orange">Сохранить</Button>
+        </Space>
       </form>
-    </>
+    </Space>
   )
 }

@@ -1,8 +1,12 @@
 .avatarUpload {
   width: 160px;
   height: 160px;
-  margin-bottom: 34px;
+  margin-bottom: 32px;
   border-radius: 50%;
   border: none;
   cursor: pointer;
+}
+
+.content {
+  align-items: center;
 }
