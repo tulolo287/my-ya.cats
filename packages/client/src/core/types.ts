@@ -13,7 +13,7 @@ export type UserPasswordData = {
 }
 
 export type UserAvatarData = {
-  id: 112
+  id: number
   login: string
   first_name: string
   second_name: string
