@@ -50,7 +50,7 @@ export const AvatarUpload = () => {
           <form onSubmit={onSubmit}>
             <Space gap="32px" className={styles.content}>
               <Typography fontSize="xl" tag="h2" color="white">
-                Изменение аватара
+                Change avatar
               </Typography>
 
               <input
@@ -60,7 +60,7 @@ export const AvatarUpload = () => {
                 onChange={onChange}
               />
 
-              <Button>Изменить</Button>
+              <Button>Change</Button>
             </Space>
           </form>
         </Modal>

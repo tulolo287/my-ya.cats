@@ -32,34 +32,34 @@ export const EditPasswordModalContent = () => {
   return (
     <Space gap="32px">
       <Typography align="center" tag="h2" fontSize="xl" color="white">
-        Изменение пароля
+        Change password
       </Typography>
 
       <form className={styles.form} onSubmit={onSubmit}>
         <Space gap="24px" className={styles.content}>
           <Input
             type="password"
-            label="Старый пароль"
+            label="Old password"
             name="oldPassword"
             w="100%"
             h="48px"
           />
           <Input
             type="password"
-            label="Новый пароль"
+            label="New password"
             name="newPassword"
             w="100%"
             h="48px"
           />
           <Input
             type="password"
-            label="Новый пароль (еще раз)"
+            label="Repeat new password"
             name="repeatPassword"
             w="100%"
             h="48px"
           />
 
-          <Button color="orange">Сохранить</Button>
+          <Button color="orange">Save</Button>
         </Space>
       </form>
     </Space>

@@ -27,7 +27,7 @@ const ProfilePage = () => {
               <Input
                 type="text"
                 label="Name"
-                placeholder="Имя"
+                placeholder="Name"
                 w="100%"
                 h="48px"
               />
@@ -41,14 +41,14 @@ const ProfilePage = () => {
               <Input
                 type="text"
                 label="Second name"
-                placeholder="Фамилия"
+                placeholder="Second name"
                 w="100%"
                 h="48px"
               />
               <Input
                 type="text"
                 label="Login"
-                placeholder="Логин"
+                placeholder="Login"
                 w="100%"
                 h="48px"
               />
@@ -61,16 +61,16 @@ const ProfilePage = () => {
               />
             </div>
             <Button color="orange" w="400px" h="66px">
-              Редактировать
+              Edit
             </Button>
             <Space className={styles.links} gap="8px">
               <button
                 className={styles.link}
                 onClick={() => setShowModal(true)}>
-                Изменить пароль
+                Change password
               </button>
               <button className={styles.link} onClick={() => navigate('/')}>
-                Назад
+                Back
               </button>
             </Space>
           </Space>
