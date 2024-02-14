@@ -24,7 +24,7 @@ type TypographyProps = {
    * цвет заголовка
    * @default 'black'
    */
-  color?: 'white'
+  color?: 'white' | 'black'
 }
 
 export const Typography = (props: TypographyProps) => {
