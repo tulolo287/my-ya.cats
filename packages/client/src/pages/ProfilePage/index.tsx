@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 
 import { Background } from '@components/background'
 import { Button } from '@components/button'
+import { Center } from '@components/center'
 import { Input } from '@components/input'
 import { Modal } from '@components/modal'
 import { Paper } from '@components/paper'
@@ -12,7 +13,6 @@ import { AvatarUpload } from './AvatarUpload'
 import { EditPasswordModalContent } from './EditPasswordModalContent'
 
 import styles from './styles.module.css'
-import { Center } from '@/components/center'
 
 const ProfilePage = () => {
   const navigate = useNavigate()

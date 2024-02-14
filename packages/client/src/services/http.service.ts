@@ -11,7 +11,7 @@ export class HTTPService {
   protected endpoint: string
 
   constructor(endpoint: string) {
-    this.endpoint = `${import.meta.env.VITE_API_URL}${endpoint}`
+    this.endpoint = `${process.env.API_URL}${endpoint}`
   }
 
   get = (url = '/', options = {}) => {
