@@ -1,5 +1,4 @@
 import { useState, ChangeEvent, SyntheticEvent, CSSProperties } from 'react'
-import { createPortal } from 'react-dom'
 
 import { Button } from '@components/button'
 import { Modal } from '@components/modal'
@@ -46,28 +45,26 @@ export const AvatarUpload = () => {
         onClick={() => setShowModal(true)}
       />
 
-      {showModal &&
-        createPortal(
-          <Modal onClose={() => setShowModal(false)}>
-            <form onSubmit={onSubmit}>
-              <Space gap="32px" className={styles.content}>
-                <Typography fontSize="xl" tag="h2" color="white">
-                  Изменение аватара
-                </Typography>
+      {showModal && (
+        <Modal onClose={() => setShowModal(false)}>
+          <form onSubmit={onSubmit}>
+            <Space gap="32px" className={styles.content}>
+              <Typography fontSize="xl" tag="h2" color="white">
+                Изменение аватара
+              </Typography>
 
-                <input
-                  name="avatar"
-                  type="file"
-                  accept="image/*"
-                  onChange={onChange}
-                />
+              <input
+                name="avatar"
+                type="file"
+                accept="image/*"
+                onChange={onChange}
+              />
 
-                <Button>Изменить</Button>
-              </Space>
-            </form>
-          </Modal>,
-          document.body
-        )}
+              <Button>Изменить</Button>
+            </Space>
+          </form>
+        </Modal>
+      )}
     </>
   )
 }

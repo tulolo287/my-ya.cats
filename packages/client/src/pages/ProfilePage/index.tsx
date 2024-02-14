@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { createPortal } from 'react-dom'
 import { useNavigate } from 'react-router-dom'
 
 import { Background } from '@components/background'
@@ -78,13 +77,11 @@ const ProfilePage = () => {
         </Paper>
       </Center>
 
-      {showModal &&
-        createPortal(
-          <Modal onClose={() => setShowModal(false)}>
-            <EditPasswordModalContent />
-          </Modal>,
-          document.body
-        )}
+      {showModal && (
+        <Modal onClose={() => setShowModal(false)}>
+          <EditPasswordModalContent />
+        </Modal>
+      )}
     </Background>
   )
 }

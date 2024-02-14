@@ -1,4 +1,5 @@
 import { ReactNode, SyntheticEvent } from 'react'
+import { createPortal } from 'react-dom'
 
 import styles from './styles.module.css'
 
@@ -16,9 +17,10 @@ export const Modal = ({ onClose, children }: Props) => {
     onClose()
   }
 
-  return (
+  return createPortal(
     <div className={styles.overlay} onClick={closeByOverlayOnly}>
       <section className={styles.modal}>{children}</section>
-    </div>
+    </div>,
+    document.body
   )
 }
