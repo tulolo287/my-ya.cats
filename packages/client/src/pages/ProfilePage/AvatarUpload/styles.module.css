@@ -5,6 +5,10 @@
   border-radius: 50%;
   border: none;
   cursor: pointer;
+  background-color: var(--grey);
+  background-image: var(--avatar-image);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .content {

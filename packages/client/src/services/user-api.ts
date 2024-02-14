@@ -6,11 +6,11 @@ export class UserAPI extends API {
     super('/user')
   }
 
-  public async changeUserAvatar(data: FormData) {
-    return await this.http.put('/profile/avatar', { data })
+  public async changeUserAvatar<Response>(data: FormData) {
+    return await this.http.put<Response>('/profile/avatar', { data })
   }
 
-  public async changeUserPassword(data: UserPasswordData) {
-    return await this.http.put('/password', { data })
+  public async changeUserPassword<Response>(data: UserPasswordData) {
+    return await this.http.put<Response>('/password', { data })
   }
 }

@@ -11,3 +11,14 @@ export type UserPasswordData = {
   oldPassword: string
   newPassword: string
 }
+
+export type UserAvatarData = {
+  id: 112
+  login: string
+  first_name: string
+  second_name: string
+  email: string
+  phone: string
+  display_name: string | null
+  avatar: string
+}

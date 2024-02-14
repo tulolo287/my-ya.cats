@@ -1,6 +1,6 @@
 import { UserAPI } from '@services/user-api'
 
-import { ServerError } from '@core/types'
+import { ServerError, UserAvatarData } from '@core/types'
 import { UserPasswordData } from '@core/types'
 
 class UserController {
@@ -8,7 +8,12 @@ class UserController {
 
   async changeAvatar(data: FormData) {
     try {
-      await this.api.changeUserAvatar(data)
+      const res = await this.api.changeUserAvatar<UserAvatarData>(data)
+      // todo: убрать из localStorage в стор
+      localStorage.setItem(
+        'avatarUrl',
+        `${process.env.API_URL}/resources/${res.data.avatar}`
+      )
     } catch (error: unknown) {
       console.error((error as ServerError).reason)
     }

@@ -1,4 +1,4 @@
-import { useState, ChangeEvent, SyntheticEvent } from 'react'
+import { useState, ChangeEvent, SyntheticEvent, CSSProperties } from 'react'
 import { createPortal } from 'react-dom'
 
 import { Button } from '@components/button'
@@ -12,6 +12,8 @@ import styles from './styles.module.css'
 export const AvatarUpload = () => {
   const [showModal, setShowModal] = useState(false)
   const [file, setFile] = useState<File | null>(null)
+  const [avatarUrl, setAvatarUrl] = useState(localStorage.getItem('avatarUrl'))
+  const style = { '--avatar-image': `url(${avatarUrl})` } as CSSProperties
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -27,7 +29,9 @@ export const AvatarUpload = () => {
       formData.append('file', file)
 
       try {
-        userController.changeAvatar(formData)
+        await userController.changeAvatar(formData)
+        // todo: брать из стора
+        setAvatarUrl(localStorage.getItem('avatarUrl') || '')
       } catch (error) {
         console.error(error)
       }
@@ -38,6 +42,7 @@ export const AvatarUpload = () => {
     <>
       <button
         className={styles.avatarUpload}
+        style={style}
         onClick={() => setShowModal(true)}
       />
 

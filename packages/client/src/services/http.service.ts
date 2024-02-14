@@ -14,23 +14,32 @@ export class HTTPService {
     this.endpoint = `${process.env.API_URL}${endpoint}`
   }
 
-  get = (url = '/', options = {}) => {
-    return axios(`${this.#path(url)}`, {
+  get = <Response>(url = '/', options = {}) => {
+    return axios<Response>(`${this.#path(url)}`, {
       ...options,
       method: HTTPMethodEnum.GET,
     })
   }
 
-  put = (url: string, options = {}) => {
-    return axios(this.#path(url), { ...options, method: HTTPMethodEnum.PUT })
+  put = <Response>(url: string, options = {}) => {
+    return axios<Response>(this.#path(url), {
+      ...options,
+      method: HTTPMethodEnum.PUT,
+    })
   }
 
-  post = (url: string, options = {}) => {
-    return axios(this.#path(url), { ...options, method: HTTPMethodEnum.POST })
+  post = <Response>(url: string, options = {}) => {
+    return axios<Response>(this.#path(url), {
+      ...options,
+      method: HTTPMethodEnum.POST,
+    })
   }
 
-  delete = (url: string, options = {}) => {
-    return axios(this.#path(url), { ...options, method: HTTPMethodEnum.DELETE })
+  delete = <Response>(url: string, options = {}) => {
+    return axios<Response>(this.#path(url), {
+      ...options,
+      method: HTTPMethodEnum.DELETE,
+    })
   }
 
   #path(path: string) {
