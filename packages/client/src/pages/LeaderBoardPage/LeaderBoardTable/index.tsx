@@ -1,17 +1,13 @@
 import { useEffect, useState } from 'react'
 
-import { leaderboardController } from '@/controllers/leaderboard-controller'
-import { formatScoreNumber } from '@/utils/format-score-number'
+import { TableItem } from './TableItem'
+import { LeaderboardRecord } from '@core/types'
+import { leaderboardController } from '@controllers/leaderboard-controller'
 
-import styles from './index.module.css'
-
-type Record = {
-  name: string
-  record: string
-}
+import styles from './styles.module.css'
 
 const LeaderBoardTable = () => {
-  const [records, setRecords] = useState<Record[]>([])
+  const [records, setRecords] = useState<LeaderboardRecord[]>([])
 
   const getRecords = async () => {
     const data = leaderboardController.getRecords()
@@ -25,10 +21,7 @@ const LeaderBoardTable = () => {
   return (
     <ol className={styles.recordList}>
       {records.map(item => (
-        <li className={styles.record} key={item.name}>
-          <span className={styles.name}>{item.name}</span>
-          <span>{formatScoreNumber(item.record)}</span>
-        </li>
+        <TableItem key={item.login} {...item} />
       ))}
     </ol>
   )

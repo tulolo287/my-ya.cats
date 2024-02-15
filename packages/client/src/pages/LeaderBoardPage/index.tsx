@@ -1,25 +1,37 @@
 import { useNavigate } from 'react-router-dom'
+
+import { Background } from '@components/background'
+import { Button } from '@components/button'
+import { Center } from '@components/center'
+import { Paper } from '@components/paper'
+import { Space } from '@components/space'
+import { Typography } from '@components/typography'
 import LeaderBoardTable from './LeaderBoardTable'
-import styles from './index.module.css'
 
-// todo: поменять на компонент заголовка из ui-кита
-const PageTitle = () => {
-  return <h1 className={styles.title}>Leaderboard</h1>
-}
-
-// todo: поменять на компонент кнопки
-const Button = () => {
-  const navigate = useNavigate()
-  return <button onClick={() => navigate('/')}>Back</button>
-}
+import styles from './styles.module.css'
 
 const LeaderBoardPage = () => {
+  const navigate = useNavigate()
+
   return (
-    <section className={styles.container}>
-      <PageTitle />
-      <LeaderBoardTable />
-      <Button />
-    </section>
+    <Background>
+      <Center>
+        <Space className={styles.container} gap="40px">
+          <Space>
+            <img src="/public/cat-image.png" className={styles.image} />
+            <Typography tag="h1" align="center" fontSize="xxl">
+              Leaderboard
+            </Typography>
+          </Space>
+          {/* className={styles.table} */}
+          <Paper>
+            <LeaderBoardTable />
+          </Paper>
+
+          <Button onClick={() => navigate('/')}>Back</Button>
+        </Space>
+      </Center>
+    </Background>
   )
 }
 

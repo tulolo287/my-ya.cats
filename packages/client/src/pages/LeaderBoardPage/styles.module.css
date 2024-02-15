@@ -1,0 +1,16 @@
+.container {
+  width: 100%;
+  align-items: center;
+}
+
+.image {
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
+}
+
+.table {
+  max-width: 1400px;
+  width: 100%;
+  box-sizing: border-box;
+}

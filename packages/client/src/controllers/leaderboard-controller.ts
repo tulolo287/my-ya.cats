@@ -1,9 +1,9 @@
 const mockData = [
-  { name: '233erw', record: '343424390' },
-  { name: 'e42erwo', record: '3434243' },
-  { name: 'erwerer3wo', record: '33' },
-  { name: 'erwcsderwo', record: '3434243' },
-  { name: 'rerwe', record: '3243' },
+  { login: '233erw', score: '343424390' },
+  { login: 'e42erwo', score: '3434243' },
+  { login: 'erwerer3wo', score: '33' },
+  { login: 'erwcsderwo', score: '3434243' },
+  { login: 'rerwe', score: '3243' },
 ]
 
 class LeaderboardController {
