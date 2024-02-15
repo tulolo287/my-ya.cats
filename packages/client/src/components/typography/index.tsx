@@ -25,6 +25,7 @@ type TypographyProps = {
    * @default 'black'
    */
   color?: 'white' | 'black'
+  className?: string
 }
 
 export const Typography = (props: TypographyProps) => {
@@ -37,7 +38,9 @@ export const Typography = (props: TypographyProps) => {
   return (
     <CustomTag
       style={fontStyles}
-      className={`${stylesFontSize[props.fontSize || 'm']} ${styles[color]}`}>
+      className={`${stylesFontSize[props.fontSize || 'm']} ${styles[color]} ${
+        props.className || ''
+      }`}>
       {props.children}
     </CustomTag>
   )
