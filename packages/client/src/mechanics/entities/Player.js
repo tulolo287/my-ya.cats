@@ -15,22 +15,22 @@ export class Player {
     this.y = this.gameSettings.height / 2 - this.height;
 
     this.collisionArea = {
-      y: this.y + 60,
+      y: this.y + 20,
       x: this.x + 30,
-      width: this.scaleWidth * 0.5,
-      height: this.scaleHeight * 0.5,
+      width: this.scaleWidth * 0.4,
+      height: this.scaleHeight * 0.4,
     }
 
-    this.gravity = .5;
+    this.gravity = .3;
     this.y_velocity = 0;
     this.x_velocity = 5;
     this.friction = 0.5;
     this.frameX = 0;
     this.frameY = 0;
-    this.maxY_velocity = 30 * this.gameSettings.gameSpeed;
+    this.maxY_velocity = 18 * this.gameSettings.gameSpeed;
     this.minY_velocity = 5;
     this.speed = 10;
-    this.jumpHeight = this.gravity * 25;
+    this.jumpHeight = this.gravity * 35;
     this.acceleration = 3;
     this.image = new Image();
     this.image.src = "./Cat-Sheet_1.png";
@@ -39,7 +39,7 @@ export class Player {
     this.currentAnimation = "walk";
   }
 
-  update() {
+  update(dt) {
     this.animate();
     this.animationSpeed = Math.floor(4 / this.gameSettings.gameSpeed);
     this.y_velocity += this.gravity;
@@ -47,15 +47,22 @@ export class Player {
       this.y_velocity = this.maxY_velocity;
     }
     this.isGround();
+    this.isButterflyHit();
     if (InputController.KEYS.space) {
       this.jump();
     }
-    this.y += this.y_velocity;
-    this.collisionArea.y = this.y + 60;
+
+    this.collisionArea.y += this.y_velocity;
+    this.y = this.collisionArea.y - 63
+
+    if (this.y > this.gameSettings.height) {
+      this.game.gameSettings.lives--;
+      this.collisionArea.y = 300;
+    }
   }
 
   animate = () => {
-    if (this.y_velocity > 0) {
+    if (this.y_velocity > this.gravity) {
       this.currentAnimation = "fall";
     }
     if (this.frameX > this.gameSettings.playerAnimation[this.currentAnimation].totalFrames) {
@@ -102,13 +109,24 @@ export class Player {
   }
 
   isGround() {
-
     for (let i = 0; i < this.game.platforms.length; i++) {
       let obstacle = isCollided(this, this.game.platforms[i])
       if (obstacle) {
         this.y_velocity = 0;
-        this.y = obstacle.y - this.scaleHeight
+        this.collisionArea.y = obstacle.y - this.collisionArea.height
         this.currentAnimation = "walk";
+        return true;
+      }
+    }
+    return false;
+  }
+
+  isButterflyHit() {
+    for (let i = 0; i < this.game.butterflies.length; i++) {
+      let obstacle = isCollided(this, this.game.butterflies[i])
+      if (obstacle) {
+        this.game.butterflies[i].delete = true;
+        this.game.gameSettings.score++
         return true;
       }
     }
@@ -140,6 +158,8 @@ export class Player {
 
   draw(ctx) {
     this.drawPlayer(ctx);
-    //this.drawCollisionArea(ctx);
+    if (this.gameSettings.debug) {
+      this.drawCollisionArea(ctx);
+    }
   }
 }

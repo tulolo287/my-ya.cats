@@ -1,7 +1,10 @@
 export default {
   width: 1600,
-  height: 700,
+  height: 900,
+  debug: false,
   gameSpeed: 1,
+  score: 0,
+  lives: 3,
   parallaxBackground: [
     {
       src: "./images/background_layer_1.png",
