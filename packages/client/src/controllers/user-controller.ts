@@ -9,7 +9,7 @@ class UserController {
   async changeAvatar(data: FormData) {
     try {
       const res = await this.api.changeUserAvatar<UserAvatarData>(data)
-      // todo: убрать из localStorage в стор
+      // todo: убрать из localStorage в стор (YAC-29)
       localStorage.setItem(
         'avatarUrl',
         `${process.env.API_URL}/resources/${res.data.avatar}`

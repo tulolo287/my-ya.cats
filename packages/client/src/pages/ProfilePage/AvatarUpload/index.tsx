@@ -12,7 +12,9 @@ export const AvatarUpload = () => {
   const [showModal, setShowModal] = useState(false)
   const [file, setFile] = useState<File | null>(null)
   const [avatarUrl, setAvatarUrl] = useState(localStorage.getItem('avatarUrl'))
-  const style = { '--avatar-image': `url(${avatarUrl})` } as CSSProperties
+  const avatarImageUrl = {
+    '--avatar-image': `url(${avatarUrl})`,
+  } as CSSProperties
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -29,7 +31,7 @@ export const AvatarUpload = () => {
 
       try {
         await userController.changeAvatar(formData)
-        // todo: брать из стора
+        // todo: брать из стора (YAC-29)
         setAvatarUrl(localStorage.getItem('avatarUrl') || '')
       } catch (error) {
         console.error(error)
@@ -41,7 +43,7 @@ export const AvatarUpload = () => {
     <>
       <button
         className={styles.avatarUpload}
-        style={style}
+        style={avatarImageUrl}
         onClick={() => setShowModal(true)}
       />
 

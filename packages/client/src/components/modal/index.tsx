@@ -1,4 +1,4 @@
-import { ReactNode, SyntheticEvent } from 'react'
+import { FC, PropsWithChildren, ReactNode, SyntheticEvent } from 'react'
 import { createPortal } from 'react-dom'
 
 import styles from './styles.module.css'
@@ -8,7 +8,7 @@ type Props = {
   children: ReactNode
 }
 
-export const Modal = ({ onClose, children }: Props) => {
+export const Modal: FC<PropsWithChildren<Props>> = ({ onClose, children }) => {
   const closeByOverlayOnly = (e: SyntheticEvent) => {
     if ((e.target as HTMLElement).closest(`.${styles.modal}`)) {
       return
