@@ -1,12 +1,4 @@
-body {
-  margin: 0;
-}
-
-#root {
-  width: 100%;
-  min-height: 100vh;
-  background-image: url('~/background.jpg');
-  background-color: var(--primary-color);
-  display: flex;
-  flex-direction: column;
+.center {
+  margin-left: auto;
+  margin-right: auto;
 }

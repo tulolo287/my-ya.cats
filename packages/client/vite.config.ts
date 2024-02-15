@@ -1,8 +1,8 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import dotenv from 'dotenv'
-dotenv.config({ path: '../../.env' })
 import path from 'node:path'
+dotenv.config({ path: '../../.env' })
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -15,7 +15,11 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
-      '~': path.resolve(__dirname, './public'),
+      '@assets': path.resolve(__dirname, './src/assets'),
+      '@components': path.resolve(__dirname, './src/components'),
+      '@core': path.resolve(__dirname, './src/core'),
+      '@pages': path.resolve(__dirname, './src/pages'),
+      '@style': path.resolve(__dirname, './src/style'),
     },
   },
   plugins: [react()],
