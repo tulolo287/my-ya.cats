@@ -1,6 +1,8 @@
 import stylesFontSize from '@style/font-size.module.css'
 import { TFontSize } from '@core/types'
 
+import styles from './styles.module.css'
+
 type TypographyProps = {
   children: React.ReactNode
   /**
@@ -18,6 +20,11 @@ type TypographyProps = {
    * @default 'p'
    */
   tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'p'
+  /**
+   * цвет заголовка
+   * @default 'black'
+   */
+  color?: 'white' | 'black'
 }
 
 export const Typography = (props: TypographyProps) => {
@@ -25,10 +32,12 @@ export const Typography = (props: TypographyProps) => {
   const fontStyles = {
     textAlign: props.align || 'left',
   }
+  const color = props.color || 'black'
+
   return (
     <CustomTag
       style={fontStyles}
-      className={stylesFontSize[props.fontSize || 'm']}>
+      className={`${stylesFontSize[props.fontSize || 'm']} ${styles[color]}`}>
       {props.children}
     </CustomTag>
   )
