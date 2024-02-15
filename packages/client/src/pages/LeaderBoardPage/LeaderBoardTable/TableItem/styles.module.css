@@ -7,6 +7,8 @@
   &::before {
     content: counter(record-counter);
     font-size: 32px;
+    color: var(--primary-text-color);
+    text-shadow: var(--text-shadow);
   }
 }
 
@@ -16,10 +18,10 @@
   overflow: hidden;
   text-overflow: ellipsis;
   color: var(--primary-text-color);
-  text-shadow: 1px 2px 0 #000;
+  text-shadow: var(--text-shadow);
 }
 
 .score {
   color: var(--orange);
-  text-shadow: 1px 2px 0 #000;
+  text-shadow: var(--text-shadow);
 }

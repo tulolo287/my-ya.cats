@@ -23,8 +23,8 @@ const LeaderBoardPage = () => {
               Leaderboard
             </Typography>
           </Space>
-          {/* className={styles.table} */}
-          <Paper>
+
+          <Paper className={styles.table}>
             <LeaderBoardTable />
           </Paper>
 
