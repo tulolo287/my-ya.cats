@@ -1,4 +1,7 @@
-const mockData = [
+import { LeaderboardRecord } from '@core/types'
+import { LeaderboardAPI } from '@services/leaderboard-api'
+
+const mockData: LeaderboardRecord[] = [
   { login: '233erw', score: '343424390' },
   { login: 'e42erwo', score: '3434243' },
   { login: 'erwerer3wo', score: '33' },
@@ -7,7 +10,12 @@ const mockData = [
 ]
 
 class LeaderboardController {
-  getRecords = () => mockData
+  private api = new LeaderboardAPI()
+
+  async getRecords() {
+    // todo: убрать моковые данные (YAC-30)
+    return mockData
+  }
 }
 
-export const leaderboardController = new LeaderboardController()
+export default new LeaderboardController()

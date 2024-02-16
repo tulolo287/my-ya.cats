@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 
 import { TableItem } from './TableItem'
 import { LeaderboardRecord } from '@core/types'
-import { leaderboardController } from '@controllers/leaderboard-controller'
+import LeaderboardController from '@controllers/leaderboard-controller'
 
 import styles from './styles.module.css'
 
@@ -10,8 +10,10 @@ const LeaderBoardTable = () => {
   const [records, setRecords] = useState<LeaderboardRecord[]>([])
 
   const getRecords = async () => {
-    const data = leaderboardController.getRecords()
-    setRecords(data)
+    const data = await LeaderboardController.getRecords()
+    if (data) {
+      setRecords(data)
+    }
   }
 
   useEffect(() => {
