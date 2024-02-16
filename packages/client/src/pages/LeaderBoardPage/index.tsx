@@ -19,7 +19,11 @@ const LeaderBoardPage = () => {
         <Space className={styles.container} gap="40px">
           <Space>
             <img src="/public/cat-image.png" className={styles.image} />
-            <Typography tag="h1" align="center" fontSize="xxl">
+            <Typography
+              tag="h1"
+              align="center"
+              fontSize="xxl"
+              className={styles.title}>
               Leaderboard
             </Typography>
           </Space>
