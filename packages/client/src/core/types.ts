@@ -25,5 +25,5 @@ export type UserAvatarData = {
 
 export type LeaderboardRecord = {
   login: string
-  score: string
+  score: number
 }
