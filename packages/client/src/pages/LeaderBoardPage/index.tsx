@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom'
 
 import { Background } from '@components/background'
 import { Button } from '@components/button'
+import { CatImage } from '@components/catImage'
 import { Center } from '@components/center'
 import { Paper } from '@components/paper'
 import { Space } from '@components/space'
@@ -18,7 +19,7 @@ const LeaderBoardPage = () => {
       <Center>
         <Space className={styles.container} gap="40px">
           <Space>
-            <img src="/public/cat-image.png" className={styles.image} />
+            <CatImage className={styles.image} />
             <Typography
               tag="h1"
               align="center"
