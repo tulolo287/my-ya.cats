@@ -1,47 +1,49 @@
-import { Background } from '@/components/background'
-import { Button } from '@/components/button'
-import { Paper } from '@/components/paper'
-import { Space } from '@/components/space'
-import { Typography } from '@/components/typography'
-import { TopicItem } from './TopicItem'
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+
+import { Background } from '@components/background'
+import { Button } from '@components/button'
+import { Center } from '@components/center'
+import { Modal } from '@components/modal'
+import { Paper } from '@components/paper'
+import { Space } from '@components/space'
+import { Typography } from '@components/typography'
+import { AddTopicModalContent } from './AddTopicModalContent'
+import { TopicList } from './TopicList'
 
 import styles from './styles.module.css'
 
-const list = [
-  { id: 1, name: '34lldks', comments: 32_423 },
-  { id: 2, name: '34lldks', comments: 32_423 },
-  { id: 3, name: '34lldks', comments: 32_423 },
-  { id: 4, name: '34lldks', comments: 32_423 },
-  { id: 5, name: '34lldks', comments: 32_423 },
-  { id: 6, name: '34lldks', comments: 32_423 },
-]
-
 const ForumPage = () => {
+  const navigate = useNavigate()
+  const [showModal, setShowModal] = useState(false)
+
   return (
     <Background>
-      <Space gap="40px" className={styles.container}>
-        <Typography tag="h1" fontSize="xxl" align="center">
-          Forum
-        </Typography>
+      <Center>
+        <Space gap="40px" className={styles.container} flexAlign="center">
+          <Typography tag="h1" fontSize="xxl" align="center">
+            Forum
+          </Typography>
 
-        <Paper>
-          <Space gap="32px" className={styles.topics}>
-            <Space gap="24px" className={styles.topicList}>
-              {list.map(({ id, name, comments }) => (
-                <TopicItem
-                  key={id}
-                  topicName={name}
-                  commentsNumber={comments}
-                />
-              ))}
+          <Paper className={styles.topicsWrapper}>
+            <Space gap="32px" flexAlign="center">
+              <TopicList />
+
+              <Button color="orange" onClick={() => setShowModal(true)}>
+                New topic
+              </Button>
             </Space>
+          </Paper>
 
-            <Button color="orange">Новый топик</Button>
-          </Space>
-        </Paper>
+          <Button onClick={() => navigate('/')}>Back</Button>
+        </Space>
+      </Center>
 
-        <Button>Back</Button>
-      </Space>
+      {showModal && (
+        <Modal onClose={() => setShowModal(false)}>
+          <AddTopicModalContent />
+        </Modal>
+      )}
     </Background>
   )
 }

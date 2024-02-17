@@ -22,3 +22,15 @@ export type UserAvatarData = {
   display_name: string | null
   avatar: string
 }
+
+export type Topic = {
+  id: number
+  topicName: string
+  comments: Comment[]
+}
+
+export type Comment = {
+  id: number
+  username: string
+  text: string
+}

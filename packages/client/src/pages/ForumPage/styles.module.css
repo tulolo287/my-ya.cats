@@ -1,16 +1,9 @@
 .container {
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  margin: auto;
-  padding: 0 min(10px, 130px);
+  width: 100%;
 }
 
-.topics {
-  align-items: center;
-}
-
-.topicList {
-  max-height: calc(100vh - 480px);
-  overflow: scroll;
+.topicsWrapper {
+  max-width: 1400px;
+  width: 100%;
+  box-sizing: border-box;
 }
