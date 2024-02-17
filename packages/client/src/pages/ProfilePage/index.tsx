@@ -21,7 +21,7 @@ const ProfilePage = () => {
     <Background>
       <Center>
         <Paper className={styles.container}>
-          <Space className={styles.content}>
+          <Space flexAlign="center">
             <AvatarUpload />
             <div className={styles.inputs}>
               <Input
@@ -63,7 +63,7 @@ const ProfilePage = () => {
             <Button color="orange" w="400px" h="66px">
               Edit
             </Button>
-            <Space className={styles.links} gap="8px">
+            <Space className={styles.links} gap="8px" flexAlign="center">
               <button
                 className={styles.link}
                 onClick={() => setShowModal(true)}>

@@ -50,7 +50,7 @@ export const AvatarUpload = () => {
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <form onSubmit={onSubmit}>
-            <Space gap="32px" className={styles.content}>
+            <Space gap="32px" flexAlign="center">
               <Typography fontSize="xl" tag="h2" color="white">
                 Change avatar
               </Typography>
