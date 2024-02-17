@@ -1,0 +1,8 @@
+.container {
+  width: 100%;
+}
+
+.title {
+  color: var(--primary-text-color);
+  text-shadow: var(--text-shadow);
+}
