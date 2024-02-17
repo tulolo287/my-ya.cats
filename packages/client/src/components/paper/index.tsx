@@ -7,6 +7,7 @@ type PaperProps = {
    * @default 'transparent'
    */
   background?: 'blue' | 'transparent'
+  className?: string
 }
 
 enum backroundColors {
@@ -23,5 +24,9 @@ export const Paper = (props: PaperProps) => {
     )
   }
 
-  return <div className={styles.paper}>{props.children}</div>
+  return (
+    <div className={`${styles.paper} ${props.className || ''}`}>
+      {props.children}
+    </div>
+  )
 }

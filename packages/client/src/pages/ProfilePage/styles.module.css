@@ -1,0 +1,33 @@
+.container {
+  max-width: 1400px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.content {
+  align-items: center;
+}
+
+.inputs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 25px 50px;
+  margin-bottom: 40px;
+  width: 100%;
+}
+
+.links {
+  align-items: center;
+  margin-top: 24px;
+}
+
+.link {
+  color: inherit;
+  background-color: transparent;
+  border: none;
+  font-size: 24px;
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+  text-underline-position: under;
+  cursor: pointer;
+}
