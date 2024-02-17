@@ -3,10 +3,8 @@
   align-items: center;
 }
 
-.image {
-  width: 200px;
-  height: 200px;
-  object-fit: contain;
+.titleWrapper {
+  align-items: center;
 }
 
 .title {

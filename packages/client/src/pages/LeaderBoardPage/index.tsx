@@ -18,8 +18,8 @@ const LeaderBoardPage = () => {
     <Background>
       <Center>
         <Space className={styles.container} gap="40px">
-          <Space>
-            <CatImage className={styles.image} />
+          <Space className={styles.titleWrapper}>
+            <CatImage />
             <Typography
               tag="h1"
               align="center"
