@@ -17,7 +17,7 @@ export const Background = ({
   images = ['background_layer_1.png'],
 }: BackgroundProps) => {
   const urls = images
-    .reduce((acc, el) => acc + `url(./public/${el}) `, '')
+    .reduce((acc, el) => acc + `url(/${el}) `, '')
     .trim()
     .replaceAll(' ', ', ')
   const root = document.documentElement
