@@ -16,6 +16,6 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src/**/*.js"],
+  "include": ["src/**/*.js", "src/mechanics/game.ts", "src/mechanics/settings/game-settings.ts", "src/mechanics/screens/game-screen.ts", "src/mechanics/system/background.ts", "src/mechanics/entities/entity.ts", "src/mechanics/entities/platform.ts", "src/mechanics/entities/player.ts", "src/mechanics/controllers/input-controller.ts", "src/mechanics/entities/butterfly.ts", "src/mechanics/system/sound.ts", "src/mechanics/utils/index.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

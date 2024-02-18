@@ -1,8 +1,10 @@
-export default {
+import { TGameSettings } from '../types'
+
+const gameSettings: TGameSettings = {
   width: 1600,
   height: 900,
   debug: false,
-  gameSpeed: .7,
+  gameSpeed: 0.7,
   gameOver: false,
   playerAnimation: {
     walk: {
@@ -22,4 +24,6 @@ export default {
       totalFrames: 3,
     },
   },
-};
+}
+
+export default gameSettings

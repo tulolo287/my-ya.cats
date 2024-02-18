@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react'
-import { Game } from '../../mechanics/Game'
+import { Game } from '../../mechanics/game'
 import styles from './game-page.module.css'
 
 const GamePage = () => {
