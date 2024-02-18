@@ -1,5 +1,6 @@
 import { Background } from '@/components/background'
 import { Button } from '@/components/button'
+import { CatImage } from '@/components/catImage'
 import { Center } from '@/components/center'
 import { Paper } from '@/components/paper'
 import { Space } from '@/components/space'
@@ -25,6 +26,7 @@ const GamePage = () => {
           ]}>
           <Center>
             <Paper background="blue">
+              <Space align="center" children={<CatImage />} />
               <Space gap="40px" align="center">
                 <Typography
                   children={'Start'}
