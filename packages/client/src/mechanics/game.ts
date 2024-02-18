@@ -15,6 +15,7 @@ export interface IGame {
   msPerFrame: number
   maxMsFrame: number
   loopId: number
+  init: () => void
 }
 export class Game implements IGame {
   canvas: HTMLCanvasElement | null
