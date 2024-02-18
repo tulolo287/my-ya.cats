@@ -22,3 +22,8 @@ export type UserAvatarData = {
   display_name: string | null
   avatar: string
 }
+
+export type LeaderboardRecord = {
+  login: string
+  score: number
+}

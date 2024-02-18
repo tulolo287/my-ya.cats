@@ -4,7 +4,7 @@
 
 .white {
   color: var(--white);
-  text-shadow: 1px 2px 0 #000;
+  text-shadow: var(--text-shadow);
 }
 
 .grey-with-shadow {

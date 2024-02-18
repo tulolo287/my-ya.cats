@@ -1,0 +1,10 @@
+.recordList {
+  width: 100%;
+  max-height: calc(100vh - 500px);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-gap: 50px 100px;
+  list-style: none;
+  counter-reset: record-counter;
+  overflow: scroll;
+}
