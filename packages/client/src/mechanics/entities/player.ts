@@ -33,6 +33,8 @@ export interface IPlayer {
   animationSpeed: number
   frameCount: number
   currentAnimation: string
+  update: (dt: number) => void
+  draw: (ctx: CanvasRenderingContext2D) => void
 }
 export class Player implements IPlayer {
   gameScreen: IGameScreen
