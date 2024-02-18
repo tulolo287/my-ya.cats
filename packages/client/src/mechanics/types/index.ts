@@ -22,6 +22,8 @@ export type TGameSettings = {
   height: number
   debug: boolean
   gameSpeed: number
+  walkSpeed: number
+  runSpeed: number
   gameOver: boolean
   playerAnimation: TPlayerAnimation
 }

@@ -9,6 +9,8 @@ import { TGameSettings } from '../types'
 export interface IGameScreen {
   game: IGame
   gameSettings: TGameSettings
+  walkSpeed: number
+  runSpeed: number
   width: number
   height: number
   bg1_xv: number
@@ -26,6 +28,8 @@ export interface IGameScreen {
 export class GameScreen implements IGameScreen {
   game: IGame
   gameSettings: TGameSettings
+  walkSpeed: number
+  runSpeed: number
   width: number
   height: number
   bg1_xv: number
@@ -42,6 +46,8 @@ export class GameScreen implements IGameScreen {
     this.gameSettings = game.gameSettings
     this.width = this.gameSettings.width
     this.height = this.gameSettings.height
+    this.walkSpeed = this.gameSettings.walkSpeed
+    this.runSpeed = this.gameSettings.runSpeed
     //this.sound = new Sound('./sound/jump.mp3');
     this.bg1_xv = 2
     this.bg2_xv = 3
@@ -127,7 +133,9 @@ export class GameScreen implements IGameScreen {
       this.game.init()
       InputController.KEYS.space = false
     }
-    this.gameSettings.gameSpeed = InputController.KEYS.run ? 1.3 : 0.9
+    this.gameSettings.gameSpeed = InputController.KEYS.run
+      ? this.runSpeed
+      : this.walkSpeed
 
     for (const [idx, platform] of this.platforms.entries()) {
       if (platform.delete) {
