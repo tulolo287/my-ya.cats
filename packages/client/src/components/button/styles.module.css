@@ -1,0 +1,11 @@
+.button {
+  box-shadow: 4px 4px var(--primary-text-color);
+}
+
+.orange {
+  background-color: var(--orange);
+}
+
+.white {
+  background-color: var(--white);
+}

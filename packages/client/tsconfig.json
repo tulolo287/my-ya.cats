@@ -5,7 +5,7 @@
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "allowJs": true,
     "skipLibCheck": true,
-    "esModuleInterop": false,
+    "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
@@ -14,7 +14,19 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@components/*": ["src/components/*"],
+      "@assets/*": ["src/assets/*"],
+      "@core/*": ["src/core/*"],
+      "@pages/*": ["src/pages/*"],
+      "@style/*": ["src/style/*"],
+      "@controllers/*": ["src/controllers/*"],
+      "@services/*": ["src/services/*"],
+      "@utils/*": ["src/utils/*"],
+    }
   },
   "include": ["src/**/*.js", "src/mechanics/game.ts", "src/mechanics/settings/game-settings.ts", "src/mechanics/screens/game-screen.ts", "src/mechanics/system/background.ts", "src/mechanics/entities/entity.ts", "src/mechanics/entities/platform.ts", "src/mechanics/entities/player.ts", "src/mechanics/controllers/input-controller.ts", "src/mechanics/entities/butterfly.ts", "src/mechanics/system/sound.ts", "src/mechanics/utils/index.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]

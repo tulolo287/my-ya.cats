@@ -1,0 +1,21 @@
+:root {
+  --primary-text-color: #453c4f;
+  --background-color: #b5c0f7;
+  --orange: #ff6e00;
+  --white: #fff;
+  --grey: #f1f1f1;
+  --text-shadow: 1px 2px 0 #000;
+}
+
+@font-face {
+  font-family: 'Chixa';
+  src: url('../fonts/ChixaDemibold.ttf');
+  font-style: normal;
+  font-weight: normal;
+}
+
+* {
+  font-family: Chixa, sans-serif;
+  margin: 0;
+  padding: 0;
+}

@@ -1,0 +1,27 @@
+.record {
+  display: grid;
+  grid-template-columns: min(20px, 100px) 1fr 150px;
+  counter-increment: record-counter;
+  gap: 16px;
+
+  &::before {
+    content: counter(record-counter);
+    font-size: 32px;
+    color: var(--primary-text-color);
+    text-shadow: var(--text-shadow);
+  }
+}
+
+.login {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--primary-text-color);
+  text-shadow: var(--text-shadow);
+}
+
+.score {
+  color: var(--orange);
+  text-shadow: var(--text-shadow);
+}

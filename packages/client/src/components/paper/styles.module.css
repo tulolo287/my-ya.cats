@@ -1,0 +1,11 @@
+:root {
+  --paper-background-color: rgba(255, 255, 255, 0.3);
+}
+
+.paper {
+  padding: 70px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 4px 4px var(--primary-text-color);
+  background-color: var(--paper-background-color);
+}
