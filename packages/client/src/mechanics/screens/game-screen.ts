@@ -127,7 +127,7 @@ export class GameScreen implements IGameScreen {
       this.game.init()
       InputController.KEYS.space = false
     }
-    this.gameSettings.gameSpeed = InputController.KEYS.run ? 1.3 : 0.7
+    this.gameSettings.gameSpeed = InputController.KEYS.run ? 1.3 : 0.9
 
     for (const [idx, platform] of this.platforms.entries()) {
       if (platform.delete) {
