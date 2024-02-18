@@ -1,46 +1,14 @@
-import gameSettings from "../settings/gameSettings";
+import { Entity } from "./Entity";
 
-export class Platform {
-   constructor(x, y, width, height) {
-      this.gameSettings = gameSettings;
-      this.width = width
-      this.height = height
-      this.x = x
-      this.y = y
-      this.x_velocity = 4;
-      this.delete = false
-
-      this.image = new Image();
-      this.image.src = "./platform.png";
-
+export class Platform extends Entity {
+   constructor(x, y, width, height, scaleWidth, scaleHeight, imgSrc) {
+      super(x, y, width, height, scaleWidth, scaleHeight, imgSrc);
    }
 
-   update() {
-      this.x -= Math.floor(this.x_velocity * this.gameSettings.gameSpeed);
+   update(x_velocity) {
+      this.x -= x_velocity//Math.floor(this.x_velocity * this.gameSettings.gameSpeed);
       if (this.x + this.width < 0) {
          this.delete = true;
       }
    }
-
-   drawCollisionArea(ctx) {
-      ctx.beginPath();
-      ctx.lineWidth = "4";
-      ctx.strokeStyle = "green";
-      ctx.rect(this.x, this.y, this.width, this.height);
-      ctx.stroke();
-      ctx.closePath();
-   }
-
-   draw(ctx) {
-      ctx.drawImage(
-         this.image,
-         this.x,
-         this.y,
-         this.width, this.height
-      );
-      if (this.gameSettings.debug) {
-         this.drawCollisionArea(ctx);
-      }
-   }
-
 }

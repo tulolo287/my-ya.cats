@@ -9,6 +9,7 @@ const GamePage = () => {
     if (!canvasRef) throw new Error('Canvas not found')
 
     const game = new Game(canvasRef)
+    game.init()
     game.start()
 
     return () => {
@@ -18,7 +19,6 @@ const GamePage = () => {
 
   return (
     <main>
-      <h1>Game</h1>
       <canvas id="canvas" className={styles.canvas} ref={canvasRef}></canvas>
     </main>
   )

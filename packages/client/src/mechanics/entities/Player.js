@@ -6,6 +6,9 @@ export class Player {
     this.game = game;
     this.gameSettings = game.gameSettings;
 
+    this.lives = 3
+    this.score = 0
+
     this.width = 618 / 8;
     this.height = 3940 / 51;
     this.scaleWidth = 120;
@@ -16,7 +19,7 @@ export class Player {
 
     this.collisionArea = {
       y: this.y + 20,
-      x: this.x + 30,
+      x: this.x + 25,
       width: this.scaleWidth * 0.4,
       height: this.scaleHeight * 0.4,
     }
@@ -56,7 +59,7 @@ export class Player {
     this.y = this.collisionArea.y - 63
 
     if (this.y > this.gameSettings.height) {
-      this.game.gameSettings.lives--;
+      this.lives--;
       this.collisionArea.y = 300;
     }
   }
@@ -68,7 +71,6 @@ export class Player {
     if (this.frameX > this.gameSettings.playerAnimation[this.currentAnimation].totalFrames) {
       this.frameX = 0;
     }
-
     this.frameY =
       this.gameSettings.playerAnimation[this.currentAnimation].frameY;
     if (this.frameCount % this.animationSpeed === 0) {
@@ -92,10 +94,10 @@ export class Player {
 
   jump() {
     InputController.KEYS.space = false;
-
     if (!this.isGround()) {
       return;
     }
+    //this.game.sound.play()
     this.frameX = 0;
     this.currentAnimation = "jump";
     if (
@@ -112,9 +114,13 @@ export class Player {
     for (let i = 0; i < this.game.platforms.length; i++) {
       let obstacle = isCollided(this, this.game.platforms[i])
       if (obstacle) {
-        this.y_velocity = 0;
-        this.collisionArea.y = obstacle.y - this.collisionArea.height
-        this.currentAnimation = "walk";
+        if (this.y + 50 < obstacle.y) {
+          this.y_velocity = 0;
+          this.collisionArea.y = obstacle.y - this.collisionArea.height
+          if(this.gameSettings.gameSpeed > 1.1) {
+            this.currentAnimation = "run";
+          } else this.currentAnimation = "walk";
+        }
         return true;
       }
     }
@@ -126,7 +132,7 @@ export class Player {
       let obstacle = isCollided(this, this.game.butterflies[i])
       if (obstacle) {
         this.game.butterflies[i].delete = true;
-        this.game.gameSettings.score++
+        this.score++
         return true;
       }
     }
