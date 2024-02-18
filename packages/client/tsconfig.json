@@ -25,6 +25,7 @@
       "@style/*": ["src/style/*"],
       "@controllers/*": ["src/controllers/*"],
       "@services/*": ["src/services/*"],
+      "@utils/*": ["src/utils/*"],
     }
   },
   "include": ["src"],

@@ -17,5 +17,6 @@ export default {
     "@style/(.*)$": "<rootDir>/src/style/$1",
     "@controllers/(.*)$": "<rootDir>/src/controllers/$1",
     "@services/(.*)$": "<rootDir>/src/services/$1",
+    "@utils/(.*)$": "<rootDir>/src/utils/$1",
   },
 }
