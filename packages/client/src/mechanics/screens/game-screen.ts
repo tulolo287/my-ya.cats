@@ -37,7 +37,7 @@ export class GameScreen implements IGameScreen {
   bg3_xv: number
   parallaxBg: IBackground[]
   platforms: IPlatform[]
-  player: any
+  player: IPlayer
   butterflies: IButterfly[]
   speedChangeIntervalID: number
 
