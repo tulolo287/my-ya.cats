@@ -19,7 +19,7 @@ export interface IGameScreen {
   parallaxBg: IBackground[]
   platforms: IPlatform[]
   butterflies: IButterfly[]
-  player: IPlayer | undefined
+  player: IPlayer
   speedChangeIntervalID: number
   update: (dt: number) => void
   draw: (ctx: CanvasRenderingContext2D) => void
@@ -37,7 +37,7 @@ export class GameScreen implements IGameScreen {
   bg3_xv: number
   parallaxBg: IBackground[]
   platforms: IPlatform[]
-  player: IPlayer | undefined
+  player: IPlayer
   butterflies: IButterfly[]
   speedChangeIntervalID: number
 
@@ -55,7 +55,7 @@ export class GameScreen implements IGameScreen {
     this.butterflies = []
     this.platforms = []
     this.speedChangeIntervalID = 0
-    this.player = undefined
+    this.player = <IPlayer>{}
 
     this.init()
   }
