@@ -8,10 +8,10 @@
 }
 
 .grey-with-shadow {
-  color: var(--purple-grey);
+  color: var(--primary-text-color);
   text-shadow: 2px 4px 0 #000;
 }
 
 .grey {
-  color: var(--purple-grey);
+  color: var(--primary-text-color);
 }
