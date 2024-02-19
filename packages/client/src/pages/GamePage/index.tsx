@@ -41,6 +41,11 @@ const GamePage = () => {
                     color="grey"
                   />
                   <Typography
+                    children={'press R or ARROW UP to speed up'}
+                    fontSize="xl"
+                    color="grey"
+                  />
+                  <Typography
                     children={'try to get as many points as you can'}
                     fontSize="xl"
                     color="grey"
