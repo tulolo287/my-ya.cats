@@ -6,3 +6,12 @@
   color: var(--white);
   text-shadow: var(--text-shadow);
 }
+
+.grey-with-shadow {
+  color: var(--primary-text-color);
+  text-shadow: 2px 4px 0 #000;
+}
+
+.grey {
+  color: var(--primary-text-color);
+}

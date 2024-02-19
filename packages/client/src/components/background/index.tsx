@@ -7,6 +7,7 @@ type BackgroundProps = {
    * массив картинок фона страницы
    * должна находлиться в папке public
    * если указать несколько самой верхней будет первая
+   * картинки указывать в формате 'picture_name.png'
    */
   images?: string[]
 }
@@ -17,7 +18,7 @@ export const Background = ({
   images = ['background_layer_1.png'],
 }: BackgroundProps) => {
   const urls = images
-    .reduce((acc, el) => acc + `url(./public/${el}) `, '')
+    .reduce((acc, el) => acc + `url(/${el}) `, '')
     .trim()
     .replaceAll(' ', ', ')
   const root = document.documentElement
