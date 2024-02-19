@@ -4,7 +4,7 @@ import { IPlayer } from '../entities/player'
 export function isCollided<T extends Entity>(
   player: IPlayer,
   obstacle: T
-): T | boolean {
+): T | false {
   if (
     player.collisionArea.x + player.collisionArea.width < obstacle.x ||
     player.collisionArea.x > obstacle.x + obstacle.width ||

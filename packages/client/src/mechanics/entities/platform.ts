@@ -17,7 +17,7 @@ export class Platform extends Entity implements IPlatform {
   }
 
   update(x_velocity: number) {
-    this.x -= x_velocity //Math.floor(this.x_velocity * this.gameSettings.gameSpeed);
+    this.x -= x_velocity
     if (this.x + this.width < 0) {
       this.delete = true
     }

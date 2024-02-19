@@ -91,7 +91,7 @@ export class Player implements IPlayer {
     this.frameY = 0
     this.maxY_velocity = 18 * this.gameSettings.gameSpeed
     this.minY_velocity = 5
-    this.jumpHeight = this.gravity * 35
+    this.jumpHeight = this.gravity * 30
     this.isJumping = false
     this.image = new Image()
     this.image.src = './Cat-Sheet_1.png'
@@ -112,13 +112,6 @@ export class Player implements IPlayer {
     if (InputController.KEYS.space) {
       this.jump()
     }
-    /*     if (!InputController.KEYS.space) {
-      this.isJumping = false
-    }
-    if (!this.isJumping && this.y_velocity < 0) {
-      InputController.KEYS.space = false
-      this.y_velocity += 0.5
-    } */
 
     this.collisionArea.y += this.y_velocity
     this.y = this.collisionArea.y - 63
@@ -168,7 +161,6 @@ export class Player implements IPlayer {
       return
     }
     this.isJumping = true
-    //this.game.sound.play()
     this.isJumping = true
     this.frameX = 0
     this.currentAnimation = 'jump'
@@ -189,7 +181,7 @@ export class Player implements IPlayer {
   isGround() {
     for (let i = 0; i < this.gameScreen.platforms.length; i++) {
       const obstacle = isCollided(this, this.gameScreen.platforms[i])
-      if (obstacle && typeof obstacle === 'object') {
+      if (obstacle) {
         if (this.y + 50 < obstacle.y) {
           this.y_velocity = 0
           this.collisionArea.y = obstacle.y - this.collisionArea.height

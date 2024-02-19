@@ -19,7 +19,7 @@ export interface IGameScreen {
   parallaxBg: IBackground[]
   platforms: IPlatform[]
   butterflies: IButterfly[]
-  player: IPlayer
+  player: IPlayer | undefined
   speedChangeIntervalID: number
   update: (dt: number) => void
   draw: (ctx: CanvasRenderingContext2D) => void
@@ -37,7 +37,7 @@ export class GameScreen implements IGameScreen {
   bg3_xv: number
   parallaxBg: IBackground[]
   platforms: IPlatform[]
-  player: IPlayer
+  player: IPlayer | undefined
   butterflies: IButterfly[]
   speedChangeIntervalID: number
 
@@ -48,7 +48,6 @@ export class GameScreen implements IGameScreen {
     this.height = this.gameSettings.height
     this.walkSpeed = this.gameSettings.walkSpeed
     this.runSpeed = this.gameSettings.runSpeed
-    //this.sound = new Sound('./sound/jump.mp3');
     this.bg1_xv = 2
     this.bg2_xv = 3
     this.bg3_xv = 5
@@ -56,6 +55,7 @@ export class GameScreen implements IGameScreen {
     this.butterflies = []
     this.platforms = []
     this.speedChangeIntervalID = 0
+    this.player = undefined
 
     this.init()
   }
@@ -226,7 +226,7 @@ export class GameScreen implements IGameScreen {
   }
 
   createButterfly(platform: IPlatform) {
-    const x = platform.x //Math.floor(Math.random() * (platform.x + platform.width - platform.x) + platform.x);
+    const x = platform.x
     const y = Math.floor(Math.random() * (platform.y - 100 - 400) + 400)
     this.butterflies.push(
       new Butterfly(x, y, 50, 50, 50, 50, './butterfly.png')

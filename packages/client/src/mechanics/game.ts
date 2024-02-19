@@ -74,8 +74,6 @@ export class Game implements IGame {
       this.accTime -= this.msPerFrame
       this.update(delta)
     }
-    //console.log('FPS', 1000 / delta)
-
     if (!this.gameOver) {
       this.draw(this.context!)
     }
