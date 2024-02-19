@@ -3,7 +3,7 @@
     "target": "ESNext",
     "useDefineForClassFields": true,
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "allowJs": true,
+    "allowJs": false,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -28,6 +28,6 @@
       "@utils/*": ["src/utils/*"],
     }
   },
-  "include": ["src/**/*.js", "src/mechanics/game.ts", "src/mechanics/settings/game-settings.ts", "src/mechanics/screens/game-screen.ts", "src/mechanics/system/background.ts", "src/mechanics/entities/entity.ts", "src/mechanics/entities/platform.ts", "src/mechanics/entities/player.ts", "src/mechanics/controllers/input-controller.ts", "src/mechanics/entities/butterfly.ts", "src/mechanics/system/sound.ts", "src/mechanics/utils/index.ts"],
+  "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
