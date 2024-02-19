@@ -5,25 +5,26 @@ import { Center } from '@components/center'
 import { Paper } from '@components/paper'
 import { Space } from '@components/space'
 import { Typography } from '@components/typography'
-import React from 'react'
+import React, { FC } from 'react'
 import { useState } from 'react'
 
-const GamePage = () => {
-  const [start, setStart] = useState<boolean>(false) // флаг начала игры
+const GAME_BACKGROUNDS = [
+  'background_layer_3.png',
+  'background_layer_2.png',
+  'background_layer_1.png',
+]
 
-  const handleStart = () => setStart(true)
+const GamePage: FC = () => {
+  const [isStarted, setStarted] = useState<boolean>(false) // флаг начала игры
+
+  const handleStart = () => setStarted(true)
 
   return (
     <React.Fragment>
-      {start ? (
+      {isStarted ? (
         <>{/* игра */}</>
       ) : (
-        <Background
-          images={[
-            'background_layer_3.png',
-            'background_layer_2.png',
-            'background_layer_1.png',
-          ]}>
+        <Background images={GAME_BACKGROUNDS}>
           <Center>
             <Paper background="blue">
               <Space align="center" children={<CatImage />} />
