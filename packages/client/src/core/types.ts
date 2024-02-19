@@ -27,3 +27,17 @@ export type LeaderboardRecord = {
   login: string
   score: number
 }
+
+export type AuthLoginData = {
+  login: string
+  password: string
+}
+
+export type AuthSignupData = {
+  first_name: string
+  second_name: string
+  login: string
+  email: string
+  password: string
+  phone: string
+}

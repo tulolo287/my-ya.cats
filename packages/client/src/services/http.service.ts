@@ -16,6 +16,7 @@ export class HTTPService {
 
   get = <Response>(url = '/', options = {}) => {
     return axios<Response>(`${this.#path(url)}`, {
+      withCredentials: true,
       ...options,
       method: HTTPMethodEnum.GET,
     })
@@ -23,6 +24,7 @@ export class HTTPService {
 
   put = <Response>(url: string, options = {}) => {
     return axios<Response>(this.#path(url), {
+      withCredentials: true,
       ...options,
       method: HTTPMethodEnum.PUT,
     })
@@ -30,6 +32,7 @@ export class HTTPService {
 
   post = <Response>(url: string, options = {}) => {
     return axios<Response>(this.#path(url), {
+      withCredentials: true,
       ...options,
       method: HTTPMethodEnum.POST,
     })
@@ -37,6 +40,7 @@ export class HTTPService {
 
   delete = <Response>(url: string, options = {}) => {
     return axios<Response>(this.#path(url), {
+      withCredentials: true,
       ...options,
       method: HTTPMethodEnum.DELETE,
     })
