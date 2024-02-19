@@ -7,7 +7,10 @@ export class UserAPI extends API {
   }
 
   public async changeUserAvatar<Response>(data: FormData) {
-    return await this.http.put<Response>('/profile/avatar', { data })
+    return await this.http.put<Response>('/profile/avatar', {
+      data,
+      headers: { 'Content-Type': 'multipart/form-data' },
+    })
   }
 
   public async changeUserPassword<Response>(data: UserPasswordData) {

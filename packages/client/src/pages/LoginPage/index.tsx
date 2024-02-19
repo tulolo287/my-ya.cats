@@ -25,13 +25,11 @@ const LoginPage = () => {
     const formJson = Object.fromEntries(formData.entries())
 
     try {
-      const res = await AuthController.login(formJson as AuthLoginData)
-      if (res?.status === 200) {
-        setError('')
-        // TODO: перенести в стор когда появится редакс
-        localStorage.setItem('isAuth', 'true')
-        navigate(routerPaths.main)
-      }
+      await AuthController.login(formJson as AuthLoginData)
+      setError('')
+      // TODO: перенести в стор когда появится редакс
+      localStorage.setItem('isAuth', 'true')
+      navigate(routerPaths.main)
     } catch (error) {
       setError(error as string)
     }
@@ -57,7 +55,7 @@ const LoginPage = () => {
                     h="48px"
                   />
                   <Input
-                    type="text"
+                    type="password"
                     label="password"
                     name="password"
                     w="100%"

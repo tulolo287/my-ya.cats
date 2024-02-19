@@ -16,12 +16,10 @@ const MainPage = () => {
     e.preventDefault()
 
     try {
-      const res = await AuthController.logout()
-      if (res?.status === 200) {
-        // TODO: перенести в стор когда появится редакс
-        localStorage.removeItem('isAuth')
-        navigate(routerPaths.login)
-      }
+      await AuthController.logout()
+      // TODO: перенести в стор когда появится редакс
+      localStorage.removeItem('isAuth')
+      navigate(routerPaths.login)
     } catch (error) {
       console.log(error)
     }

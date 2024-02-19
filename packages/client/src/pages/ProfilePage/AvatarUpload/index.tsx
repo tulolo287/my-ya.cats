@@ -24,7 +24,7 @@ export const AvatarUpload = () => {
 
     if (file) {
       const formData = new FormData()
-      formData.append('file', file)
+      formData.append('avatar', file)
 
       try {
         await userController.changeAvatar(formData)
