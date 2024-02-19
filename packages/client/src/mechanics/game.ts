@@ -1,8 +1,8 @@
 import { MutableRefObject } from 'react'
-import { InputController } from './controllers/input-controller.js'
-import { GameScreen, IGameScreen } from './screens/game-screen.js'
-import gameSettings from './settings/game-settings.js'
-import type { TGameSettings } from './types/index.js'
+import { InputController } from './controllers/input-controller'
+import { GameScreen, IGameScreen } from './screens/game-screen'
+import gameSettings from './settings/game-settings'
+import type { TGameSettings } from './types/index'
 
 export interface IGame {
   canvas: HTMLCanvasElement | null
