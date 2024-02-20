@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 
 import { Background } from '@components/background'
 import { Button } from '@components/button'
+import { CatImage } from '@components/catImage'
 import { Center } from '@components/center'
 import { Modal } from '@components/modal'
 import { Paper } from '@components/paper'
@@ -12,7 +13,6 @@ import { AddTopicModalContent } from './AddTopicModalContent'
 import { TopicList } from './TopicList'
 
 import styles from './styles.module.css'
-import { CatImage } from '@/components/catImage'
 
 const ForumPage: FC = () => {
   const navigate = useNavigate()
