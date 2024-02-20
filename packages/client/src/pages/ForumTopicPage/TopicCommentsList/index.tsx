@@ -15,10 +15,11 @@ export const TopicCommentsList = ({ comments }: Props) => {
       {comments.map(({ id, username, text }) => (
         <Paper key={id} className={styles.container}>
           <Space gap="16px">
-            {/*  className={styles.name} */}
-            <Typography fontSize="xl">{username}</Typography>
+            <Typography fontSize="l" color="orange">
+              {username}
+            </Typography>
 
-            <Typography fontSize="l">{text}</Typography>
+            <Typography fontSize="m">{text}</Typography>
           </Space>
         </Paper>
       ))}

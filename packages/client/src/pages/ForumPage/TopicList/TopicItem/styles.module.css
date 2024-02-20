@@ -8,10 +8,13 @@
 .name {
   flex-grow: 1;
   min-width: 250px;
-  max-width: 600px;
   overflow: hidden;
   text-overflow: ellipsis;
   text-wrap: nowrap;
+}
+
+.comments {
+  width: 200px;
 }
 
 .number {

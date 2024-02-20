@@ -1,4 +1,4 @@
-import { useState, ChangeEvent, SyntheticEvent } from 'react'
+import { useState, ChangeEvent, SyntheticEvent, FC } from 'react'
 
 import { Button } from '@components/button'
 import { Modal } from '@components/modal'
@@ -8,7 +8,7 @@ import userController from '@controllers/user-controller'
 
 import styles from './styles.module.css'
 
-export const AvatarUpload = () => {
+export const AvatarUpload: FC = () => {
   const [showModal, setShowModal] = useState(false)
   const [file, setFile] = useState<File | null>(null)
   const [avatarUrl, setAvatarUrl] = useState(localStorage.getItem('avatarUrl'))

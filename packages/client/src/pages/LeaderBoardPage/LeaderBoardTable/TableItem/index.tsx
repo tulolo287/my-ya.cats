@@ -7,7 +7,10 @@ import styles from './styles.module.css'
 export const TableItem = ({ login, score }: LeaderboardRecord) => {
   return (
     <li className={styles.record}>
-      <Typography fontSize="xl" className={styles.login}>
+      <Typography
+        fontSize="xl"
+        className={styles.login}
+        color="grey-with-shadow">
         {login}
       </Typography>
       <Typography fontSize="xl" className={styles.score}>

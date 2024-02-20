@@ -1,4 +1,4 @@
-import { SyntheticEvent } from 'react'
+import { FC, SyntheticEvent } from 'react'
 
 import { Button } from '@components/button'
 import { Space } from '@components/space'
@@ -32,7 +32,7 @@ const onSubmit = async (e: SyntheticEvent) => {
   }
 }
 
-export const AddCommentForm = () => {
+export const AddCommentForm: FC = () => {
   return (
     <form onSubmit={onSubmit} className={styles.form}>
       <Space gap="16px" align="center">
