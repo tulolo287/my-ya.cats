@@ -1,50 +1,65 @@
 import { createBrowserRouter } from 'react-router-dom'
-import MainPage from './pages/MainPage'
-import LoginPage from './pages/LoginPage'
-import SignupPage from './pages/SignupPage'
-import ProfilePage from './pages/ProfilePage'
-import GamePage from './pages/GamePage'
-import LeaderBoardPage from './pages/LeaderBoardPage'
-import ForumPage from './pages/ForumPage'
-import ForumTopicPage from './pages/ForumTopicPage'
-import ErrorPage from './pages/ErrorPage'
+
+import MainPage from '@pages/MainPage'
+import LoginPage from '@pages/LoginPage'
+import SignupPage from '@pages/SignupPage'
+import ProfilePage from '@pages/ProfilePage'
+import GamePage from '@pages/GamePage'
+import LeaderBoardPage from '@pages/LeaderBoardPage'
+import ForumPage from '@pages/ForumPage'
+import ForumTopicPage from '@pages/ForumTopicPage'
+import ErrorPage from '@pages//ErrorPage'
+import ProtectedRoute from '@components/protected-route'
+import { routerPaths } from '@core/constants'
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <MainPage />,
+    element: <ProtectedRoute authProtected={false} />,
+    children: [
+      {
+        path: routerPaths.login,
+        element: <LoginPage />,
+      },
+      {
+        path: routerPaths.signup,
+        element: <SignupPage />,
+      },
+    ],
   },
   {
-    path: '/login',
-    element: <LoginPage />,
-  },
-  {
-    path: '/signup',
-    element: <SignupPage />,
-  },
-  {
-    path: '/profile',
-    element: <ProfilePage />,
-  },
-  {
-    path: '/game',
-    element: <GamePage />,
-  },
-  {
-    path: '/leaderboard',
-    element: <LeaderBoardPage />,
-  },
-  {
-    path: '/forum',
-    element: <ForumPage />,
-  },
-  {
-    path: '/forum/:topicId',
-    element: <ForumTopicPage />,
-  },
-  {
-    path: '*',
-    element: <ErrorPage />,
+    path: '/',
+    element: <ProtectedRoute authProtected={true} />,
+    children: [
+      {
+        index: true,
+        element: <MainPage />,
+      },
+      {
+        path: routerPaths.profile,
+        element: <ProfilePage />,
+      },
+      {
+        path: routerPaths.game,
+        element: <GamePage />,
+      },
+      {
+        path: routerPaths.leaderBoard,
+        element: <LeaderBoardPage />,
+      },
+      {
+        path: routerPaths.forum,
+        element: <ForumPage />,
+      },
+      {
+        path: routerPaths.forumTopic,
+        element: <ForumTopicPage />,
+      },
+      {
+        path: '*',
+        element: <ErrorPage />,
+      },
+    ],
   },
 ])
 
