@@ -1,4 +1,4 @@
-import { SyntheticEvent, useState } from 'react'
+import { FC, SyntheticEvent, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 import { Button } from '@components/button'
@@ -9,12 +9,12 @@ import { Background } from '@components/background'
 import { Center } from '@components/center'
 import { Paper } from '@components/paper'
 import AuthController from '@controllers/auth-controller'
-import { AuthLoginData } from '@core/types'
+import { AuthLoginData, InputTypes } from '@core/types'
 import { routerPaths } from '@core/constants'
 
 import styles from './styles.module.css'
 
-const LoginPage = () => {
+const LoginPage: FC = () => {
   const navigate = useNavigate()
   const [error, setError] = useState('')
 
@@ -53,14 +53,14 @@ const LoginPage = () => {
               <Space gap="62px" align="center">
                 <Space gap="16px">
                   <Input
-                    type="text"
+                    type={InputTypes.text}
                     label="Login"
                     name="login"
                     w="300px"
                     h="48px"
                   />
                   <Input
-                    type="password"
+                    type={InputTypes.password}
                     label="Password"
                     name="password"
                     w="300px"
@@ -70,7 +70,7 @@ const LoginPage = () => {
                 <Space>
                   {error && <Typography align="center">{error}</Typography>}
                   <Button color="orange" w="300px">
-                    Login
+                    LOG IN
                   </Button>
                 </Space>
               </Space>
