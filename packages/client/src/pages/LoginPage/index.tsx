@@ -12,6 +12,8 @@ import AuthController from '@controllers/auth-controller'
 import { AuthLoginData } from '@core/types'
 import { routerPaths } from '@core/constants'
 
+import styles from './styles.module.css'
+
 const LoginPage = () => {
   const navigate = useNavigate()
   const [error, setError] = useState('')
@@ -35,42 +37,49 @@ const LoginPage = () => {
     }
   }
 
-  // TODO: верстка страницы (YAC-15)
   return (
     <Background>
       <Center>
         <Paper>
-          <Space gap="32px">
-            <Typography align="center" tag="h2" fontSize="xl" color="black">
+          <Space gap="62px" align="center">
+            <Typography
+              align="center"
+              tag="h2"
+              fontSize="xxxl"
+              color="grey-with-shadow">
               LOGIN
             </Typography>
             <form onSubmit={submitHandler}>
-              <Space gap="64px">
+              <Space gap="62px" align="center">
                 <Space gap="16px">
                   <Input
                     type="text"
-                    label="login"
+                    label="Login"
                     name="login"
-                    w="100%"
+                    w="300px"
                     h="48px"
                   />
                   <Input
                     type="password"
-                    label="password"
+                    label="Password"
                     name="password"
-                    w="100%"
+                    w="300px"
                     h="48px"
                   />
                 </Space>
                 <Space>
                   {error && <Typography align="center">{error}</Typography>}
-                  <Button color="orange">Login</Button>
+                  <Button color="orange" w="300px">
+                    Login
+                  </Button>
                 </Space>
               </Space>
             </form>
-            <Typography align="center">
+            <Typography align="center" color="grey" fontSize="m">
               Don’t have an account yet?
-              <Link to={routerPaths.signup}>Register</Link>
+              <Link to={routerPaths.signup} className={styles.link}>
+                Register
+              </Link>
             </Typography>
           </Space>
         </Paper>
