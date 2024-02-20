@@ -1,3 +1,4 @@
+import ErrorPage from '@pages/ErrorPage'
 import { Component, ErrorInfo, ReactNode } from 'react'
 
 type ErrorProps = {
@@ -16,12 +17,10 @@ class ErrorBoundary extends Component<ErrorProps, ErrorState> {
   }
 
   static getDerivedStateFromError(): ErrorState {
-    console.log('getDerivedStateFromError')
     return { hasError: true }
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.log('componentDidCatch')
     this.setState(prev => {
       return {
         ...prev,
@@ -33,7 +32,12 @@ class ErrorBoundary extends Component<ErrorProps, ErrorState> {
 
   render() {
     if (this.state.hasError) {
-      return <p>{this.state.errorMessage}</p>
+      return (
+        <ErrorPage
+          type="errorBoundary"
+          errorMessage={this.state?.errorMessage}
+        />
+      )
     }
 
     return this.props.children

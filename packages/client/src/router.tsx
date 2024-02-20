@@ -15,10 +15,6 @@ import ErrorBoundary from './components/error-boundary'
 
 const router = createBrowserRouter([
   {
-    // path: '/',
-    // element: <ErrorBoundary />,
-    // children: [
-    //   {
     path: '/',
     element: (
       <ErrorBoundary>
@@ -70,10 +66,8 @@ const router = createBrowserRouter([
       },
       {
         path: '*',
-        element: <ErrorPage />,
+        element: <ErrorPage type="404" />,
       },
-      //   ],
-      // },
     ],
   },
 ])
