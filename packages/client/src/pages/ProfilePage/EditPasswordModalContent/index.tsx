@@ -5,7 +5,7 @@ import { Input } from '@components/input'
 import { Space } from '@components/space'
 import { Typography } from '@components/typography'
 import UserController from '@controllers/user-controller'
-import { UserPasswordData } from '@core/types'
+import { InputTypes, UserPasswordData } from '@core/types'
 
 import styles from './styles.module.css'
 
@@ -38,21 +38,21 @@ export const EditPasswordModalContent = () => {
       <form className={styles.form} onSubmit={onSubmit}>
         <Space gap="24px" className={styles.content}>
           <Input
-            type="password"
+            type={InputTypes.password}
             label="Old password"
             name="oldPassword"
             w="100%"
             h="48px"
           />
           <Input
-            type="password"
+            type={InputTypes.password}
             label="New password"
             name="newPassword"
             w="100%"
             h="48px"
           />
           <Input
-            type="password"
+            type={InputTypes.password}
             label="Repeat new password"
             name="repeatPassword"
             w="100%"

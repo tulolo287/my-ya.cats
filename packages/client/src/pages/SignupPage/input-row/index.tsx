@@ -1,6 +1,6 @@
-import { Input } from '@/components/input'
-import { Space } from '@/components/space'
-import { InputTypes } from '@/core/types'
+import { Input } from '@components/input'
+import { Space } from '@components/space'
+import { InputTypes } from '@core/types'
 import { FC } from 'react'
 
 type InputProps = {
