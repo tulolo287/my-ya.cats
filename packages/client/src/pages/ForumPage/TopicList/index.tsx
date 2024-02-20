@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 
 import { Space } from '@components/space'
 import TopicController from '@controllers/topic-controller'
@@ -7,7 +7,7 @@ import { TopicItem } from './TopicItem'
 
 import styles from './styles.module.css'
 
-export const TopicList = () => {
+export const TopicList: FC = () => {
   const [topics, setTopics] = useState<Topic[]>([])
 
   const getTopics = async () => {

@@ -1,4 +1,4 @@
-import { SyntheticEvent } from 'react'
+import { FC, SyntheticEvent } from 'react'
 
 import { Button } from '@components/button'
 import { Input } from '@components/input'
@@ -28,7 +28,7 @@ const onSubmit = async (e: SyntheticEvent) => {
   }
 }
 
-export const EditPasswordModalContent = () => {
+export const EditPasswordModalContent: FC = () => {
   return (
     <Space gap="32px">
       <Typography align="center" tag="h2" fontSize="xl" color="white">

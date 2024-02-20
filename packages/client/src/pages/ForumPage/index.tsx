@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { FC, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { Background } from '@components/background'
@@ -12,8 +12,9 @@ import { AddTopicModalContent } from './AddTopicModalContent'
 import { TopicList } from './TopicList'
 
 import styles from './styles.module.css'
+import { CatImage } from '@/components/catImage'
 
-const ForumPage = () => {
+const ForumPage: FC = () => {
   const navigate = useNavigate()
   const [showModal, setShowModal] = useState(false)
 
@@ -21,7 +22,12 @@ const ForumPage = () => {
     <Background>
       <Center>
         <Space gap="40px" className={styles.container} align="center">
-          <Typography tag="h1" fontSize="xxl" align="center">
+          <CatImage />
+          <Typography
+            tag="h1"
+            fontSize="xxl"
+            align="center"
+            color="grey-with-shadow">
             Forum
           </Typography>
 
@@ -35,7 +41,7 @@ const ForumPage = () => {
             </Space>
           </Paper>
 
-          <Button onClick={() => navigate('/')}>Back</Button>
+          <Button onClick={() => navigate(-1)}>Back</Button>
         </Space>
       </Center>
 

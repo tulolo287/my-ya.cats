@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 
 import { TableItem } from './TableItem'
 import { LeaderboardRecord } from '@core/types'
@@ -6,7 +6,7 @@ import LeaderboardController from '@controllers/leaderboard-controller'
 
 import styles from './styles.module.css'
 
-const LeaderBoardTable = () => {
+const LeaderBoardTable: FC = () => {
   const [records, setRecords] = useState<LeaderboardRecord[]>([])
 
   const getRecords = async () => {

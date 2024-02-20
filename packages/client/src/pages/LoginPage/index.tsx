@@ -1,4 +1,4 @@
-import { SyntheticEvent, useState } from 'react'
+import { FC, SyntheticEvent, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 import { Button } from '@components/button'
@@ -12,7 +12,7 @@ import AuthController from '@controllers/auth-controller'
 import { AuthLoginData } from '@core/types'
 import { routerPaths } from '@core/constants'
 
-const LoginPage = () => {
+const LoginPage: FC = () => {
   const navigate = useNavigate()
   const [error, setError] = useState('')
 

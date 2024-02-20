@@ -1,3 +1,4 @@
+import { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { Background } from '@components/background'
@@ -11,7 +12,7 @@ import LeaderBoardTable from './LeaderBoardTable'
 
 import styles from './styles.module.css'
 
-const LeaderBoardPage = () => {
+const LeaderBoardPage: FC = () => {
   const navigate = useNavigate()
 
   return (
@@ -24,7 +25,7 @@ const LeaderBoardPage = () => {
               tag="h1"
               align="center"
               fontSize="xxl"
-              className={styles.title}>
+              color="grey-with-shadow">
               Leaderboard
             </Typography>
           </Space>
@@ -33,7 +34,7 @@ const LeaderBoardPage = () => {
             <LeaderBoardTable />
           </Paper>
 
-          <Button onClick={() => navigate('/')}>Back</Button>
+          <Button onClick={() => navigate(-1)}>Back</Button>
         </Space>
       </Center>
     </Background>

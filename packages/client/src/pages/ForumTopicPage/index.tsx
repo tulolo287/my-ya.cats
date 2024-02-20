@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 
 import { Background } from '@components/background'
@@ -13,7 +13,7 @@ import { TopicCommentsList } from './TopicCommentsList'
 
 import styles from './styles.module.css'
 
-const ForumTopicPage = () => {
+const ForumTopicPage: FC = () => {
   const [topic, setTopic] = useState<Topic>()
   const { topicId } = useParams()
   const navigate = useNavigate()
@@ -37,13 +37,16 @@ const ForumTopicPage = () => {
       <Center>
         {topic && (
           <Space gap="40px" className={styles.container} align="center">
-            {/*  className={styles.title} */}
-            <Typography tag="h1" fontSize="xxl" align="center">
+            <Typography
+              tag="h1"
+              fontSize="xxl"
+              align="center"
+              color="grey-with-shadow">
               {topic.topicName}
             </Typography>
             <TopicCommentsList comments={topic.comments} />
             <AddCommentForm />
-            <Button onClick={() => navigate('/forum')}>Back</Button>
+            <Button onClick={() => navigate(-1)}>Back</Button>
           </Space>
         )}
       </Center>

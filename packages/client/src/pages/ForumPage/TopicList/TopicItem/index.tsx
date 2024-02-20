@@ -8,12 +8,11 @@ import styles from './styles.module.css'
 export const TopicItem = ({ id, topicName, comments }: Topic) => {
   return (
     <Link className={styles.topicItem} to={`${id}`}>
-      {/*  className={styles.name} */}
-      <Typography tag="h2" fontSize="l">
+      <Typography tag="h2" fontSize="l" className={styles.name}>
         {topicName}
       </Typography>
 
-      <Typography fontSize="m">
+      <Typography fontSize="m" className={styles.comments}>
         comments: <span className={styles.number}>{comments.length}</span>
       </Typography>
     </Link>

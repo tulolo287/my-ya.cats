@@ -7,11 +7,6 @@
   align-items: center;
 }
 
-.title {
-  color: var(--primary-text-color);
-  text-shadow: var(--text-shadow);
-}
-
 .table {
   max-width: 1400px;
   width: 100%;
