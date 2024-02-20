@@ -51,7 +51,6 @@ export class Game implements IGame {
 
   init = () => {
     this.gameOver = false
-    this.gameSettings = gameSettings
     this.gameScreen = new GameScreen(this)
   }
 
@@ -82,9 +81,6 @@ export class Game implements IGame {
   }
 
   start = () => {
-    this.accTime = 0
-    this.msPerFrame = 16
-    this.maxMsFrame = 32
     this.prevTime = performance.now()
     this.loop()
   }

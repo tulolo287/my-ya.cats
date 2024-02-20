@@ -28,7 +28,6 @@ export interface IPlayer {
   maxY_velocity: number
   minY_velocity: number
   jumpHeight: number
-  isJumping: boolean
   image: HTMLImageElement
   animationSpeed: number
   frameCount: number
@@ -56,7 +55,6 @@ export class Player implements IPlayer {
   maxY_velocity: number
   minY_velocity: number
   jumpHeight: number
-  isJumping: boolean
   image: HTMLImageElement
   animationSpeed: number
   frameCount: number
@@ -92,7 +90,6 @@ export class Player implements IPlayer {
     this.maxY_velocity = 18 * this.gameSettings.gameSpeed
     this.minY_velocity = 5
     this.jumpHeight = this.gravity * 30
-    this.isJumping = false
     this.image = new Image()
     this.image.src = './Cat-Sheet_1.png'
     this.animationSpeed = Math.floor(4 / this.gameSettings.gameSpeed)
@@ -160,8 +157,6 @@ export class Player implements IPlayer {
     if (!this.isGround()) {
       return
     }
-    this.isJumping = true
-    this.isJumping = true
     this.frameX = 0
     this.currentAnimation = 'jump'
     if (
@@ -188,7 +183,6 @@ export class Player implements IPlayer {
           this.currentAnimation =
             this.gameSettings.gameSpeed > 1.1 ? 'run' : 'walk'
         }
-        this.isJumping = false
         return true
       }
     }

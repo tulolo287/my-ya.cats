@@ -160,10 +160,10 @@ export class GameScreen implements IGameScreen {
     ctx.strokeStyle = 'yellow'
     ctx.strokeText('LIVES: ' + this.player.lives, 20, 50)
     ctx.textBaseline = 'middle'
-    const textString = 'SCORE: 1',
-      textWidth = ctx.measureText(textString).width
+    const textString = 'SCORE: ',
+      textWidth = ctx.measureText(textString).width + ctx.measureText('1').width
     ctx.strokeText(
-      'SCORE: ' + this.player.score,
+      textString + this.player.score,
       this.gameSettings.width / 2 - textWidth / 2,
       50
     )
@@ -175,7 +175,7 @@ export class GameScreen implements IGameScreen {
     let textString = 'GAME OVER',
       textWidth = ctx.measureText(textString).width
     ctx.fillText(
-      'GAME OVER',
+      textString,
       this.gameSettings.width / 2 - textWidth / 2,
       this.gameSettings.height / 2 - 50
     )
@@ -185,7 +185,7 @@ export class GameScreen implements IGameScreen {
     ;(textString = 'To start again press SPACE'),
       (textWidth = ctx.measureText(textString).width)
     ctx.fillText(
-      'To start again press SPACE',
+      textString,
       this.gameSettings.width / 2 - textWidth / 2,
       this.gameSettings.height / 2 + 50
     )
