@@ -13,22 +13,30 @@ type SpaceProps = {
    */
   gap?: DimensionsProp
   /**
-   * выравнвание внутри флекса
-   * @default 'start'
+   * выравнивание дочерних элементов
+   * @default 'normal'
    */
-  flexAlign?: 'start' | 'center' | 'end'
+  align?:
+    | 'normal'
+    | 'center'
+    | 'start'
+    | 'end'
+    | 'baseline'
+    | 'stretch'
+    | 'flex-start'
+    | 'flex-end'
+    | 'initial'
+    | 'inherit'
 }
 
 export const Space = (
   props: React.ComponentPropsWithoutRef<'div'> & SpaceProps
 ) => {
-  const { direction = 'column', gap, flexAlign, ...rest } = props
-  const alignItems = flexAlign === 'center' ? 'center' : `flex-${flexAlign}`
-
+  const { direction = 'column', gap, align, ...rest } = props
   const spaceStyle = {
     flexDirection: direction,
-    gap,
-    alignItems,
+    gap: gap,
+    alignItems: align,
   } as Record<string, string>
 
   return (

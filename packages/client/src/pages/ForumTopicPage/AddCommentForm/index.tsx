@@ -35,7 +35,7 @@ const onSubmit = async (e: SyntheticEvent) => {
 export const AddCommentForm = () => {
   return (
     <form onSubmit={onSubmit} className={styles.form}>
-      <Space gap="16px" flexAlign="center">
+      <Space gap="16px" align="center">
         <Space gap="8px" className={styles.commentField}>
           <Typography fontSize="l">
             <label htmlFor="comment-textarea">Enter your comment</label>
@@ -46,7 +46,7 @@ export const AddCommentForm = () => {
             id="comment-textarea"></textarea>
         </Space>
 
-        <Button color="orange">Save</Button>
+        <Button color="orange">Send</Button>
       </Space>
     </form>
   )

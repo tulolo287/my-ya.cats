@@ -20,13 +20,13 @@ const ForumPage = () => {
   return (
     <Background>
       <Center>
-        <Space gap="40px" className={styles.container} flexAlign="center">
+        <Space gap="40px" className={styles.container} align="center">
           <Typography tag="h1" fontSize="xxl" align="center">
             Forum
           </Typography>
 
           <Paper className={styles.topicsWrapper}>
-            <Space gap="32px" flexAlign="center">
+            <Space gap="32px" align="center">
               <TopicList />
 
               <Button color="orange" onClick={() => setShowModal(true)}>

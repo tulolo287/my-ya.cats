@@ -36,7 +36,7 @@ const ForumTopicPage = () => {
     <Background>
       <Center>
         {topic && (
-          <Space gap="40px" className={styles.container} flexAlign="center">
+          <Space gap="40px" className={styles.container} align="center">
             {/*  className={styles.title} */}
             <Typography tag="h1" fontSize="xxl" align="center">
               {topic.topicName}

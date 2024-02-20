@@ -1,4 +1,4 @@
-export type TFontSize = 'xxl' | 'xl' | 'l' | 'm' | 's' | 'xs'
+export type TFontSize = 'xxxl' | 'xxl' | 'xl' | 'l' | 'm' | 's' | 'xs'
 
 type DimensionsUnit = '%' | 'px' | 'em' | 'vh' | 'vw' | 'rem'
 export type DimensionsProp = `${number}${DimensionsUnit}`
@@ -33,4 +33,23 @@ export type Comment = {
   id: number
   username: string
   text: string
+}
+
+export type LeaderboardRecord = {
+  login: string
+  score: number
+}
+
+export type AuthLoginData = {
+  login: string
+  password: string
+}
+
+export type AuthSignupData = {
+  first_name: string
+  second_name: string
+  login: string
+  email: string
+  password: string
+  phone: string
 }

@@ -1,5 +1,7 @@
 .button {
   box-shadow: 4px 4px var(--primary-text-color);
+  border: 0;
+  color: var(--primary-text-color);
 }
 
 .orange {

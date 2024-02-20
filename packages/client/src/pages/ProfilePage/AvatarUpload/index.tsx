@@ -1,4 +1,4 @@
-import { useState, ChangeEvent, SyntheticEvent, CSSProperties } from 'react'
+import { useState, ChangeEvent, SyntheticEvent } from 'react'
 
 import { Button } from '@components/button'
 import { Modal } from '@components/modal'
@@ -12,9 +12,6 @@ export const AvatarUpload = () => {
   const [showModal, setShowModal] = useState(false)
   const [file, setFile] = useState<File | null>(null)
   const [avatarUrl, setAvatarUrl] = useState(localStorage.getItem('avatarUrl'))
-  const avatarImageUrl = {
-    '--avatar-image': `url(${avatarUrl})`,
-  } as CSSProperties
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -27,7 +24,7 @@ export const AvatarUpload = () => {
 
     if (file) {
       const formData = new FormData()
-      formData.append('file', file)
+      formData.append('avatar', file)
 
       try {
         await userController.changeAvatar(formData)
@@ -43,14 +40,16 @@ export const AvatarUpload = () => {
     <>
       <button
         className={styles.avatarUpload}
-        style={avatarImageUrl}
-        onClick={() => setShowModal(true)}
-      />
+        onClick={() => setShowModal(true)}>
+        {avatarUrl && (
+          <img src={avatarUrl} className={styles.image} alt="user avatar" />
+        )}
+      </button>
 
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <form onSubmit={onSubmit}>
-            <Space gap="32px" flexAlign="center">
+            <Space gap="32px" align="center">
               <Typography fontSize="xl" tag="h2" color="white">
                 Change avatar
               </Typography>

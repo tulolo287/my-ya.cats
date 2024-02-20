@@ -4,5 +4,14 @@
 
 .white {
   color: var(--white);
-  text-shadow: 1px 2px 0 #000;
+  text-shadow: var(--text-shadow);
+}
+
+.grey-with-shadow {
+  color: var(--primary-text-color);
+  text-shadow: 2px 4px 0 #000;
+}
+
+.grey {
+  color: var(--primary-text-color);
 }

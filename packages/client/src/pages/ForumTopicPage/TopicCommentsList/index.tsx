@@ -11,7 +11,7 @@ type Props = {
 
 export const TopicCommentsList = ({ comments }: Props) => {
   return comments.length > 0 ? (
-    <Space gap="24px" flexAlign="center" className={styles.wrapper}>
+    <Space gap="24px" align="center" className={styles.wrapper}>
       {comments.map(({ id, username, text }) => (
         <Paper key={id} className={styles.container}>
           <Space gap="16px">

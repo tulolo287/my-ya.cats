@@ -36,7 +36,7 @@ export const EditPasswordModalContent = () => {
       </Typography>
 
       <form className={styles.form} onSubmit={onSubmit}>
-        <Space gap="24px" className={styles.content} flexAlign="center">
+        <Space gap="24px" className={styles.content} align="center">
           <Input
             type="password"
             label="Old password"
