@@ -20,14 +20,13 @@ class ErrorBoundary extends Component<ErrorProps, ErrorState> {
     return { hasError: true }
   }
 
-  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+  componentDidCatch(error: Error) {
     this.setState(prev => {
       return {
         ...prev,
         errorMessage: error.message,
       }
     })
-    console.log(error, errorInfo)
   }
 
   render() {

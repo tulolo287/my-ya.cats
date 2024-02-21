@@ -64,11 +64,11 @@ const router = createBrowserRouter([
         path: routerPaths.forumTopic,
         element: <ForumTopicPage />,
       },
-      {
-        path: '*',
-        element: <ErrorPage type="404" />,
-      },
     ],
+  },
+  {
+    path: '*',
+    element: <ErrorPage type="404" />,
   },
 ])
 
