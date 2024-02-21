@@ -6,14 +6,14 @@ export interface IBackground {
     y: number
     width: number
     height: number
-    image: any
+    image: HTMLImageElement
   }
   bg2: {
     x: number
     y: number
     width: number
     height: number
-    image: any
+    image: HTMLImageElement
   }
   x_offset: number
   x_velocity: number

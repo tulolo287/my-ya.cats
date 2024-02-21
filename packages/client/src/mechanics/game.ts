@@ -54,16 +54,16 @@ export class Game implements IGame {
     this.gameScreen = new GameScreen(this)
   }
 
-  update(dt: number) {
+  private update(dt: number) {
     this.gameScreen?.update(dt)
   }
 
-  draw(ctx: CanvasRenderingContext2D) {
+  private draw(ctx: CanvasRenderingContext2D) {
     ctx.clearRect(0, 0, this.gameScreen!.width, this.gameScreen!.height)
     this.gameScreen?.draw(ctx)
   }
 
-  loop = () => {
+  private loop = () => {
     const nowTime = performance.now()
     const delta = nowTime - this.prevTime
     this.prevTime = nowTime

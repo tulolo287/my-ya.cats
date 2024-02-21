@@ -161,7 +161,9 @@ export class GameScreen implements IGameScreen {
     ctx.strokeText('LIVES: ' + this.player.lives, 20, 50)
     ctx.textBaseline = 'middle'
     const textString = 'SCORE: ',
-      textWidth = ctx.measureText(textString).width + ctx.measureText('1').width
+      textWidth =
+        ctx.measureText(textString).width +
+        ctx.measureText(this.player.score.toString()).width
     ctx.strokeText(
       textString + this.player.score,
       this.gameSettings.width / 2 - textWidth / 2,

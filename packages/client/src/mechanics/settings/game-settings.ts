@@ -1,12 +1,12 @@
 import { TGameSettings } from '../types'
 
 const gameSettings: TGameSettings = {
-  width: 1600,
-  height: 900,
+  width: 1920,
+  height: 1080,
   debug: false,
-  gameSpeed: 0.9,
-  walkSpeed: 0.9,
-  runSpeed: 1.3,
+  gameSpeed: 1.1,
+  walkSpeed: 1.1,
+  runSpeed: 1.7,
   gameOver: false,
   playerAnimation: {
     walk: {

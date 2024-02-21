@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { Game } from '../../mechanics/game'
 import styles from './game-page.module.css'
 
