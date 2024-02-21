@@ -12,8 +12,8 @@ import { AvatarUpload } from './AvatarUpload'
 import { EditPasswordModalContent } from './EditPasswordModalContent'
 
 import styles from './styles.module.css'
-import { InputTypes, User } from '@/core/types'
-import { validation } from '@/core/constants'
+import { InputTypes, User } from '@core/types'
+import { validation } from '@core/constants'
 
 const onSubmit: SubmitHandler<User> = data => {
   // TODO Поменять на вызов API

@@ -7,7 +7,7 @@ import { InputTypes, UserPasswordData } from '@core/types'
 
 import styles from './styles.module.css'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { validation } from '@/core/constants'
+import { validation } from '@core/constants'
 
 const changePassword = async (data: UserPasswordData) => {
   await UserController.changePassword(data)

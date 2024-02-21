@@ -1,9 +1,9 @@
-import { validation } from '@/core/constants'
+import { validation } from '@core/constants'
 import { Input } from '@components/input'
 import { Space } from '@components/space'
 import { AuthSignupData, InputTypes } from '@core/types'
 import { FC } from 'react'
-import { FieldErrors, FormState, UseFormRegister } from 'react-hook-form'
+import { FieldErrors, UseFormRegister } from 'react-hook-form'
 
 export type InputProps = {
   type: InputTypes
