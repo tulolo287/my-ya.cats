@@ -1,5 +1,5 @@
 .topicList {
   max-height: calc(100vh - 480px);
-  overflow: scroll;
+  overflow-y: scroll;
   width: 100%;
 }
