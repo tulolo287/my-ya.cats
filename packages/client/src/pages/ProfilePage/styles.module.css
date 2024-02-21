@@ -8,6 +8,13 @@
   align-items: center;
 }
 
+.form {
+  width: 100%;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
 .inputs {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
