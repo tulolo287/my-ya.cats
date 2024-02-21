@@ -5,11 +5,9 @@ import { Input } from '@components/input'
 import { Space } from '@components/space'
 import { Typography } from '@components/typography'
 import TopicController from '@controllers/topic-controller'
-import { Topic } from '@core/types'
+import { NewTopic } from '@core/types'
 
 import styles from './styles.module.css'
-
-type NewTopic = Pick<Topic, 'topicName'>
 
 const addNewTopic = async (data: NewTopic) => {
   await TopicController.addNewTopic(data)

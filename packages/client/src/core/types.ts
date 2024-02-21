@@ -53,3 +53,5 @@ export type AuthSignupData = {
   password: string
   phone: string
 }
+
+export type NewTopic = Pick<Topic, 'topicName'>

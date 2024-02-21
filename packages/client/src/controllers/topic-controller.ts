@@ -1,5 +1,5 @@
 import { TopicAPI } from '@services/topic-api'
-import { Comment, Topic } from '@core/types'
+import { Comment, NewTopic, Topic } from '@core/types'
 
 const mockData: Topic[] = [
   {
@@ -47,7 +47,7 @@ class TopicController {
     return mockData
   }
 
-  async addNewTopic(data: Pick<Topic, 'topicName'>) {
+  async addNewTopic(data: NewTopic) {
     // todo: убрать моковые данные (YAC-31)
     console.log('addNewTopic |', data)
     return mockTopic
