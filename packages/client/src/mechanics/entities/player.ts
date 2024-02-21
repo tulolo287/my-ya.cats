@@ -88,14 +88,14 @@ export class Player implements IPlayer {
       height: this.scaleHeight * 0.4,
     }
 
-    this.gravity = 0.3
+    this.gravity = 0.6
     this.y_velocity = 0
     this.x_velocity = 5
     this.frameX = 0
     this.frameY = 0
-    this.maxY_velocity = 18 * this.gameSettings.gameSpeed
+    this.maxY_velocity = 18
     this.minY_velocity = 5
-    this.jumpHeight = this.gravity * 27
+    this.jumpHeight = 12
     this.image = new Image()
     this.image.src = './Cat-Sheet.png'
     this.animationSpeedFactor = 4
@@ -187,7 +187,7 @@ export class Player implements IPlayer {
     for (let i = 0; i < this.gameScreen.platforms.length; i++) {
       const obstacle = isCollided(this, this.gameScreen.platforms[i])
       if (obstacle) {
-        if (this.y + 80 < obstacle.y) {
+        if (this.y + 70 < obstacle.y) {
           this.y_velocity = 0
           this.collisionArea.y = obstacle.y - this.collisionArea.height
           this.currentAnimation =

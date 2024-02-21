@@ -27,7 +27,7 @@ export class Butterfly extends Entity implements IButterfly {
     imgSrc: string
   ) {
     super(x, y, width, height, scaleWidth, scaleHeight, imgSrc)
-    this.x_velocity = Math.random() * 3 + 5
+    this.x_velocity = Math.random() * 2 + 6
     this.y_velocity = Math.random() * 2 - 1
     this.velocity = Math.random() * 2 - 1
     this.curve = Math.random() * 7
@@ -37,7 +37,8 @@ export class Butterfly extends Entity implements IButterfly {
 
   update() {
     this.y_velocity = Math.random() * 20 - 10
-    this.x -= this.x_velocity
+    this.x -=
+      this.x_velocity + Math.random() * 6 + 4 * (Math.random() > 0.5 ? 1 : -1)
     this.y += this.curve * Math.sin(this.angle) + this.y_velocity
     this.angle += this.angleSpeed
     if (this.x + this.width < 0) {
