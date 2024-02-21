@@ -15,16 +15,46 @@ import AuthController from '@controllers/auth-controller'
 
 const Inputs = [
   [
-    { type: InputTypes.text, label: 'Name', name: 'first_name,' },
-    { type: InputTypes.tel, label: 'Phone', name: 'phone' },
+    {
+      type: InputTypes.text,
+      label: 'Name',
+      name: 'first_name',
+      placeholder: 'Name',
+    },
+    {
+      type: InputTypes.tel,
+      label: 'Phone',
+      name: 'phone',
+      placeholder: '+0(000)00-00-00',
+    },
   ],
   [
-    { type: InputTypes.text, label: 'Second Name', name: 'second_name' },
-    { type: InputTypes.text, label: 'Login', name: 'login' },
+    {
+      type: InputTypes.text,
+      label: 'Second Name',
+      name: 'second_name',
+      placeholder: 'Second Name',
+    },
+    {
+      type: InputTypes.text,
+      label: 'Login',
+      name: 'login',
+      placeholder: 'Login',
+    },
   ],
   [
-    { type: InputTypes.email, label: 'Email', name: 'email' },
-    { type: InputTypes.password, label: 'Password', name: 'password' },
+    {
+      type: InputTypes.email,
+      label: 'Email',
+      name: 'email',
+      placeholder: 'Email',
+    },
+    {
+      type: InputTypes.password,
+      label: 'Password',
+      name: 'password',
+      placeholder: 'Password',
+    },
   ],
 ]
 
@@ -64,8 +94,8 @@ const SignupPage: FC = () => {
             <form onSubmit={handleSubmit}>
               <Space gap="62px" align="center">
                 <Space gap="20px">
-                  {Inputs.map(inputRow => (
-                    <InputRow row={inputRow} />
+                  {Inputs.map((inputRow, index) => (
+                    <InputRow row={inputRow} key={index} />
                   ))}
                 </Space>
                 <Space>

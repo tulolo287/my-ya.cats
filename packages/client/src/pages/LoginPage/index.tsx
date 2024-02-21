@@ -58,6 +58,7 @@ const LoginPage: FC = () => {
                     name="login"
                     w="300px"
                     h="48px"
+                    placeholder="Login"
                   />
                   <Input
                     type={InputTypes.password}
@@ -65,6 +66,7 @@ const LoginPage: FC = () => {
                     name="password"
                     w="300px"
                     h="48px"
+                    placeholder="Password"
                   />
                 </Space>
                 <Space>

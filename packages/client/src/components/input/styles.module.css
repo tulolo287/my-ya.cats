@@ -21,3 +21,8 @@
   height: 12px;
   color: #ac3232;
 }
+
+::placeholder {
+  color: var(--light-grey);
+  opacity: 1; /* Firefox */
+}
