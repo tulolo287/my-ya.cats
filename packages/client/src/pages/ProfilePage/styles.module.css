@@ -17,7 +17,7 @@
 }
 
 .link {
-  color: inherit;
+  color: var(--primary-text-color);
   background-color: rgba(0, 0, 0, 0);
   border: none;
   font-size: 24px;

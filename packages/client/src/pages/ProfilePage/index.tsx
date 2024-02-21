@@ -12,6 +12,7 @@ import { AvatarUpload } from './AvatarUpload'
 import { EditPasswordModalContent } from './EditPasswordModalContent'
 
 import styles from './styles.module.css'
+import { InputTypes } from '@core/types'
 
 const ProfilePage: FC = () => {
   const navigate = useNavigate()
@@ -25,35 +26,35 @@ const ProfilePage: FC = () => {
             <AvatarUpload />
             <div className={styles.inputs}>
               <Input
-                type="text"
+                type={InputTypes.text}
                 label="Name"
                 placeholder="Name"
                 w="100%"
                 h="48px"
               />
               <Input
-                type="tel"
+                type={InputTypes.tel}
                 label="Phone"
                 placeholder="+0(000)000-00-00"
                 w="100%"
                 h="48px"
               />
               <Input
-                type="text"
+                type={InputTypes.text}
                 label="Second name"
                 placeholder="Second name"
                 w="100%"
                 h="48px"
               />
               <Input
-                type="text"
+                type={InputTypes.text}
                 label="Login"
                 placeholder="Login"
                 w="100%"
                 h="48px"
               />
               <Input
-                type="email"
+                type={InputTypes.email}
                 label="Email"
                 placeholder="test@test.com"
                 w="100%"

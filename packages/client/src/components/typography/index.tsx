@@ -22,7 +22,7 @@ type TypographyProps = {
   tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'p'
   /**
    * цвет заголовка
-   * @default 'black'
+   * @default 'grey'
    */
   color?: 'white' | 'black' | 'grey' | 'grey-with-shadow' | 'orange'
   className?: string
@@ -33,7 +33,7 @@ export const Typography = (props: TypographyProps) => {
   const fontStyles = {
     textAlign: props.align || 'left',
   }
-  const color = props.color || 'black'
+  const color = props.color || 'grey'
 
   return (
     <CustomTag

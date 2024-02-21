@@ -5,7 +5,7 @@ import { Input } from '@components/input'
 import { Space } from '@components/space'
 import { Typography } from '@components/typography'
 import TopicController from '@controllers/topic-controller'
-import { NewTopic } from '@core/types'
+import { InputTypes, NewTopic } from '@core/types'
 
 import styles from './styles.module.css'
 
@@ -38,7 +38,7 @@ export const AddTopicModalContent: FC = () => {
       <form onSubmit={onSubmit}>
         <Space gap="24px" className={styles.content} align="center">
           <Input
-            type="text"
+            type={InputTypes.text}
             label="Topic name"
             name="topicName"
             w="100%"
