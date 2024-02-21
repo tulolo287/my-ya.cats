@@ -41,3 +41,11 @@ export type AuthSignupData = {
   password: string
   phone: string
 }
+
+export enum InputTypes {
+  text = 'text',
+  password = 'password',
+  email = 'email',
+  tel = 'tel',
+  number = 'number',
+}
