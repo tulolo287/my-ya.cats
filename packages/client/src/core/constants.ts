@@ -1,4 +1,4 @@
-import { Validation } from './types'
+import { AuthSignupData, Validation } from './types'
 
 export const routerPaths = {
   login: '/login',
@@ -14,7 +14,7 @@ export const routerPaths = {
 export const defaultError = 'Something went wrong...Please try again'
 
 export const validation: Record<
-  string,
+  keyof AuthSignupData,
   { pattern: Validation; required: string | boolean }
 > = {
   first_name: {
