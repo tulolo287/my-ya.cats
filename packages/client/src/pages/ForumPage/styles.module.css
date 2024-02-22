@@ -1,13 +1,8 @@
 .container {
   width: 100%;
-  align-items: center;
 }
 
-.titleWrapper {
-  align-items: center;
-}
-
-.table {
+.topicsWrapper {
   max-width: 1400px;
   width: 100%;
   box-sizing: border-box;

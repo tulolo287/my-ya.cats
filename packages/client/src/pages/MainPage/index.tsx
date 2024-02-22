@@ -5,11 +5,11 @@ import { Center } from '@components/center'
 import { Space } from '@components/space'
 import { Typography } from '@components/typography'
 import { useNavigate } from 'react-router-dom'
-import { SyntheticEvent } from 'react'
+import { FC, SyntheticEvent } from 'react'
 import AuthController from '@controllers/auth-controller'
 import { routerPaths } from '@core/constants'
 
-const MainPage = () => {
+const MainPage: FC = () => {
   const navigate = useNavigate()
 
   const submitHandler = async (e: SyntheticEvent) => {

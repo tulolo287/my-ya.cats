@@ -23,6 +23,18 @@ export type UserAvatarData = {
   avatar: string
 }
 
+export type Topic = {
+  id: number
+  topicName: string
+  comments: Comment[]
+}
+
+export type Comment = {
+  id: number
+  username: string
+  text: string
+}
+
 export type LeaderboardRecord = {
   login: string
   score: number
@@ -49,3 +61,5 @@ export enum InputTypes {
   tel = 'tel',
   number = 'number',
 }
+
+export type NewTopic = Pick<Topic, 'topicName'>

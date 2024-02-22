@@ -1,4 +1,4 @@
-import { SyntheticEvent } from 'react'
+import { FC, SyntheticEvent } from 'react'
 
 import { Button } from '@components/button'
 import { Input } from '@components/input'
@@ -28,7 +28,7 @@ const onSubmit = async (e: SyntheticEvent) => {
   }
 }
 
-export const EditPasswordModalContent = () => {
+export const EditPasswordModalContent: FC = () => {
   return (
     <Space gap="32px">
       <Typography align="center" tag="h2" fontSize="xl" color="white">
@@ -36,7 +36,7 @@ export const EditPasswordModalContent = () => {
       </Typography>
 
       <form className={styles.form} onSubmit={onSubmit}>
-        <Space gap="24px" className={styles.content}>
+        <Space gap="24px" className={styles.content} align="center">
           <Input
             type={InputTypes.password}
             label="Old password"

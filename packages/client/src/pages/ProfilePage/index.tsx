@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { FC, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { Background } from '@components/background'
@@ -14,7 +14,7 @@ import { EditPasswordModalContent } from './EditPasswordModalContent'
 import styles from './styles.module.css'
 import { InputTypes } from '@core/types'
 
-const ProfilePage = () => {
+const ProfilePage: FC = () => {
   const navigate = useNavigate()
   const [showModal, setShowModal] = useState(false)
 
@@ -22,7 +22,7 @@ const ProfilePage = () => {
     <Background>
       <Center>
         <Paper className={styles.container}>
-          <Space className={styles.content}>
+          <Space align="center">
             <AvatarUpload />
             <div className={styles.inputs}>
               <Input
@@ -64,15 +64,15 @@ const ProfilePage = () => {
             <Button color="orange" w="400px" h="66px">
               Edit
             </Button>
-            <Space className={styles.links} gap="8px">
+            <Space className={styles.links} gap="8px" align="center">
               <button
                 className={styles.link}
                 onClick={() => setShowModal(true)}>
                 Change password
               </button>
-              <button className={styles.link} onClick={() => navigate('/')}>
+              <a className={styles.link} onClick={() => navigate(-1)}>
                 Back
-              </button>
+              </a>
             </Space>
           </Space>
         </Paper>

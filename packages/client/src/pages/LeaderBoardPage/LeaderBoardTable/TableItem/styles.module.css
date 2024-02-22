@@ -17,8 +17,6 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  color: var(--primary-text-color);
-  text-shadow: var(--text-shadow);
 }
 
 .score {

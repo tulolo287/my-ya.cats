@@ -9,9 +9,13 @@
 
 .grey-with-shadow {
   color: var(--primary-text-color);
-  text-shadow: 2px 4px 0 #000;
+  text-shadow: var(--text-shadow);
 }
 
 .grey {
   color: var(--primary-text-color);
+}
+
+.orange {
+  color: var(--orange);
 }
