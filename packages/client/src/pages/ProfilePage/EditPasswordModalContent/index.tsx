@@ -1,3 +1,6 @@
+
+import { FC, SyntheticEvent } from 'react'
+
 import { Button } from '@components/button'
 import { Input } from '@components/input'
 import { Space } from '@components/space'
@@ -24,7 +27,7 @@ const onSubmit: SubmitHandler<ChangePassword> = async data => {
 
 type ChangePassword = UserPasswordData & { secondNewPassword: string }
 
-export const EditPasswordModalContent = () => {
+export const EditPasswordModalContent: FC = () => {
   const {
     register,
     handleSubmit,
@@ -38,7 +41,8 @@ export const EditPasswordModalContent = () => {
       </Typography>
 
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-        <Space gap="24px" className={styles.content}>
+        <Space gap="24px" className={styles.content} align="center">
+
           <Input
             type={InputTypes.password}
             label="Old password"

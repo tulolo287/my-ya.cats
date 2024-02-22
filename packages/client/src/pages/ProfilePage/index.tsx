@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { FC, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { Background } from '@components/background'
@@ -20,7 +20,7 @@ const onSubmit: SubmitHandler<User> = data => {
   console.log(data)
 }
 
-const ProfilePage = () => {
+const ProfilePage: FC = () => {
   const navigate = useNavigate()
   const [showModal, setShowModal] = useState(false)
   const {
@@ -33,7 +33,7 @@ const ProfilePage = () => {
     <Background>
       <Center>
         <Paper className={styles.container}>
-          <Space className={styles.content}>
+          <Space align="center">
             <AvatarUpload />
             <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
               <div className={styles.inputs}>
@@ -91,15 +91,15 @@ const ProfilePage = () => {
                 Edit
               </Button>
             </form>
-            <Space className={styles.links} gap="8px">
+            <Space className={styles.links} gap="8px" align="center">
               <button
                 className={styles.link}
                 onClick={() => setShowModal(true)}>
                 Change password
               </button>
-              <button className={styles.link} onClick={() => navigate('/')}>
+              <a className={styles.link} onClick={() => navigate(-1)}>
                 Back
-              </button>
+              </a>
             </Space>
           </Space>
         </Paper>

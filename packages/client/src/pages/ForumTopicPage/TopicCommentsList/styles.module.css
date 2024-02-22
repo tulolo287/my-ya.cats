@@ -1,0 +1,14 @@
+.wrapper {
+  max-height: calc(100vh - 480px);
+  overflow-y: scroll;
+  width: 100%;
+  box-sizing: border-box;
+  padding-bottom: 4px;
+}
+
+.container {
+  width: 100%;
+  max-width: 1400px;
+  padding: 20px;
+  box-sizing: border-box;
+}

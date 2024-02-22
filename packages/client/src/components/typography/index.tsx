@@ -24,7 +24,7 @@ type TypographyProps = {
    * цвет заголовка
    * @default 'grey'
    */
-  color?: 'white' | 'black' | 'grey' | 'grey-with-shadow'
+  color?: 'white' | 'black' | 'grey' | 'grey-with-shadow' | 'orange'
   className?: string
 }
 

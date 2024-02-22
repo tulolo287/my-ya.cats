@@ -32,7 +32,7 @@ type SpaceProps = {
 export const Space = (
   props: React.ComponentPropsWithoutRef<'div'> & SpaceProps
 ) => {
-  const { direction = 'column', gap, align } = props
+  const { direction = 'column', gap, align, ...rest } = props
   const spaceStyle = {
     flexDirection: direction,
     gap: gap,
@@ -41,7 +41,7 @@ export const Space = (
 
   return (
     <div
-      {...props}
+      {...rest}
       className={`${styles.space} ${props.className || ''}`}
       style={spaceStyle}>
       {props.children}
