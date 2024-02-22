@@ -24,12 +24,6 @@ export const Background = ({
   const root = document.documentElement
   root.style.setProperty('--background-images', urls)
 
-  const stylesBackground = {
-    backgroundImage: `${urls}`,
-  }
-
-  console.log(stylesBackground, urls)
-
   return (
     <div className={`${styles.background} ${className || ''}`}>{children}</div>
   )
