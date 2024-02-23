@@ -1,8 +1,8 @@
 import { InputController } from '../controllers/input-controller'
+import { IGame } from '../engine/game'
 import { Butterfly, IButterfly } from '../entities/butterfly'
 import { IPlatform, Platform } from '../entities/platform'
 import { IPlayer, Player } from '../entities/player'
-import { IGame } from '../game'
 import { Background, IBackground } from '../system/background'
 import { TGameSettings } from '../types'
 
@@ -144,8 +144,8 @@ export class GameScreen implements IGameScreen {
       platform.update(Math.floor(this.bg3_xv * this.gameSettings.gameSpeed))
     }
     this.player.update(dt)
-    if (this.platforms.length < 7) {
-      this.createPlatforms(7)
+    if (this.platforms.length < 8) {
+      this.createPlatforms(8)
     }
     for (const [idx, butterfly] of this.butterflies.entries()) {
       if (butterfly.delete) {
@@ -229,7 +229,7 @@ export class GameScreen implements IGameScreen {
 
   createButterfly(platform: IPlatform) {
     const x = platform.x
-    const y = Math.floor(Math.random() * (platform.y - 100 - 400) + 400)
+    const y = Math.floor(Math.random() * (platform.y - 200 - 600) + 600)
     this.butterflies.push(
       new Butterfly(x, y, 50, 50, 50, 50, './butterfly.png')
     )

@@ -6,3 +6,16 @@
   color: var(--white);
   text-shadow: var(--text-shadow);
 }
+
+.grey-with-shadow {
+  color: var(--primary-text-color);
+  text-shadow: var(--text-shadow);
+}
+
+.grey {
+  color: var(--primary-text-color);
+}
+
+.orange {
+  color: var(--orange);
+}

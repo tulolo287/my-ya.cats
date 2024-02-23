@@ -1,26 +1,64 @@
-import { useEffect, useRef } from 'react'
-import { Game } from '../../mechanics/game'
-import styles from './game-page.module.css'
+import { Canvas } from '@/mechanics/Canvas'
+import { Background } from '@components/background'
+import { Button } from '@components/button'
+import { CatImage } from '@components/catImage'
+import { Center } from '@components/center'
+import { Paper } from '@components/paper'
+import { Space } from '@components/space'
+import { Typography } from '@components/typography'
+import React, { FC, useState } from 'react'
 
-const GamePage = () => {
-  const canvasRef = useRef<HTMLCanvasElement | null>(null)
+const GAME_BACKGROUNDS = [
+  'background_layer_3.png',
+  'background_layer_2.png',
+  'background_layer_1.png',
+]
 
-  useEffect(() => {
-    if (!canvasRef) throw new Error('Canvas not found')
+const GamePage: FC = () => {
+  const [isStarted, setStarted] = useState<boolean>(false) // флаг начала игры
 
-    const game = new Game(canvasRef)
-    game.init()
-    game.start()
-
-    return () => {
-      window.cancelAnimationFrame(game.loopId!)
-    }
-  }, [])
+  const handleStart = () => setStarted(true)
 
   return (
-    <main>
-      <canvas id="canvas" className={styles.canvas} ref={canvasRef}></canvas>
-    </main>
+    <React.Fragment>
+      {isStarted ? (
+        <Canvas />
+      ) : (
+        <Background images={GAME_BACKGROUNDS}>
+          <Center>
+            <Paper background="blue">
+              <Space align="center" children={<CatImage />} />
+              <Space gap="40px" align="center">
+                <Typography
+                  children={'Start'}
+                  fontSize="xxxl"
+                  tag="h1"
+                  color="grey-with-shadow"
+                />
+                <Space align="center">
+                  <Typography
+                    children={'press SPACE for jump'}
+                    fontSize="xl"
+                    color="grey"
+                  />
+                  <Typography
+                    children={'press R or ARROW UP to speed up'}
+                    fontSize="xl"
+                    color="grey"
+                  />
+                  <Typography
+                    children={'try to get as many points as you can'}
+                    fontSize="xl"
+                    color="grey"
+                  />
+                </Space>
+                <Button children="START" onClick={handleStart} />
+              </Space>
+            </Paper>
+          </Center>
+        </Background>
+      )}
+    </React.Fragment>
   )
 }
 

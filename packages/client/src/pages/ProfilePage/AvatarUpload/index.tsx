@@ -1,4 +1,4 @@
-import { useState, ChangeEvent, SyntheticEvent } from 'react'
+import { useState, ChangeEvent, SyntheticEvent, FC } from 'react'
 
 import { Button } from '@components/button'
 import { Modal } from '@components/modal'
@@ -8,7 +8,7 @@ import userController from '@controllers/user-controller'
 
 import styles from './styles.module.css'
 
-export const AvatarUpload = () => {
+export const AvatarUpload: FC = () => {
   const [showModal, setShowModal] = useState(false)
   const [file, setFile] = useState<File | null>(null)
   const [avatarUrl, setAvatarUrl] = useState(localStorage.getItem('avatarUrl'))
@@ -24,7 +24,7 @@ export const AvatarUpload = () => {
 
     if (file) {
       const formData = new FormData()
-      formData.append('file', file)
+      formData.append('avatar', file)
 
       try {
         await userController.changeAvatar(formData)
@@ -49,7 +49,7 @@ export const AvatarUpload = () => {
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <form onSubmit={onSubmit}>
-            <Space gap="32px" className={styles.content}>
+            <Space gap="32px" align="center">
               <Typography fontSize="xl" tag="h2" color="white">
                 Change avatar
               </Typography>

@@ -1,0 +1,22 @@
+.topicItem {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  gap: 16px;
+}
+
+.name {
+  flex-grow: 1;
+  min-width: 250px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-wrap: nowrap;
+}
+
+.comments {
+  width: 200px;
+}
+
+.number {
+  color: var(--orange);
+}

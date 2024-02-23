@@ -1,13 +1,13 @@
 import React from 'react'
 import styles from './styles.module.css'
 import stylesFontSize from '@style/font-size.module.css'
-import { DimensionsProp, TFontSize } from '@core/types'
+import { DimensionsProp, InputTypes, TFontSize } from '@core/types'
 
 type InputProps = {
   /**
    * тип инпута
    */
-  type?: 'text' | 'password' | 'email' | 'tel' | 'number'
+  type?: InputTypes
   /**
    * текст лейбла
    */

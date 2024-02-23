@@ -12,10 +12,17 @@
 .label {
   display: flex;
   flex-direction: column;
+  color: var(--primary-text-color);
+  text-align: left;
 }
 
 .error {
   font-size: 0.75rem;
   height: 12px;
   color: #ac3232;
+}
+
+::placeholder {
+  color: var(--light-grey);
+  opacity: 1; /* Firefox */
 }
