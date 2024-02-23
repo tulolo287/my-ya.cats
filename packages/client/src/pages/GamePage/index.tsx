@@ -6,13 +6,9 @@ import { Center } from '@components/center'
 import { Paper } from '@components/paper'
 import { Space } from '@components/space'
 import { Typography } from '@components/typography'
-import React, { FC, useState } from 'react'
-
-const GAME_BACKGROUNDS = [
-  'background_layer_3.png',
-  'background_layer_2.png',
-  'background_layer_1.png',
-]
+import React, { FC } from 'react'
+import { useState } from 'react'
+import { GAME_BACKGROUNDS } from './constants'
 
 const GamePage: FC = () => {
   const [isStarted, setStarted] = useState<boolean>(false) // флаг начала игры
