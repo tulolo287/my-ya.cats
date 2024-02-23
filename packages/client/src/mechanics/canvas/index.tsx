@@ -1,4 +1,4 @@
-import { Game } from '@/mechanics/engine/game'
+import { Game } from '@mechanics/engine/game'
 import { useEffect, useRef } from 'react'
 import styles from './canvas.module.css'
 

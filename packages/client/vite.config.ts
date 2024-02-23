@@ -23,6 +23,7 @@ export default defineConfig({
       '@controllers': path.resolve(__dirname, './src/controllers'),
       '@services': path.resolve(__dirname, './src/services'),
       '@utils': path.resolve(__dirname, './src/utils'),
+      '@mechanics': path.resolve(__dirname, './src/mechanics'),
     },
   },
   plugins: [react()],

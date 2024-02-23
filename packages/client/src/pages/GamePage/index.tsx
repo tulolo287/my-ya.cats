@@ -1,4 +1,4 @@
-import { Canvas } from '@/mechanics/Canvas'
+import { Canvas } from '@mechanics/canvas'
 import { Background } from '@components/background'
 import { Button } from '@components/button'
 import { CatImage } from '@components/catImage'
