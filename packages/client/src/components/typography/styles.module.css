@@ -18,4 +18,5 @@
 
 .orange {
   color: var(--orange);
+  text-shadow: var(--text-shadow);
 }
