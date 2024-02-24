@@ -1,4 +1,4 @@
-import { API } from './api.service'
+import { API } from '../api.service'
 import { AuthLoginData, AuthSignupData } from '@core/types'
 
 export class AuthAPI extends API {

@@ -1,4 +1,4 @@
-import { API } from './api.service'
+import { API } from '../api.service'
 
 export class TopicAPI extends API {
   constructor() {

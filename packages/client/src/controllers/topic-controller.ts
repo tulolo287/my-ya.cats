@@ -1,4 +1,4 @@
-import { TopicAPI } from '@services/topic-api'
+import { TopicAPI } from '@services/api/topic-api'
 import { Comment, NewTopic, Topic } from '@core/types'
 
 const mockData: Topic[] = [

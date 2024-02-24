@@ -1,4 +1,4 @@
-import { API } from './api.service'
+import { API } from '../api.service'
 import { UserPasswordData } from '@core/types'
 
 export class UserAPI extends API {

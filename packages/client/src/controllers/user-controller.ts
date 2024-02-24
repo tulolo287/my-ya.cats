@@ -1,4 +1,4 @@
-import { UserAPI } from '@services/user-api'
+import { UserAPI } from '@services/api/user-api'
 
 import { UserAvatarData } from '@core/types'
 import { UserPasswordData } from '@core/types'
