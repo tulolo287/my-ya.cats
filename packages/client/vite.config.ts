@@ -1,8 +1,23 @@
-import { defineConfig } from 'vite'
+import { PluginOption, defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import dotenv from 'dotenv'
 import path from 'node:path'
+import { buildSync } from 'esbuild'
 dotenv.config({ path: '../../.env' })
+
+const SWPluginOptions: PluginOption = {
+  name: 'build-sw',
+  apply: 'build',
+  enforce: 'post',
+  transformIndexHtml() {
+    buildSync({
+      minify: true,
+      bundle: true,
+      entryPoints: [path.join(process.cwd(), './src/services/sw.service.ts')],
+      outfile: path.join(process.cwd(), 'dist', 'sw.js'),
+    })
+  },
+}
 
 export default defineConfig({
   server: {
@@ -25,5 +40,5 @@ export default defineConfig({
       '@utils': path.resolve(__dirname, './src/utils'),
     },
   },
-  plugins: [react()],
+  plugins: [react(), SWPluginOptions],
 })
