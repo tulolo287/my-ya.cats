@@ -1,6 +1,4 @@
-
-import { FC, SyntheticEvent } from 'react'
-
+import { FC } from 'react'
 import { Button } from '@components/button'
 import { Input } from '@components/input'
 import { Space } from '@components/space'
@@ -25,6 +23,14 @@ const onSubmit: SubmitHandler<ChangePassword> = async data => {
   }
 }
 
+const validationPassword = {
+  newPassword: (value: string, formValues: ChangePassword) =>
+    value !== formValues.oldPassword ||
+    'The new password must be different from the old password',
+  secondNewPassword: (value: string, formValues: ChangePassword) =>
+    value === formValues.newPassword || 'Must match new password',
+}
+
 type ChangePassword = UserPasswordData & { secondNewPassword: string }
 
 export const EditPasswordModalContent: FC = () => {
@@ -42,7 +48,6 @@ export const EditPasswordModalContent: FC = () => {
 
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <Space gap="24px" className={styles.content} align="center">
-
           <Input
             type={InputTypes.password}
             label="Old password"
@@ -58,9 +63,7 @@ export const EditPasswordModalContent: FC = () => {
             h="48px"
             {...register('newPassword', {
               ...validation.password,
-              validate: (value, formValues) =>
-                value !== formValues.oldPassword ||
-                'The new password must be different from the old password',
+              validate: validationPassword.newPassword,
             })}
             errorMessage={errors.newPassword?.message}
           />
@@ -71,8 +74,7 @@ export const EditPasswordModalContent: FC = () => {
             h="48px"
             {...register('secondNewPassword', {
               ...validation.password,
-              validate: (value, formValues) =>
-                value === formValues.newPassword || 'Must match new password',
+              validate: validationPassword.secondNewPassword,
             })}
             errorMessage={errors.secondNewPassword?.message}
           />
