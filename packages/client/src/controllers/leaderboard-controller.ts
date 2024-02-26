@@ -1,5 +1,5 @@
 import { LeaderboardRecord } from '@core/types'
-import { LeaderboardAPI } from '@services/leaderboard-api'
+import { LeaderboardAPI } from '@services/api/leaderboard-api'
 
 const mockData: LeaderboardRecord[] = [
   { login: '233erw', score: 343_424_390 },

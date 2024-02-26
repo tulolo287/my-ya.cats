@@ -1,4 +1,4 @@
-import { AuthAPI } from '@services/auth-api'
+import { AuthAPI } from '@services/api/auth-api'
 import { AuthLoginData, AuthSignupData } from '@core/types'
 
 class AuthController {
