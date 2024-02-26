@@ -12,13 +12,8 @@ export type UserPasswordData = {
   newPassword: string
 }
 
-export type UserAvatarData = {
+export type UserAvatarData = User & {
   id: number
-  login: string
-  first_name: string
-  second_name: string
-  email: string
-  phone: string
   display_name: string | null
   avatar: string
 }
@@ -45,12 +40,15 @@ export type AuthLoginData = {
   password: string
 }
 
-export type AuthSignupData = {
+export type AuthSignupData = User & {
+  password: string
+}
+
+export type User = {
   first_name: string
   second_name: string
   login: string
   email: string
-  password: string
   phone: string
 }
 
@@ -62,4 +60,11 @@ export enum InputTypes {
   number = 'number',
 }
 
+
+export type Validation = {
+  value: RegExp
+  message: string
+}
+
 export type NewTopic = Pick<Topic, 'topicName'>
+

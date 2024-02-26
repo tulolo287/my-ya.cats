@@ -1,5 +1,4 @@
-import { FC, SyntheticEvent } from 'react'
-
+import { FC } from 'react'
 import { Button } from '@components/button'
 import { Input } from '@components/input'
 import { Space } from '@components/space'
@@ -8,58 +7,81 @@ import UserController from '@controllers/user-controller'
 import { InputTypes, UserPasswordData } from '@core/types'
 
 import styles from './styles.module.css'
+import { SubmitHandler, useForm } from 'react-hook-form'
+import { validation } from '@core/constants'
 
 const changePassword = async (data: UserPasswordData) => {
   await UserController.changePassword(data)
 }
 
-const onSubmit = async (e: SyntheticEvent) => {
-  e.preventDefault()
-
-  const form = e.target as HTMLFormElement
-  const formData = new FormData(form)
-
-  const formJson = Object.fromEntries(formData.entries())
-
+const onSubmit: SubmitHandler<ChangePassword> = async data => {
+  const { oldPassword, newPassword } = data
   try {
-    await changePassword(formJson as UserPasswordData)
+    await changePassword({ oldPassword, newPassword })
   } catch (error) {
     console.log(error)
   }
 }
 
+const validationPassword = {
+  newPassword: (value: string, formValues: ChangePassword) =>
+    value !== formValues.oldPassword ||
+    'The new password must be different from the old password',
+  secondNewPassword: (value: string, formValues: ChangePassword) =>
+    value === formValues.newPassword || 'Must match new password',
+}
+
+type ChangePassword = UserPasswordData & { secondNewPassword: string }
+
 export const EditPasswordModalContent: FC = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<ChangePassword>()
+
   return (
     <Space gap="32px">
       <Typography align="center" tag="h2" fontSize="xl" color="white">
         Change password
       </Typography>
 
-      <form className={styles.form} onSubmit={onSubmit}>
+      <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <Space gap="24px" className={styles.content} align="center">
           <Input
             type={InputTypes.password}
             label="Old password"
-            name="oldPassword"
             w="100%"
             h="48px"
+            {...register('oldPassword', { ...validation.password })}
+            errorMessage={errors.oldPassword?.message}
           />
           <Input
             type={InputTypes.password}
             label="New password"
-            name="newPassword"
             w="100%"
             h="48px"
+            {...register('newPassword', {
+              ...validation.password,
+              validate: validationPassword.newPassword,
+            })}
+            errorMessage={errors.newPassword?.message}
           />
           <Input
             type={InputTypes.password}
             label="Repeat new password"
-            name="repeatPassword"
             w="100%"
             h="48px"
+            {...register('secondNewPassword', {
+              ...validation.password,
+              validate: validationPassword.secondNewPassword,
+            })}
+            errorMessage={errors.secondNewPassword?.message}
           />
 
-          <Button color="orange">Save</Button>
+          <Button type="submit" color="orange">
+            Save
+          </Button>
         </Space>
       </form>
     </Space>

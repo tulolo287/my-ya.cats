@@ -5,15 +5,16 @@ import { Paper } from '@components/paper'
 import { Space } from '@components/space'
 import { Typography } from '@components/typography'
 import { routerPaths } from '@core/constants'
-import { FC, SyntheticEvent, useState } from 'react'
+import { FC, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 import styles from './styles.module.css'
-import { InputRow } from './input-row'
+import { InputProps, InputRow } from './input-row'
 import { AuthSignupData, InputTypes } from '@core/types'
 import AuthController from '@controllers/auth-controller'
+import { SubmitHandler, useForm } from 'react-hook-form'
 
-const Inputs = [
+const Inputs: Array<InputProps[]> = [
   [
     {
       type: InputTypes.text,
@@ -61,17 +62,15 @@ const Inputs = [
 const SignupPage: FC = () => {
   const [error, setError] = useState('')
   const navigate = useNavigate()
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<AuthSignupData>()
 
-  const handleSubmit = async (e: SyntheticEvent) => {
-    e.preventDefault()
-
-    const form = e.target as HTMLFormElement
-    const formData = new FormData(form)
-
-    const formJson = Object.fromEntries(formData.entries())
-
+  const onSubmit: SubmitHandler<AuthSignupData> = async data => {
     try {
-      await AuthController.signup(formJson as AuthSignupData)
+      await AuthController.signup(data)
       setError('')
       navigate(routerPaths.login)
     } catch (error) {
@@ -91,11 +90,15 @@ const SignupPage: FC = () => {
               color="grey-with-shadow">
               SIGNUP
             </Typography>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit(onSubmit)}>
               <Space gap="62px" align="center">
                 <Space gap="20px">
                   {Inputs.map((inputRow, index) => (
-                    <InputRow row={inputRow} key={index} />
+                    <InputRow
+                      row={inputRow}
+                      form={{ register, errors }}
+                      key={index}
+                    />
                   ))}
                 </Space>
                 <Space>

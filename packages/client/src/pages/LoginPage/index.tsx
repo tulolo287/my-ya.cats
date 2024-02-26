@@ -1,4 +1,4 @@
-import { FC, SyntheticEvent, useState } from 'react'
+import { FC, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 import { Button } from '@components/button'
@@ -10,24 +10,24 @@ import { Center } from '@components/center'
 import { Paper } from '@components/paper'
 import AuthController from '@controllers/auth-controller'
 import { AuthLoginData, InputTypes } from '@core/types'
-import { routerPaths } from '@core/constants'
+import { routerPaths, validation } from '@core/constants'
 
 import styles from './styles.module.css'
+import { SubmitHandler, useForm } from 'react-hook-form'
 
 const LoginPage: FC = () => {
   const navigate = useNavigate()
   const [error, setError] = useState('')
 
-  const submitHandler = async (e: SyntheticEvent) => {
-    e.preventDefault()
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<AuthLoginData>()
 
-    const form = e.target as HTMLFormElement
-    const formData = new FormData(form)
-
-    const formJson = Object.fromEntries(formData.entries())
-
+  const onSubmit: SubmitHandler<AuthLoginData> = async data => {
     try {
-      await AuthController.login(formJson as AuthLoginData)
+      await AuthController.login(data)
       setError('')
       // TODO: перенести в стор когда появится редакс
       localStorage.setItem('isAuth', 'true')
@@ -49,29 +49,31 @@ const LoginPage: FC = () => {
               color="grey-with-shadow">
               LOGIN
             </Typography>
-            <form onSubmit={submitHandler}>
+            <form onSubmit={handleSubmit(onSubmit)}>
               <Space gap="62px" align="center">
                 <Space gap="16px">
                   <Input
                     type={InputTypes.text}
                     label="Login"
-                    name="login"
                     w="300px"
                     h="48px"
                     placeholder="Login"
+                    {...register('login', { ...validation.login })}
+                    errorMessage={errors.login?.message}
                   />
                   <Input
                     type={InputTypes.password}
                     label="Password"
-                    name="password"
                     w="300px"
                     h="48px"
                     placeholder="Password"
+                    {...register('password', { ...validation.password })}
+                    errorMessage={errors.password?.message}
                   />
                 </Space>
                 <Space>
                   {error && <Typography align="center">{error}</Typography>}
-                  <Button color="orange" w="300px">
+                  <Button type="submit" color="orange" w="300px">
                     LOG IN
                   </Button>
                 </Space>
