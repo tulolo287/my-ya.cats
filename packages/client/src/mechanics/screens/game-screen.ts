@@ -6,40 +6,35 @@ import { IPlayer, Player } from '../entities/player'
 import { Background, IBackground } from '../system/background'
 import { TGameSettings } from '../types'
 
-export interface IGameScreen {
+export type TGameScreen = {
   game: IGame
-  gameSettings: TGameSettings
-  walkSpeed: number
-  runSpeed: number
   width: number
   height: number
-  bg1_xv: number
-  bg2_xv: number
-  bg3_xv: number
+  gameSettings: TGameSettings
   parallaxBg: IBackground[]
   platforms: IPlatform[]
   butterflies: IButterfly[]
   player: IPlayer
-  speedChangeIntervalID: number
   update: (dt: number) => void
   draw: (ctx: CanvasRenderingContext2D) => void
+  gameOver: boolean
 }
 
-export class GameScreen implements IGameScreen {
+export class GameScreen {
   game: IGame
   gameSettings: TGameSettings
   walkSpeed: number
   runSpeed: number
   width: number
   height: number
-  bg1_xv: number
-  bg2_xv: number
-  bg3_xv: number
+  private bg1_xv: number
+  private bg2_xv: number
+  private bg3_xv: number
   parallaxBg: IBackground[]
   platforms: IPlatform[]
   player: IPlayer
   butterflies: IButterfly[]
-  speedChangeIntervalID: number
+  gameOver: boolean
 
   constructor(game: IGame) {
     this.game = game
@@ -54,13 +49,9 @@ export class GameScreen implements IGameScreen {
     this.parallaxBg = []
     this.butterflies = []
     this.platforms = []
-    this.speedChangeIntervalID = 0
     this.player = <IPlayer>{}
+    this.gameOver = false
 
-    this.init()
-  }
-
-  init() {
     this.player = new Player(this)
     this.platforms = []
     this.butterflies = new Array<IButterfly>()
@@ -91,18 +82,13 @@ export class GameScreen implements IGameScreen {
       this.bg3_xv
     )
     this.parallaxBg.push(bg1, bg2, bg3)
+  }
 
-    const platform1 = new Platform(
-      this.player.x,
-      this.gameSettings.height - 50,
-      500,
-      40,
-      500,
-      40,
-      './platform.png'
-    )
-    this.platforms.push(platform1)
-    this.createPlatforms(7)
+  private restart() {
+    this.gameOver = false
+    this.player = new Player(this)
+    this.platforms = []
+    this.butterflies = new Array<IButterfly>()
   }
 
   draw(ctx: CanvasRenderingContext2D) {
@@ -120,42 +106,44 @@ export class GameScreen implements IGameScreen {
     this.player.draw(ctx)
 
     if (this.player.lives < 1) {
-      this.gameOver(ctx)
+      this.drawGameOver(ctx)
     }
   }
 
   update(dt: number) {
-    for (const bg of this.parallaxBg) {
-      bg.update(this.gameSettings.gameSpeed)
-    }
-    if (InputController.KEYS.space && this.game.gameOver) {
-      window.clearInterval(this.speedChangeIntervalID)
-      this.game.init()
-      InputController.KEYS.space = false
-    }
-    this.gameSettings.gameSpeed = InputController.KEYS.run
-      ? this.runSpeed
-      : this.walkSpeed
+    if (!this.gameOver) {
+      this.player.update(dt)
+      for (const bg of this.parallaxBg) {
+        bg.update(this.gameSettings.gameSpeed)
+      }
 
-    for (const [idx, platform] of this.platforms.entries()) {
-      if (platform.delete) {
-        this.platforms.splice(idx, 1)
+      this.gameSettings.gameSpeed = InputController.KEYS.run
+        ? this.runSpeed
+        : this.walkSpeed
+
+      for (const [idx, platform] of this.platforms.entries()) {
+        if (platform.delete) {
+          this.platforms.splice(idx, 1)
+        }
+        platform.update(Math.floor(this.bg3_xv * this.gameSettings.gameSpeed))
       }
-      platform.update(Math.floor(this.bg3_xv * this.gameSettings.gameSpeed))
-    }
-    this.player.update(dt)
-    if (this.platforms.length < 8) {
-      this.createPlatforms(8)
-    }
-    for (const [idx, butterfly] of this.butterflies.entries()) {
-      if (butterfly.delete) {
-        this.butterflies.splice(idx, 1)
+
+      if (this.platforms.length < 8 || this.platforms.length === 0) {
+        this.createPlatforms(8)
       }
-      butterfly.update()
+      for (const [idx, butterfly] of this.butterflies.entries()) {
+        if (butterfly.delete) {
+          this.butterflies.splice(idx, 1)
+        }
+        butterfly.update()
+      }
+    }
+    if (InputController.KEYS.jump && this.gameOver) {
+      this.restart()
     }
   }
 
-  drawUI(ctx: CanvasRenderingContext2D) {
+  private drawUI(ctx: CanvasRenderingContext2D) {
     ctx.font = '24px serif'
     ctx.strokeStyle = 'yellow'
     ctx.strokeText('LIVES: ' + this.player.lives, 20, 50)
@@ -171,7 +159,7 @@ export class GameScreen implements IGameScreen {
     )
   }
 
-  gameOver(ctx: CanvasRenderingContext2D) {
+  private drawGameOver(ctx: CanvasRenderingContext2D) {
     ctx.font = '60px serif'
     ctx.fillStyle = 'red'
     let textString = 'GAME OVER',
@@ -191,16 +179,28 @@ export class GameScreen implements IGameScreen {
       this.gameSettings.width / 2 - textWidth / 2,
       this.gameSettings.height / 2 + 50
     )
-
-    this.game.gameOver = true
+    this.gameOver = true
   }
 
-  createPlatforms(qty: number) {
+  private createPlatforms(qty: number) {
     let dir = 0
     for (let i = 0; i < qty; i++) {
+      if (this.platforms.length === 0) {
+        this.platforms.push(
+          new Platform(
+            this.player.x,
+            this.gameSettings.height - 50,
+            500,
+            40,
+            500,
+            40,
+            './platform.png'
+          )
+        )
+      }
       const lastPlatform = this.platforms.at(-1)
-      if (!lastPlatform) throw new Error('Platform not found')
       const diff = Math.floor(Math.random() * 170 + 10)
+      if (!lastPlatform) return
       const up =
         lastPlatform.y >= this.gameSettings.height - 50 - diff ? true : false
       const down = lastPlatform.y <= 400 ? true : false
@@ -227,7 +227,7 @@ export class GameScreen implements IGameScreen {
     }
   }
 
-  createButterfly(platform: IPlatform) {
+  private createButterfly(platform: IPlatform) {
     const x = platform.x
     const y = Math.floor(Math.random() * (platform.y - 200 - 600) + 600)
     this.butterflies.push(

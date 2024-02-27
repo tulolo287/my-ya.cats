@@ -15,3 +15,8 @@ export function isCollided<T extends Entity>(
   }
   return obstacle
 }
+
+export function getRandom(from: number, to: number): number {
+  const random = Math.random() * from - to
+  return random
+}

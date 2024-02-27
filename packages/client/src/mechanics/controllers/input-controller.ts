@@ -1,10 +1,10 @@
 export class InputController {
-  static KEYS: { space: boolean; run: boolean }
-  private static _instance: InputController
+  static KEYS: { jump: boolean; run: boolean }
+  static _instance: InputController | undefined
 
   static {
     InputController.KEYS = {
-      space: false,
+      jump: false,
       run: false,
     }
   }
@@ -14,39 +14,48 @@ export class InputController {
     }
     InputController._instance = this
 
-    window.addEventListener('keydown', e => {
-      switch (e.code) {
-        case 'Space': {
-          if (!e.repeat) {
-            InputController.KEYS.space = true
-          }
-          break
+    window.addEventListener('keydown', InputController.keyDown)
+    window.addEventListener('keyup', InputController.keyUp)
+  }
+
+  static keyDown(e: KeyboardEvent): void {
+    switch (e.code) {
+      case 'Space': {
+        if (!e.repeat) {
+          InputController.KEYS.jump = true
         }
-        case 'KeyR':
-        case 'ArrowUp': {
-          if (!e.repeat) {
-            InputController.KEYS.run = true
-          }
-          break
-        }
+        break
       }
-    })
-    window.addEventListener('keyup', e => {
-      switch (e.code) {
-        case 'Space': {
-          InputController.KEYS.space = false
-          break
+      case 'KeyR':
+      case 'ArrowUp': {
+        if (!e.repeat) {
+          InputController.KEYS.run = true
         }
-        case 'KeyR':
-        case 'ArrowUp': {
-          InputController.KEYS.run = false
-          break
-        }
+        break
       }
-    })
+    }
+  }
+
+  static keyUp(e: KeyboardEvent): void {
+    switch (e.code) {
+      case 'Space': {
+        InputController.KEYS.jump = false
+        break
+      }
+      case 'KeyR':
+      case 'ArrowUp': {
+        InputController.KEYS.run = false
+        break
+      }
+    }
   }
 
   static init() {
     new this()
+  }
+
+  static removeEvents() {
+    window.removeEventListener('keydown', InputController.keyDown)
+    window.removeEventListener('keyup', InputController.keyUp)
   }
 }

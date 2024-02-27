@@ -1,7 +1,7 @@
-import { Entity } from './entity'
+import { Entity, IEntity } from './entity'
 
-export interface IPlatform extends Entity {
-  update: (x_velocity: number) => void
+export interface IPlatform extends IEntity {
+  update: (xVelocity: number) => void
 }
 export class Platform extends Entity implements IPlatform {
   constructor(
@@ -16,8 +16,8 @@ export class Platform extends Entity implements IPlatform {
     super(x, y, width, height, scaleWidth, scaleHeight, imgSrc)
   }
 
-  update(x_velocity: number) {
-    this.x -= x_velocity
+  update(xVelocity: number) {
+    this.x -= xVelocity
     if (this.x + this.width < 0) {
       this.delete = true
     }

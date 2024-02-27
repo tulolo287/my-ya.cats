@@ -1,10 +1,10 @@
 import { InputController } from '../controllers/input-controller'
-import { IGameScreen } from '../screens/game-screen'
+import { TGameScreen } from '../screens/game-screen'
 import { TGameSettings, TPlayerAnimation } from '../types'
 import { isCollided } from '../utils'
 
 export interface IPlayer {
-  gameScreen: IGameScreen
+  gameScreen: TGameScreen
   gameSettings: TGameSettings
   lives: number
   score: number
@@ -19,14 +19,16 @@ export interface IPlayer {
     x: number
     width: number
     height: number
+    initialOffset: number
+    offset: number
+    jumpOffset: number
   }
   gravity: number
-  y_velocity: number
-  x_velocity: number
+  yVelocity: number
+  xVelocity: number
   frameX: number
   frameY: number
   maxY_velocity: number
-  minY_velocity: number
   jumpHeight: number
   image: HTMLImageElement
   animationSpeedFactor: number
@@ -40,7 +42,7 @@ export interface IPlayer {
   jumpFriction: number
 }
 export class Player implements IPlayer {
-  gameScreen: IGameScreen
+  gameScreen: TGameScreen
   gameSettings: TGameSettings
   lives: number
   score: number
@@ -50,14 +52,21 @@ export class Player implements IPlayer {
   scaleHeight: number
   x: number
   y: number
-  collisionArea: { y: number; x: number; width: number; height: number }
+  collisionArea: {
+    y: number
+    x: number
+    width: number
+    height: number
+    initialOffset: number
+    offset: number
+    jumpOffset: number
+  }
   gravity: number
-  y_velocity: number
-  x_velocity: number
+  yVelocity: number
+  xVelocity: number
   frameX: number
   frameY: number
   maxY_velocity: number
-  minY_velocity: number
   jumpHeight: number
   image: HTMLImageElement
   animationSpeedFactor: number
@@ -68,11 +77,11 @@ export class Player implements IPlayer {
   isJump: boolean
   jumpFriction: number
 
-  constructor(gameScreen: IGameScreen) {
+  constructor(gameScreen: TGameScreen) {
     this.gameScreen = gameScreen
     this.gameSettings = gameScreen.gameSettings
 
-    this.lives = 3
+    this.lives = 1
     this.score = 0
 
     this.width = 1236 / 8
@@ -90,47 +99,50 @@ export class Player implements IPlayer {
       x: this.x + 35,
       width: this.scaleWidth * 0.4,
       height: this.scaleHeight * 0.4,
+      initialOffset: 73,
+      offset: 73,
+      jumpOffset: 20,
     }
 
     this.gravity = 0.7
-    this.y_velocity = 0
-    this.x_velocity = 5
+    this.yVelocity = 0
+    this.xVelocity = 5
     this.frameX = 0
     this.frameY = 0
-    this.maxY_velocity = 20
-    this.minY_velocity = 5
+    this.maxY_velocity = 17
     this.jumpHeight = 17
     this.jumpFriction = 0.7
+    this.isJump = false
+
     this.image = new Image()
     this.image.src = './Cat-Sheet.png'
     this.animationSpeedFactor = 4
     this.animationSpeed = 1
     this.frameCount = 0
     this.currentAnimation = 'walk'
-    this.isJump = false
   }
 
   update(dt: number) {
     this.animate()
-    this.y_velocity += this.gravity
-    if (this.y_velocity > this.maxY_velocity) {
-      this.y_velocity = this.maxY_velocity
+    this.yVelocity += this.gravity
+    if (this.yVelocity > this.maxY_velocity) {
+      this.yVelocity = this.maxY_velocity
     }
     this.isGround()
     this.isButterflyHit()
-    if (InputController.KEYS.space && this.isJump) {
+    if (InputController.KEYS.jump && this.isJump) {
       this.jump()
     }
-    if (!InputController.KEYS.space) {
+    if (!InputController.KEYS.jump) {
       this.isJump = true
     }
 
-    if (this.isJump && this.y_velocity < 0 && !InputController.KEYS.space) {
-      this.y_velocity *= this.jumpFriction
+    if (this.isJump && this.yVelocity < 0 && !InputController.KEYS.jump) {
+      this.yVelocity *= this.jumpFriction
     }
 
-    this.collisionArea.y += this.y_velocity
-    this.y = this.collisionArea.y - 73
+    this.collisionArea.y += this.yVelocity
+    this.y = this.collisionArea.y - this.collisionArea.offset
 
     if (this.y > this.gameSettings.height) {
       this.lives--
@@ -139,11 +151,11 @@ export class Player implements IPlayer {
   }
 
   animate = () => {
-    this.animationSpeedFactor = this.currentAnimation === 'run' ? 6 : 4
+    this.animationSpeedFactor = this.currentAnimation === 'run' ? 7 : 5
     this.animationSpeed = Math.floor(
       this.animationSpeedFactor / this.gameSettings.gameSpeed
     )
-    if (this.y_velocity > this.gravity) {
+    if (this.yVelocity > this.gravity) {
       this.currentAnimation = 'fall'
     }
     if (
@@ -172,6 +184,10 @@ export class Player implements IPlayer {
             : 0
       } else this.frameX++
     }
+    this.collisionArea.offset =
+      this.currentAnimation === 'jump'
+        ? this.collisionArea.jumpOffset
+        : this.collisionArea.initialOffset
     this.frameCount++
   }
 
@@ -193,7 +209,7 @@ export class Player implements IPlayer {
           this.currentAnimation as keyof TPlayerAnimation
         ].totalFrames
     }
-    this.y_velocity = -this.jumpHeight
+    this.yVelocity = -this.jumpHeight
   }
 
   isGround() {
@@ -201,10 +217,10 @@ export class Player implements IPlayer {
       const obstacle = isCollided(this, this.gameScreen.platforms[i])
       if (obstacle) {
         if (this.y + 70 < obstacle.y) {
-          this.y_velocity = 0
+          this.yVelocity = 0
           this.collisionArea.y = obstacle.y - this.collisionArea.height
           this.currentAnimation =
-            this.gameSettings.gameSpeed > 1.5 ? 'run' : 'walk'
+            this.gameSettings.gameSpeed > 1.7 ? 'run' : 'walk'
         }
         return true
       }

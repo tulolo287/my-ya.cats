@@ -11,6 +11,8 @@ export interface IEntity {
   delete: boolean
   image: HTMLImageElement
   gameSettings: TGameSettings
+  drawCollisionArea: (ctx: CanvasRenderingContext2D) => void
+  draw: (ctx: CanvasRenderingContext2D) => void
 }
 export abstract class Entity implements IEntity {
   x: number

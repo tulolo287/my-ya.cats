@@ -16,7 +16,7 @@ export interface IBackground {
     image: HTMLImageElement
   }
   x_offset: number
-  x_velocity: number
+  xVelocity: number
   src: string
   createImage: () => void
 }
@@ -37,7 +37,7 @@ export class Background implements IBackground {
     image: new Image(),
   }
   x_offset = 0
-  x_velocity = 0
+  xVelocity = 0
   src = ''
   constructor(
     x: number,
@@ -62,7 +62,7 @@ export class Background implements IBackground {
       image: new Image(),
     }
     this.x_offset = x_offset
-    this.x_velocity = 0
+    this.xVelocity = 0
     this.src = src
     this.createImage()
   }
@@ -73,9 +73,9 @@ export class Background implements IBackground {
   }
 
   update(speed: number) {
-    this.x_velocity = Math.floor(this.x_offset * speed)
-    this.bg1.x -= this.x_velocity
-    this.bg2.x -= this.x_velocity
+    this.xVelocity = Math.floor(this.x_offset * speed)
+    this.bg1.x -= this.xVelocity
+    this.bg2.x -= this.xVelocity
     if (this.bg1.x <= -this.bg1.width) {
       this.bg1.x = 0
       this.bg2.x = this.bg1.width

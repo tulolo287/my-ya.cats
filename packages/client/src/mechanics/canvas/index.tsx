@@ -7,14 +7,10 @@ export const Canvas = () => {
 
   useEffect(() => {
     if (!canvasRef) throw new Error('Canvas not found')
-
     const game = new Game(canvasRef)
-    game.init()
     game.start()
 
-    return () => {
-      window.cancelAnimationFrame(game.loopId!)
-    }
+    return () => game.destroy()
   }, [])
   return <canvas id="canvas" className={styles.canvas} ref={canvasRef}></canvas>
 }
