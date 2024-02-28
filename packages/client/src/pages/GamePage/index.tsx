@@ -1,3 +1,4 @@
+import { Canvas } from '@mechanics/canvas'
 import { Background } from '@components/background'
 import { Button } from '@components/button'
 import { CatImage } from '@components/catImage'
@@ -17,7 +18,7 @@ const GamePage: FC = () => {
   return (
     <React.Fragment>
       {isStarted ? (
-        <>{/* игра */}</>
+        <Canvas />
       ) : (
         <Background images={GAME_BACKGROUNDS}>
           <Center>

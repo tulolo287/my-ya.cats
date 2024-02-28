@@ -18,5 +18,6 @@ export default {
     '@controllers/(.*)$': '<rootDir>/src/controllers/$1',
     '@services/(.*)$': '<rootDir>/src/services/$1',
     '@utils/(.*)$': '<rootDir>/src/utils/$1',
+    '@mechanics/(.*)$': '<rootDir>/src/mechanics/$1',
   },
 }
