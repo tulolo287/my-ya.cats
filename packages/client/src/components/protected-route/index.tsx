@@ -1,21 +1,36 @@
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { Navigate, Outlet } from 'react-router-dom'
 
 import { routerPaths } from '@core/constants'
+import { useAppDispatch, useAppSelector } from '@store/hooks'
+import { getUser } from '@store/user/user-thunks'
+import { LoadStatus } from '@core/types'
 
 type ProtectedRouteProps = {
   authProtected: boolean
 }
 
 const ProtectedRoute: FC<ProtectedRouteProps> = ({ authProtected }) => {
-  // TODO: брать из стора когда будет редакс
-  const isAuth = localStorage.getItem('isAuth')
+  const dispatch = useAppDispatch()
+  const { currentUser, status } = useAppSelector(state => state.user)
 
-  if (authProtected) {
-    return isAuth ? <Outlet /> : <Navigate to={routerPaths.login} replace />
+  useEffect(() => {
+    dispatch(getUser())
+  }, [dispatch])
+
+  if (status === LoadStatus.LOADING || status === LoadStatus.INITIAL) {
+    return <Outlet />
   }
 
-  return isAuth ? <Navigate to={routerPaths.main} replace /> : <Outlet />
+  if (authProtected) {
+    return currentUser ? (
+      <Outlet />
+    ) : (
+      <Navigate to={routerPaths.login} replace />
+    )
+  }
+
+  return currentUser ? <Navigate to={routerPaths.main} replace /> : <Outlet />
 }
 
 export default ProtectedRoute

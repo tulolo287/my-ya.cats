@@ -1,5 +1,6 @@
-import { FC, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { FC } from 'react'
+import { Link } from 'react-router-dom'
+import { SubmitHandler, useForm } from 'react-hook-form'
 
 import { Button } from '@components/button'
 import { Input } from '@components/input'
@@ -8,16 +9,17 @@ import { Typography } from '@components/typography'
 import { Background } from '@components/background'
 import { Center } from '@components/center'
 import { Paper } from '@components/paper'
-import AuthController from '@controllers/auth-controller'
-import { AuthLoginData, InputTypes } from '@core/types'
+import { AuthLoginData, InputTypes, LoadStatus } from '@core/types'
 import { routerPaths, validation } from '@core/constants'
+import { useAppDispatch, useAppSelector } from '@store/hooks'
+import { login } from '@store/user/user-thunks'
+import { Spinner } from '@components/spinner'
 
 import styles from './styles.module.css'
-import { SubmitHandler, useForm } from 'react-hook-form'
 
 const LoginPage: FC = () => {
-  const navigate = useNavigate()
-  const [error, setError] = useState('')
+  const dispatch = useAppDispatch()
+  const { error, status } = useAppSelector(state => state.user)
 
   const {
     register,
@@ -25,21 +27,14 @@ const LoginPage: FC = () => {
     formState: { errors },
   } = useForm<AuthLoginData>()
 
-  const onSubmit: SubmitHandler<AuthLoginData> = async data => {
-    try {
-      await AuthController.login(data)
-      setError('')
-      // TODO: перенести в стор когда появится редакс
-      localStorage.setItem('isAuth', 'true')
-      navigate(routerPaths.main)
-    } catch (error) {
-      setError(error as string)
-    }
+  const onSubmit: SubmitHandler<AuthLoginData> = data => {
+    dispatch(login(data))
   }
 
   return (
     <Background>
       <Center>
+        {status === LoadStatus.LOADING && <Spinner />}
         <Paper>
           <Space gap="62px" align="center">
             <Typography

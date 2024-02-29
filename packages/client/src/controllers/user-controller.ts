@@ -1,22 +1,19 @@
 import { UserAPI } from '@services/api/user-api'
-
-import { UserAvatarData } from '@core/types'
-import { UserPasswordData } from '@core/types'
+import { UserData, UserProfileData, UserPasswordData } from '@core/types'
 
 class UserController {
   private api = new UserAPI()
 
   async changeAvatar(data: FormData) {
-    const res = await this.api.changeUserAvatar<UserAvatarData>(data)
-    // todo: убрать из localStorage в стор (YAC-29)
-    localStorage.setItem(
-      'avatarUrl',
-      `${process.env.API_URL}/resources/${res.data.avatar}`
-    )
+    return await this.api.changeUserAvatar<UserData>(data)
   }
 
   async changePassword(password: UserPasswordData) {
-    await this.api.changeUserPassword(password)
+    return await this.api.changeUserPassword<UserPasswordData>(password)
+  }
+
+  async changeProfileData(data: UserProfileData) {
+    return await this.api.changeUserData<UserData>(data)
   }
 }
 

@@ -1,5 +1,5 @@
 import { AuthAPI } from '@services/api/auth-api'
-import { AuthLoginData, AuthSignupData } from '@core/types'
+import { AuthLoginData, AuthSignupData, UserData } from '@core/types'
 
 class AuthController {
   private api = new AuthAPI()
@@ -17,7 +17,7 @@ class AuthController {
   }
 
   async getUser() {
-    return await this.api.getUser()
+    return await this.api.getUser<UserData>()
   }
 }
 

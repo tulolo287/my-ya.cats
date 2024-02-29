@@ -5,13 +5,15 @@ import { Paper } from '@components/paper'
 import { Space } from '@components/space'
 import { Typography } from '@components/typography'
 import { routerPaths } from '@core/constants'
-import { FC, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { FC } from 'react'
+import { Link } from 'react-router-dom'
+import { useAppDispatch, useAppSelector } from '@store/hooks'
+import { signup } from '@store/user/user-thunks'
+import { Spinner } from '@components/spinner'
+import { AuthSignupData, InputTypes, LoadStatus } from '@core/types'
 
 import styles from './styles.module.css'
 import { InputProps, InputRow } from './input-row'
-import { AuthSignupData, InputTypes } from '@core/types'
-import AuthController from '@controllers/auth-controller'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 const Inputs: Array<InputProps[]> = [
@@ -60,27 +62,23 @@ const Inputs: Array<InputProps[]> = [
 ]
 
 const SignupPage: FC = () => {
-  const [error, setError] = useState('')
-  const navigate = useNavigate()
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<AuthSignupData>()
 
-  const onSubmit: SubmitHandler<AuthSignupData> = async data => {
-    try {
-      await AuthController.signup(data)
-      setError('')
-      navigate(routerPaths.login)
-    } catch (error) {
-      setError(error as string)
-    }
+  const { error, status } = useAppSelector(state => state.user)
+  const dispatch = useAppDispatch()
+
+  const onSubmit: SubmitHandler<AuthSignupData> = data => {
+    dispatch(signup(data))
   }
 
   return (
     <Background>
       <Center>
+        {status === LoadStatus.LOADING && <Spinner />}
         <Paper>
           <Space gap="62px" align="center">
             <Typography

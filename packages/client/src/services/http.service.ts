@@ -32,7 +32,7 @@ export class HTTPService {
       e => {
         if (axios.isAxiosError(e)) {
           const error = e as AxiosError<ServerError>
-          throw error.response?.data?.reason
+          throw error.response?.data?.reason || error.message
         } else {
           throw defaultError
         }

@@ -1,27 +1,16 @@
 import { FC } from 'react'
+import { SubmitHandler, useForm } from 'react-hook-form'
+
 import { Button } from '@components/button'
 import { Input } from '@components/input'
 import { Space } from '@components/space'
 import { Typography } from '@components/typography'
-import UserController from '@controllers/user-controller'
 import { InputTypes, UserPasswordData } from '@core/types'
+import { validation } from '@core/constants'
+import { useAppDispatch } from '@store/hooks'
+import { changePassword } from '@store/user/user-thunks'
 
 import styles from './styles.module.css'
-import { SubmitHandler, useForm } from 'react-hook-form'
-import { validation } from '@core/constants'
-
-const changePassword = async (data: UserPasswordData) => {
-  await UserController.changePassword(data)
-}
-
-const onSubmit: SubmitHandler<ChangePassword> = async data => {
-  const { oldPassword, newPassword } = data
-  try {
-    await changePassword({ oldPassword, newPassword })
-  } catch (error) {
-    console.log(error)
-  }
-}
 
 const validationPassword = {
   newPassword: (value: string, formValues: ChangePassword) =>
@@ -39,6 +28,13 @@ export const EditPasswordModalContent: FC = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<ChangePassword>()
+
+  const dispatch = useAppDispatch()
+
+  const onSubmit: SubmitHandler<ChangePassword> = data => {
+    const { oldPassword, newPassword } = data
+    dispatch(changePassword({ oldPassword, newPassword }))
+  }
 
   return (
     <Space gap="32px">
