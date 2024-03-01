@@ -7,6 +7,9 @@ import { getUser } from '@store/user/user-thunks'
 import { LoadStatus } from '@core/types'
 
 type ProtectedRouteProps = {
+  /**
+   * указывает защищен ли роут авторизацией
+   */
   authProtected: boolean
 }
 
@@ -18,10 +21,18 @@ const ProtectedRoute: FC<ProtectedRouteProps> = ({ authProtected }) => {
     dispatch(getUser())
   }, [dispatch])
 
+  /**
+   * пока происходит запрос пользователя отдает страницу
+   */
   if (status === LoadStatus.LOADING || status === LoadStatus.INITIAL) {
     return <Outlet />
   }
 
+  /**
+   * Для защищенных роутов:
+   * если юзер авторизован - загрузить страницу
+   * если нет - перейти на страницу логин
+   */
   if (authProtected) {
     return currentUser ? (
       <Outlet />
@@ -30,6 +41,11 @@ const ProtectedRoute: FC<ProtectedRouteProps> = ({ authProtected }) => {
     )
   }
 
+  /**
+   * Для незащищенных роутов:
+   * если юзер авторизован - перейти на главную
+   * если нет - загрузить запрашиваемую страницу (логин или регистрация)
+   */
   return currentUser ? <Navigate to={routerPaths.main} replace /> : <Outlet />
 }
 

@@ -22,9 +22,24 @@ const initialState: UserState = {
   error: null,
 }
 
+/**
+ * Проверка action на 'pending'
+ */
 const isLoading = (action: Action) => action.type.endsWith('pending')
 
+/**
+ * Проверка action на 'rejected'
+ */
 const isError = (action: Action) => action.type.endsWith('rejected')
+
+/**
+ * Обработчик успешного действия с payload
+ */
+const onFulfilled = (state: UserState, action: PayloadAction<UserData>) => {
+  state.status = LoadStatus.SUCCESS
+  state.currentUser = action.payload
+  state.error = null
+}
 
 const userSlice = createSlice({
   name: 'user',
@@ -32,31 +47,11 @@ const userSlice = createSlice({
   reducers: {},
   extraReducers: builder => {
     builder
-      .addCase(getUser.fulfilled, (state, action) => {
-        state.status = LoadStatus.SUCCESS
-        state.currentUser = action.payload
-        state.error = null
-      })
-      .addCase(login.fulfilled, (state, action) => {
-        state.status = LoadStatus.SUCCESS
-        state.currentUser = action.payload
-        state.error = null
-      })
-      .addCase(signup.fulfilled, (state, action) => {
-        state.status = LoadStatus.SUCCESS
-        state.currentUser = action.payload
-        state.error = null
-      })
-      .addCase(changeProfileData.fulfilled, (state, action) => {
-        state.status = LoadStatus.SUCCESS
-        state.currentUser = action.payload
-        state.error = null
-      })
-      .addCase(changeAvatar.fulfilled, (state, action) => {
-        state.status = LoadStatus.SUCCESS
-        state.currentUser = action.payload
-        state.error = null
-      })
+      .addCase(getUser.fulfilled, onFulfilled)
+      .addCase(login.fulfilled, onFulfilled)
+      .addCase(signup.fulfilled, onFulfilled)
+      .addCase(changeProfileData.fulfilled, onFulfilled)
+      .addCase(changeAvatar.fulfilled, onFulfilled)
       .addCase(changePassword.fulfilled, state => {
         state.status = LoadStatus.SUCCESS
         state.error = null
