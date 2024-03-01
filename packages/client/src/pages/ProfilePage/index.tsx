@@ -18,6 +18,15 @@ import { useAppDispatch, useAppSelector } from '@store/hooks'
 import { changeProfileData } from '@store/user/user-thunks'
 import { Spinner } from '@components/spinner'
 
+const DEFAULT_VALUES = {
+  first_name: '',
+  second_name: '',
+  login: '',
+  email: '',
+  phone: '',
+  display_name: '',
+}
+
 const ProfilePage: FC = () => {
   const navigate = useNavigate()
   const [showModal, setShowModal] = useState(false)
@@ -26,7 +35,7 @@ const ProfilePage: FC = () => {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<UserProfileData>()
+  } = useForm<UserProfileData>({ defaultValues: DEFAULT_VALUES })
 
   const { currentUser, status } = useAppSelector(state => state.user)
   const dispatch = useAppDispatch()
