@@ -9,6 +9,7 @@ import { Typography } from '@components/typography'
 import React, { FC } from 'react'
 import { useState } from 'react'
 import { GAME_BACKGROUNDS } from './constants'
+import { FullpageButton } from './FullpageButton'
 
 const GamePage: FC = () => {
   const [isStarted, setStarted] = useState<boolean>(false) // флаг начала игры
@@ -54,6 +55,8 @@ const GamePage: FC = () => {
           </Center>
         </Background>
       )}
+
+      <FullpageButton />
     </React.Fragment>
   )
 }
