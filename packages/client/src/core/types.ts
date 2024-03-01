@@ -60,11 +60,9 @@ export enum InputTypes {
   number = 'number',
 }
 
-
 export type Validation = {
   value: RegExp
   message: string
 }
 
 export type NewTopic = Pick<Topic, 'topicName'>
-

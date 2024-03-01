@@ -14,8 +14,15 @@ export interface IGame {
   msPerFrame: number
   maxMsFrame: number
   loopId: number
-  gameQuit: boolean
   destroy: () => void
+  handleEnd: () => void
+  handleScore: (points: number) => void
+}
+
+type GameProps = {
+  canvasRef: MutableRefObject<HTMLCanvasElement | null>
+  handleEnd: () => void
+  handleScore: (points: number) => void
 }
 export class Game implements IGame {
   canvas: HTMLCanvasElement | null
@@ -27,16 +34,18 @@ export class Game implements IGame {
   msPerFrame: number
   maxMsFrame: number
   loopId: number
-  gameQuit: boolean
+  handleEnd: () => void
+  handleScore: (points: number) => void
 
-  constructor(canvasRef: MutableRefObject<HTMLCanvasElement | null>) {
+  constructor({ canvasRef, handleEnd, handleScore }: GameProps) {
     this.canvas = canvasRef.current
+    this.handleEnd = handleEnd
+    this.handleScore = handleScore
     this.context = this.canvas?.getContext('2d')
     if (this.canvas) {
       this.canvas.width = gameSettings.width
       this.canvas.height = gameSettings.height
     } else throw new Error('Canvas not loaded')
-    this.gameQuit = false
 
     this.gameSettings = gameSettings
 
@@ -51,10 +60,13 @@ export class Game implements IGame {
   }
 
   destroy() {
-    this.gameQuit = true
     window.cancelAnimationFrame(this.loopId)
     InputController.removeEvents()
     InputController._instance = undefined
+  }
+
+  getScore() {
+    return this.gameScreen.player.score
   }
 
   private update(dt: number) {
@@ -67,7 +79,10 @@ export class Game implements IGame {
   }
 
   private loop = () => {
-    if (!this.gameQuit) {
+    if (this.gameScreen.gameOver) {
+      this.handleScore(this.getScore())
+      this.handleEnd()
+    } else {
       const nowTime = performance.now()
       const delta = nowTime - this.prevTime
       this.prevTime = nowTime
