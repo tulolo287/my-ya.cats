@@ -1,6 +1,8 @@
 import { InputController } from '../controllers/input-controller'
 import { IGame } from '../engine/game'
 import { Butterfly, IButterfly } from '../entities/butterfly'
+import { IHeart } from '../entities/heart'
+import { IMushroom, Mushroom } from '../entities/mushroom'
 import { IPlatform, Platform } from '../entities/platform'
 import { IPlayer, Player } from '../entities/player'
 import { Background, IBackground } from '../system/background'
@@ -14,6 +16,8 @@ export type TGameScreen = {
   parallaxBg: IBackground[]
   platforms: IPlatform[]
   butterflies: IButterfly[]
+  mushrooms: IMushroom[]
+  hearts: IHeart[]
   player: IPlayer
   update: (dt: number) => void
   draw: (ctx: CanvasRenderingContext2D) => void
@@ -34,6 +38,8 @@ export class GameScreen {
   platforms: IPlatform[]
   player: IPlayer
   butterflies: IButterfly[]
+  mushrooms: IMushroom[]
+  hearts: IHeart[]
   gameOver: boolean
 
   constructor(game: IGame) {
@@ -55,6 +61,8 @@ export class GameScreen {
     this.player = new Player(this)
     this.platforms = []
     this.butterflies = new Array<IButterfly>()
+    this.mushrooms = new Array<IMushroom>()
+    this.hearts = new Array<IHeart>()
     this.parallaxBg = new Array<IBackground>()
 
     const bg1 = new Background(
@@ -89,6 +97,8 @@ export class GameScreen {
     this.player = new Player(this)
     this.platforms = []
     this.butterflies = new Array<IButterfly>()
+    this.mushrooms = new Array<IMushroom>()
+    this.hearts = new Array<IHeart>()
   }
 
   draw(ctx: CanvasRenderingContext2D) {
@@ -102,6 +112,12 @@ export class GameScreen {
     }
     for (const butterfly of this.butterflies) {
       butterfly.draw(ctx)
+    }
+    for (const mushroom of this.mushrooms) {
+      mushroom.draw(ctx)
+    }
+    for (const heart of this.hearts) {
+      heart.draw(ctx)
     }
     this.player.draw(ctx)
 
@@ -136,6 +152,18 @@ export class GameScreen {
           this.butterflies.splice(idx, 1)
         }
         butterfly.update()
+      }
+      for (const [idx, mushroom] of this.mushrooms.entries()) {
+        if (mushroom.delete) {
+          this.mushrooms.splice(idx, 1)
+        }
+        mushroom.update(Math.floor(this.bg3_xv * this.gameSettings.gameSpeed))
+      }
+      for (const [idx, heart] of this.hearts.entries()) {
+        if (heart.delete) {
+          this.hearts.splice(idx, 1)
+        }
+        heart.update(Math.floor(this.bg3_xv * this.gameSettings.gameSpeed))
       }
     }
     if (InputController.KEYS.jump && this.gameOver) {
@@ -223,6 +251,9 @@ export class GameScreen {
       )
       if (this.platforms[i].x > this.gameSettings.width) {
         this.createButterfly(this.platforms[i])
+        if (this.platforms[i].width > 250 && Math.random() > 0.7)
+          this.createMushroom(this.platforms[i])
+        if (Math.random() > 0.9) this.createHeart(this.platforms[i])
       }
     }
   }
@@ -233,5 +264,19 @@ export class GameScreen {
     this.butterflies.push(
       new Butterfly(x, y, 50, 50, 50, 50, './butterfly.png')
     )
+  }
+
+  private createMushroom(platform: IPlatform) {
+    const x =
+      platform.x + 100 + Math.floor((platform.width - 200) * Math.random())
+    const y = platform.y - platform.height + 20
+    this.mushrooms.push(new Mushroom(x, y, 40, 40, 40, 40, './mushroom_1.png'))
+  }
+
+  private createHeart(platform: IPlatform) {
+    const x =
+      platform.x + 100 + Math.floor((platform.width - 200) * Math.random())
+    const y = platform.y - platform.height + 10
+    this.hearts.push(new Mushroom(x, y, 40, 40, 40, 40, './heart.png'))
   }
 }

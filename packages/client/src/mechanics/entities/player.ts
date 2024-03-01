@@ -130,6 +130,8 @@ export class Player implements IPlayer {
     }
     this.isGround()
     this.isButterflyHit()
+    this.isMushroomHit()
+    this.isHeartHit()
     if (InputController.KEYS.jump && this.isJump) {
       this.jump()
     }
@@ -234,6 +236,30 @@ export class Player implements IPlayer {
       if (obstacle) {
         this.gameScreen.butterflies[i].delete = true
         this.score++
+        return true
+      }
+    }
+    return false
+  }
+
+  isMushroomHit() {
+    for (let i = 0; i < this.gameScreen.mushrooms.length; i++) {
+      const obstacle = isCollided(this, this.gameScreen.mushrooms[i])
+      if (obstacle) {
+        this.gameScreen.mushrooms[i].delete = true
+        this.lives--
+        return true
+      }
+    }
+    return false
+  }
+
+  isHeartHit() {
+    for (let i = 0; i < this.gameScreen.hearts.length; i++) {
+      const obstacle = isCollided(this, this.gameScreen.hearts[i])
+      if (obstacle) {
+        this.gameScreen.hearts[i].delete = true
+        this.lives++
         return true
       }
     }
