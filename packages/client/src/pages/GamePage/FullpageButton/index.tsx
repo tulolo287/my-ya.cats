@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { FC, SyntheticEvent, useState } from 'react'
 
 import styles from './styles.module.css'
 
@@ -43,13 +43,19 @@ function deactivateFullscreen() {
 export const FullpageButton: FC = () => {
   const [isFullscreen, setIsFullscreen] = useState(false)
 
-  const toggleFullscreen = () => {
+  const toggleFullscreen = (e: SyntheticEvent) => {
+    const button = (e.target as HTMLElement).closest('button')
+
     if (isFullscreen) {
       deactivateFullscreen()
       setIsFullscreen(false)
     } else {
       activateFullscreen(document.documentElement)
       setIsFullscreen(true)
+    }
+
+    if (button) {
+      button.blur()
     }
   }
 
