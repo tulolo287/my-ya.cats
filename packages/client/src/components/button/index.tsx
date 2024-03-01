@@ -1,4 +1,4 @@
-import { DimensionsProp, TFontSize } from '@/core/types'
+import { DimensionsProp, TFontSize } from '@core/types'
 import styles from './styles.module.css'
 import stylesFontSize from '@style/font-size.module.css'
 

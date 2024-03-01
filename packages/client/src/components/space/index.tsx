@@ -1,4 +1,4 @@
-import { DimensionsProp } from '@/core/types'
+import { DimensionsProp } from '@core/types'
 import styles from './styles.module.css'
 
 type SpaceProps = {
