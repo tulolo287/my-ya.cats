@@ -1,4 +1,4 @@
-import { FC, SyntheticEvent, useState } from 'react'
+import { FC, SyntheticEvent, useEffect, useState } from 'react'
 
 import styles from './styles.module.css'
 
@@ -43,9 +43,7 @@ function deactivateFullscreen() {
 export const FullpageButton: FC = () => {
   const [isFullscreen, setIsFullscreen] = useState(false)
 
-  const toggleFullscreen = (e: SyntheticEvent) => {
-    const button = (e.target as HTMLElement).closest('button')
-
+  const toggleFullscreen = (e?: SyntheticEvent) => {
     if (isFullscreen) {
       deactivateFullscreen()
       setIsFullscreen(false)
@@ -54,13 +52,35 @@ export const FullpageButton: FC = () => {
       setIsFullscreen(true)
     }
 
+    if (!e) {
+      return
+    }
+
+    const button = (e.target as HTMLElement).closest('button')
+
     if (button) {
       button.blur()
     }
   }
 
+  useEffect(() => {
+    function handleKeydown(e: KeyboardEvent) {
+      if (e.code !== 'KeyF') {
+        return
+      }
+
+      toggleFullscreen()
+    }
+
+    window.addEventListener('keydown', handleKeydown)
+    return () => window.removeEventListener('keydown', handleKeydown)
+  }, [isFullscreen])
+
   return (
-    <button className={styles.button} onClick={toggleFullscreen}>
+    <button
+      className={styles.button}
+      onClick={toggleFullscreen}
+      title="Press 'F' to go fullscreen">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="44"
