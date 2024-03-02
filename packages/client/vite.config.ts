@@ -39,6 +39,7 @@ export default defineConfig({
       '@services': path.resolve(__dirname, './src/services'),
       '@utils': path.resolve(__dirname, './src/utils'),
       '@mechanics': path.resolve(__dirname, './src/mechanics'),
+      '@store': path.resolve(__dirname, './src/store'),
     },
   },
   plugins: [react(), SWPluginOptions],

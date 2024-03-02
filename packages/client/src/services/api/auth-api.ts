@@ -6,19 +6,19 @@ export class AuthAPI extends API {
     super('/auth')
   }
 
-  public login = async <Response>(data: AuthLoginData) => {
-    return await this.http.post<Response>('/signin', { data })
+  public login = <Response>(data: AuthLoginData) => {
+    return this.http.post<Response>('/signin', { data })
   }
 
-  public logout = async <Response>() => {
-    return await this.http.post<Response>('/logout')
+  public logout = <Response>() => {
+    return this.http.post<Response>('/logout')
   }
 
-  public signup = async <Response>(data: AuthSignupData) => {
-    return await this.http.post<Response>('/signup', { data })
+  public signup = <Response>(data: AuthSignupData) => {
+    return this.http.post<Response>('/signup', { data })
   }
 
-  public getUser = async <Response>() => {
-    return await this.http.get<Response>('/user')
+  public getUser = <Response>() => {
+    return this.http.get<Response>('/user')
   }
 }

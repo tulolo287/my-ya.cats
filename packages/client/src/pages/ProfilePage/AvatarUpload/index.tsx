@@ -4,14 +4,16 @@ import { Button } from '@components/button'
 import { Modal } from '@components/modal'
 import { Space } from '@components/space'
 import { Typography } from '@components/typography'
-import userController from '@controllers/user-controller'
+import { useAppDispatch, useAppSelector } from '@store/hooks'
+import { changeAvatar } from '@store/user/user-thunks'
 
 import styles from './styles.module.css'
 
 export const AvatarUpload: FC = () => {
   const [showModal, setShowModal] = useState(false)
   const [file, setFile] = useState<File | null>(null)
-  const [avatarUrl, setAvatarUrl] = useState(localStorage.getItem('avatarUrl'))
+  const avatarUrl = useAppSelector(state => state.user.currentUser?.avatar)
+  const dispatch = useAppDispatch()
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -19,20 +21,14 @@ export const AvatarUpload: FC = () => {
     }
   }
 
-  const onSubmit = async (e: SyntheticEvent) => {
+  const onSubmit = (e: SyntheticEvent) => {
     e.preventDefault()
 
     if (file) {
       const formData = new FormData()
       formData.append('avatar', file)
 
-      try {
-        await userController.changeAvatar(formData)
-        // todo: брать из стора (YAC-29)
-        setAvatarUrl(localStorage.getItem('avatarUrl') || '')
-      } catch (error) {
-        console.error(error)
-      }
+      dispatch(changeAvatar(formData))
     }
   }
 
@@ -42,7 +38,11 @@ export const AvatarUpload: FC = () => {
         className={styles.avatarUpload}
         onClick={() => setShowModal(true)}>
         {avatarUrl && (
-          <img src={avatarUrl} className={styles.image} alt="user avatar" />
+          <img
+            src={`${process.env.API_URL}/resources/${avatarUrl}`}
+            className={styles.image}
+            alt="user avatar"
+          />
         )}
       </button>
 

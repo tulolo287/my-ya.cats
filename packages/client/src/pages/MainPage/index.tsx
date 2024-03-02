@@ -6,23 +6,18 @@ import { Space } from '@components/space'
 import { Typography } from '@components/typography'
 import { useNavigate } from 'react-router-dom'
 import { FC, SyntheticEvent } from 'react'
-import AuthController from '@controllers/auth-controller'
 import { routerPaths } from '@core/constants'
+import { useAppDispatch } from '@store/hooks'
+import { logout } from '@store/user/user-thunks'
 
 const MainPage: FC = () => {
   const navigate = useNavigate()
+  const dispatch = useAppDispatch()
 
-  const submitHandler = async (e: SyntheticEvent) => {
+  const submitHandler = (e: SyntheticEvent) => {
     e.preventDefault()
 
-    try {
-      await AuthController.logout()
-      // TODO: перенести в стор когда появится редакс
-      localStorage.removeItem('isAuth')
-      navigate(routerPaths.login)
-    } catch (error) {
-      console.log(error)
-    }
+    dispatch(logout())
   }
 
   return (

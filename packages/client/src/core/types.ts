@@ -12,10 +12,13 @@ export type UserPasswordData = {
   newPassword: string
 }
 
-export type UserAvatarData = User & {
-  id: number
+export type UserProfileData = User & {
   display_name: string | null
-  avatar: string
+}
+
+export type UserData = UserProfileData & {
+  id: number
+  avatar: string | null
 }
 
 export type Topic = {
@@ -66,3 +69,10 @@ export type Validation = {
 }
 
 export type NewTopic = Pick<Topic, 'topicName'>
+
+export enum LoadStatus {
+  INITIAL = 'initial',
+  LOADING = 'loading',
+  SUCCESS = 'success',
+  ERROR = 'error',
+}

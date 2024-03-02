@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { Background } from '@components/background'
@@ -12,12 +12,19 @@ import { AvatarUpload } from './AvatarUpload'
 import { EditPasswordModalContent } from './EditPasswordModalContent'
 
 import styles from './styles.module.css'
-import { InputTypes, User } from '@core/types'
+import { InputTypes, LoadStatus, UserProfileData } from '@core/types'
 import { validation } from '@core/constants'
+import { useAppDispatch, useAppSelector } from '@store/hooks'
+import { changeProfileData } from '@store/user/user-thunks'
+import { Spinner } from '@components/spinner'
 
-const onSubmit: SubmitHandler<User> = data => {
-  // TODO Поменять на вызов API
-  console.log(data)
+const DEFAULT_VALUES = {
+  first_name: '',
+  second_name: '',
+  login: '',
+  email: '',
+  phone: '',
+  display_name: '',
 }
 
 const ProfilePage: FC = () => {
@@ -27,11 +34,26 @@ const ProfilePage: FC = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<User>()
+    reset,
+  } = useForm<UserProfileData>({ defaultValues: DEFAULT_VALUES })
+
+  const { currentUser, status } = useAppSelector(state => state.user)
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    if (currentUser) {
+      reset(currentUser)
+    }
+  }, [currentUser])
+
+  const onSubmit: SubmitHandler<UserProfileData> = data => {
+    dispatch(changeProfileData(data))
+  }
 
   return (
     <Background>
       <Center>
+        {status === LoadStatus.LOADING && <Spinner />}
         <Paper className={styles.container}>
           <Space align="center">
             <AvatarUpload />
@@ -78,6 +100,15 @@ const ProfilePage: FC = () => {
                   errorMessage={errors.login?.message}
                 />
                 <Input
+                  type={InputTypes.text}
+                  label="Display name"
+                  placeholder="Display name"
+                  w="100%"
+                  h="48px"
+                  {...register('display_name')}
+                  errorMessage={errors.display_name?.message}
+                />
+                <Input
                   type={InputTypes.email}
                   label="Email"
                   placeholder="test@test.com"
@@ -87,7 +118,7 @@ const ProfilePage: FC = () => {
                   errorMessage={errors.email?.message}
                 />
               </div>
-              <Button type="submit" color="orange" w="400px" h="66px">
+              <Button type="submit" color="orange">
                 Edit
               </Button>
             </form>
