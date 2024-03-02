@@ -6,18 +6,18 @@ export class UserAPI extends API {
     super('/user')
   }
 
-  public async changeUserAvatar<Response>(data: FormData) {
-    return await this.http.put<Response>('/profile/avatar', {
+  public changeUserAvatar<Response>(data: FormData) {
+    return this.http.put<Response>('/profile/avatar', {
       data,
       headers: { 'Content-Type': 'multipart/form-data' },
     })
   }
 
-  public async changeUserPassword<Response>(data: UserPasswordData) {
-    return await this.http.put<Response>('/password', { data })
+  public changeUserPassword<Response>(data: UserPasswordData) {
+    return this.http.put<Response>('/password', { data })
   }
 
-  public async changeUserData<Response>(data: UserProfileData) {
-    return await this.http.put<Response>('/profile', { data })
+  public changeUserData<Response>(data: UserProfileData) {
+    return this.http.put<Response>('/profile', { data })
   }
 }

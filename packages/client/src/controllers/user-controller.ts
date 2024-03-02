@@ -4,16 +4,16 @@ import { UserData, UserProfileData, UserPasswordData } from '@core/types'
 class UserController {
   private api = new UserAPI()
 
-  async changeAvatar(data: FormData) {
-    return await this.api.changeUserAvatar<UserData>(data)
+  changeAvatar(data: FormData) {
+    return this.api.changeUserAvatar<UserData>(data)
   }
 
-  async changePassword(password: UserPasswordData) {
-    return await this.api.changeUserPassword<UserPasswordData>(password)
+  changePassword(password: UserPasswordData) {
+    return this.api.changeUserPassword<UserPasswordData>(password)
   }
 
-  async changeProfileData(data: UserProfileData) {
-    return await this.api.changeUserData<UserData>(data)
+  changeProfileData(data: UserProfileData) {
+    return this.api.changeUserData<UserData>(data)
   }
 }
 
