@@ -34,17 +34,17 @@ export class Butterfly extends Entity implements IButterfly {
   ) {
     super(x, y, width, height, scaleWidth, scaleHeight, imgSrc)
     this.xVelocity = 0
-    this.initial_x_velocity = getRandom(8, 4)
-    this.yVelocity = getRandom(4, 2)
-    this.velocity = getRandom(2, 1)
-    this.curve = getRandom(8, 4)
+    this.initial_x_velocity = getRandom(-4, 4)
+    this.yVelocity = getRandom(-2, 2)
+    this.velocity = getRandom(-1, 1)
+    this.curve = getRandom(-4, 4)
     this.angle = 0
     this.angleSpeed = 0.02
     this.wiggle = 0
   }
 
   update() {
-    this.wiggle = getRandom(20, 10)
+    this.wiggle = getRandom(-10, 10)
     this.yVelocity = this.wiggle
     this.xVelocity = -this.gameSettings.gameSpeed * 5 + this.initial_x_velocity
     this.x += this.xVelocity

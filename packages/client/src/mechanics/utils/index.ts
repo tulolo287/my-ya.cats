@@ -17,6 +17,9 @@ export function isCollided<T extends Entity>(
 }
 
 export function getRandom(from: number, to: number): number {
-  const random = Math.random() * from - to
+  const random =
+    from < 0
+      ? Math.floor(Math.random() * (to + 1 + -from) - -from)
+      : Math.floor(Math.random() * (to + 1 - from) + from)
   return random
 }
