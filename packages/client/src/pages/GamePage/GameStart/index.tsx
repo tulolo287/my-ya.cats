@@ -36,6 +36,11 @@ export const GameStart: FC<GameStartProps> = ({ handleStart }) => (
               color="grey"
             />
             <Typography
+              children={'hearts give you lives, beware of mushrooms'}
+              fontSize="xl"
+              color="grey"
+            />
+            <Typography
               children={'try to get as many points as you can'}
               fontSize="xl"
               color="grey"
