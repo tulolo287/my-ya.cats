@@ -2,6 +2,7 @@ import { InputController } from '../controllers/input-controller'
 import { TGameScreen } from '../screens/game-screen'
 import { TGameSettings, TPlayerAnimation } from '../types'
 import { isCollided } from '../utils'
+import { Entity } from './entity'
 
 export interface IPlayer {
   gameScreen: TGameScreen
@@ -122,16 +123,16 @@ export class Player implements IPlayer {
     this.currentAnimation = 'walk'
   }
 
-  update(dt: number) {
+  update() {
     this.animate()
     this.yVelocity += this.gravity
     if (this.yVelocity > this.maxY_velocity) {
       this.yVelocity = this.maxY_velocity
     }
     this.isGround()
-    this.isButterflyHit()
-    this.isMushroomHit()
-    this.isHeartHit()
+    this.isObjectHit(this.gameScreen.butterflies, () => this.score++)
+    this.isObjectHit(this.gameScreen.mushrooms, () => this.lives--)
+    this.isObjectHit(this.gameScreen.hearts, () => this.lives++)
     if (InputController.KEYS.jump && this.isJump) {
       this.jump()
     }
@@ -230,36 +231,12 @@ export class Player implements IPlayer {
     return false
   }
 
-  isButterflyHit() {
-    for (let i = 0; i < this.gameScreen.butterflies.length; i++) {
-      const obstacle = isCollided(this, this.gameScreen.butterflies[i])
+  isObjectHit<T extends Entity>(objects: Array<T>, callback: () => void) {
+    for (const object of objects) {
+      const obstacle = isCollided(this, object)
       if (obstacle) {
-        this.gameScreen.butterflies[i].delete = true
-        this.score++
-        return true
-      }
-    }
-    return false
-  }
-
-  isMushroomHit() {
-    for (let i = 0; i < this.gameScreen.mushrooms.length; i++) {
-      const obstacle = isCollided(this, this.gameScreen.mushrooms[i])
-      if (obstacle) {
-        this.gameScreen.mushrooms[i].delete = true
-        this.lives--
-        return true
-      }
-    }
-    return false
-  }
-
-  isHeartHit() {
-    for (let i = 0; i < this.gameScreen.hearts.length; i++) {
-      const obstacle = isCollided(this, this.gameScreen.hearts[i])
-      if (obstacle) {
-        this.gameScreen.hearts[i].delete = true
-        this.lives++
+        object.delete = true
+        callback()
         return true
       }
     }
