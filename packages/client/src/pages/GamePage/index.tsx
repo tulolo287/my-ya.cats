@@ -44,7 +44,7 @@ const GamePage: FC = () => {
                     color="grey"
                   />
                   <Typography
-                    children={'hearts give you life, beware of mushrooms'}
+                    children={'hearts give you lives, beware of mushrooms'}
                     fontSize="xl"
                     color="grey"
                   />
