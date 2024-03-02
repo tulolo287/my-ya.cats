@@ -5,7 +5,9 @@ import { IObstacle, Obstacle } from '../entities/obstacle'
 import { IPlatform, Platform } from '../entities/platform'
 import { IPlayer, Player } from '../entities/player'
 import { Background, IBackground } from '../system/background'
+import { IParticles, Particles } from '../system/particles'
 import { TGameSettings } from '../types'
+import { getRandom } from '../utils'
 
 export type TGameScreen = {
   game: IGame
@@ -17,6 +19,7 @@ export type TGameScreen = {
   butterflies: IButterfly[]
   mushrooms: IObstacle[]
   hearts: IObstacle[]
+  butterflyParticles: IParticles[]
   player: IPlayer
   update: (dt: number) => void
   draw: (ctx: CanvasRenderingContext2D) => void
@@ -39,6 +42,7 @@ export class GameScreen {
   butterflies: IButterfly[]
   mushrooms: IObstacle[]
   hearts: IObstacle[]
+  butterflyParticles: IParticles[]
   gameOver: boolean
 
   constructor(game: IGame) {
@@ -54,6 +58,7 @@ export class GameScreen {
     this.parallaxBg = []
     this.butterflies = []
     this.platforms = []
+    this.butterflyParticles = []
     this.player = <IPlayer>{}
     this.gameOver = false
 
@@ -63,6 +68,7 @@ export class GameScreen {
     this.mushrooms = new Array<IObstacle>()
     this.hearts = new Array<IObstacle>()
     this.parallaxBg = new Array<IBackground>()
+    this.butterflyParticles = new Array<IParticles>()
 
     const bg1 = new Background(
       0,
@@ -120,13 +126,26 @@ export class GameScreen {
     }
     this.player.draw(ctx)
 
+    for (const particle of this.butterflyParticles) {
+      particle.draw(ctx)
+    }
+
     if (this.player.lives < 1) {
-      this.drawGameOver(ctx)
+      this.gameOver = true
     }
   }
 
   update(dt: number) {
     if (!this.gameOver) {
+      if (this.butterflyParticles.length > 0) {
+        for (const [idx, particle] of this.butterflyParticles.entries()) {
+          particle.update()
+          if (particle.radius < 1) {
+            this.butterflyParticles.splice(idx, 1)
+          }
+        }
+      }
+
       this.player.update(dt)
       for (const bg of this.parallaxBg) {
         bg.update(this.gameSettings.gameSpeed)
@@ -136,11 +155,13 @@ export class GameScreen {
         ? this.runSpeed
         : this.walkSpeed
 
-      for (const [idx, platform] of this.platforms.entries()) {
-        if (platform.delete) {
-          this.platforms.splice(idx, 1)
+      for (let i = 0; i < this.platforms.length; i++) {
+        if (this.platforms[i].delete) {
+          this.platforms.splice(i, 1)
         }
-        platform.update(Math.floor(this.bg3_xv * this.gameSettings.gameSpeed))
+        this.platforms[i].update(
+          Math.floor(this.bg3_xv * this.gameSettings.gameSpeed)
+        )
       }
 
       if (this.platforms.length < 8 || this.platforms.length === 0) {
@@ -149,6 +170,11 @@ export class GameScreen {
       for (const [idx, butterfly] of this.butterflies.entries()) {
         if (butterfly.delete) {
           this.butterflies.splice(idx, 1)
+          for (let i = 0; i < 10; i++) {
+            this.butterflyParticles.push(
+              new Particles(butterfly.x, butterfly.y, 10)
+            )
+          }
         }
         butterfly.update()
       }
@@ -172,41 +198,18 @@ export class GameScreen {
 
   private drawUI(ctx: CanvasRenderingContext2D) {
     ctx.font = '24px serif'
-    ctx.strokeStyle = 'yellow'
-    ctx.strokeText('LIVES: ' + this.player.lives, 20, 50)
+    ctx.fillStyle = 'white'
+    ctx.fillText('LIVES: ' + this.player.lives, 20, 50)
     ctx.textBaseline = 'middle'
     const textString = 'SCORE: ',
       textWidth =
         ctx.measureText(textString).width +
         ctx.measureText(this.player.score.toString()).width
-    ctx.strokeText(
+    ctx.fillText(
       textString + this.player.score,
       this.gameSettings.width / 2 - textWidth / 2,
       50
     )
-  }
-
-  private drawGameOver(ctx: CanvasRenderingContext2D) {
-    ctx.font = '60px serif'
-    ctx.fillStyle = 'red'
-    let textString = 'GAME OVER',
-      textWidth = ctx.measureText(textString).width
-    ctx.fillText(
-      textString,
-      this.gameSettings.width / 2 - textWidth / 2,
-      this.gameSettings.height / 2 - 50
-    )
-
-    ctx.font = '48px serif'
-    ctx.fillStyle = 'white'
-    ;(textString = 'To start again press SPACE'),
-      (textWidth = ctx.measureText(textString).width)
-    ctx.fillText(
-      textString,
-      this.gameSettings.width / 2 - textWidth / 2,
-      this.gameSettings.height / 2 + 50
-    )
-    this.gameOver = true
   }
 
   private createPlatforms(qty: number) {
@@ -241,9 +244,8 @@ export class GameScreen {
       }
 
       const y = lastPlatform.y + diff * dir
-      const x =
-        lastPlatform.x + lastPlatform.width + Math.floor(Math.random() * 280)
-      const width = Math.random() * 400 + 100
+      const x = lastPlatform.x + lastPlatform.width + getRandom(1, 280)
+      const width = getRandom(100, 500)
 
       this.platforms.push(
         new Platform(x, y, width, 45, 500, 45, './platform.png')
@@ -259,7 +261,7 @@ export class GameScreen {
 
   private createButterfly(platform: IPlatform) {
     const x = platform.x
-    const y = Math.floor(Math.random() * (platform.y - 200 - 600) + 600)
+    const y = platform.y - 50
     this.butterflies.push(
       new Butterfly(x, y, 50, 50, 50, 50, './butterfly.png')
     )

@@ -1,67 +1,37 @@
 import { Canvas } from '@mechanics/canvas'
-import { Background } from '@components/background'
-import { Button } from '@components/button'
-import { CatImage } from '@components/catImage'
-import { Center } from '@components/center'
-import { Paper } from '@components/paper'
-import { Space } from '@components/space'
-import { Typography } from '@components/typography'
 import React, { FC } from 'react'
 import { useState } from 'react'
-import { GAME_BACKGROUNDS } from './constants'
 import { FullpageButton } from './FullpageButton'
+import { GameStart } from './GameStart'
+import GameOverPage from './GameOver'
+import GameOver from './GameOver'
+
+type GameStatus = 'start' | 'game' | 'end'
 
 const GamePage: FC = () => {
-  const [isStarted, setStarted] = useState<boolean>(false) // флаг начала игры
+  const [status, setStatus] = useState<GameStatus>('start')
+  const [score, setScore] = useState<number>(0)
 
-  const handleStart = () => setStarted(true)
+  const handleGameStatus = (status: GameStatus) => setStatus(status)
+  const handleScore = (points: number) => setScore(points)
 
   return (
     <React.Fragment>
-      {isStarted ? (
-        <Canvas />
-      ) : (
-        <Background images={GAME_BACKGROUNDS}>
-          <Center>
-            <Paper background="blue">
-              <Space align="center" children={<CatImage />} />
-              <Space gap="40px" align="center">
-                <Typography
-                  children={'Start'}
-                  fontSize="xxxl"
-                  tag="h1"
-                  color="grey-with-shadow"
-                />
-                <Space align="center">
-                  <Typography
-                    children={'press SPACE for jump'}
-                    fontSize="xl"
-                    color="grey"
-                  />
-                  <Typography
-                    children={'press R or ARROW UP to speed up'}
-                    fontSize="xl"
-                    color="grey"
-                  />
-                  <Typography
-                    children={'hearts give you lives, beware of mushrooms'}
-                    fontSize="xl"
-                    color="grey"
-                  />
-                  <Typography
-                    children={'try to get as many points as you can'}
-                    fontSize="xl"
-                    color="grey"
-                  />
-                </Space>
-                <Button children="START" onClick={handleStart} />
-              </Space>
-            </Paper>
-          </Center>
-        </Background>
+      {status === 'game' && (
+        <React.Fragment>
+          <Canvas
+            handleScore={handleScore}
+            handleEnd={() => handleGameStatus('end')}
+          />
+          <FullpageButton />
+        </React.Fragment>
       )}
-
-      <FullpageButton />
+      {status === 'start' && (
+        <GameStart handleStart={() => handleGameStatus('game')} />
+      )}
+      {status === 'end' && (
+        <GameOver score={score} handleReplay={() => handleGameStatus('game')} />
+      )}
     </React.Fragment>
   )
 }

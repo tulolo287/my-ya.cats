@@ -199,7 +199,6 @@ export class Player implements IPlayer {
       return
     }
     this.isJump = false
-    this.frameX = 0
     this.currentAnimation = 'jump'
     if (
       this.frameX ===
