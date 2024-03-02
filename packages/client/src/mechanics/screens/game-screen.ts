@@ -106,7 +106,7 @@ export class GameScreen {
     this.player.draw(ctx)
 
     if (this.player.lives < 1) {
-      this.drawGameOver(ctx)
+      this.gameOver = true
     }
   }
 
@@ -145,41 +145,18 @@ export class GameScreen {
 
   private drawUI(ctx: CanvasRenderingContext2D) {
     ctx.font = '24px serif'
-    ctx.strokeStyle = 'yellow'
-    ctx.strokeText('LIVES: ' + this.player.lives, 20, 50)
+    ctx.fillStyle = 'white'
+    ctx.fillText('LIVES: ' + this.player.lives, 20, 50)
     ctx.textBaseline = 'middle'
     const textString = 'SCORE: ',
       textWidth =
         ctx.measureText(textString).width +
         ctx.measureText(this.player.score.toString()).width
-    ctx.strokeText(
+    ctx.fillText(
       textString + this.player.score,
       this.gameSettings.width / 2 - textWidth / 2,
       50
     )
-  }
-
-  private drawGameOver(ctx: CanvasRenderingContext2D) {
-    ctx.font = '60px serif'
-    ctx.fillStyle = 'red'
-    let textString = 'GAME OVER',
-      textWidth = ctx.measureText(textString).width
-    ctx.fillText(
-      textString,
-      this.gameSettings.width / 2 - textWidth / 2,
-      this.gameSettings.height / 2 - 50
-    )
-
-    ctx.font = '48px serif'
-    ctx.fillStyle = 'white'
-    ;(textString = 'To start again press SPACE'),
-      (textWidth = ctx.measureText(textString).width)
-    ctx.fillText(
-      textString,
-      this.gameSettings.width / 2 - textWidth / 2,
-      this.gameSettings.height / 2 + 50
-    )
-    this.gameOver = true
   }
 
   private createPlatforms(qty: number) {

@@ -14,15 +14,12 @@ import { GAME_BACKGROUNDS } from '../constants'
 import styles from './styles.module.css'
 import { formatScoreNumber } from '@utils/format-score-number'
 
-type GameOverTypes = {
+type GameOverProps = {
   score: number
+  handleReplay: () => void
 }
 
-const handleReplay = () => {
-  // TODO: replay game YAC-33
-}
-
-const GameOverPage: FC<GameOverTypes> = ({ score }) => {
+const GameOver: FC<GameOverProps> = ({ score, handleReplay }) => {
   const navigate = useNavigate()
 
   return (
@@ -59,4 +56,4 @@ const GameOverPage: FC<GameOverTypes> = ({ score }) => {
   )
 }
 
-export default GameOverPage
+export default GameOver

@@ -65,11 +65,6 @@ const router = createBrowserRouter([
         path: routerPaths.forumTopic,
         element: <ForumTopicPage />,
       },
-      // TODO: убрать этот роут в YAC-33
-      {
-        path: '/game-over',
-        element: <GameOverPage score={0} />,
-      },
     ],
   },
   {
