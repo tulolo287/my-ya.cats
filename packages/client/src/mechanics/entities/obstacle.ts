@@ -1,10 +1,10 @@
 import { Entity, IEntity } from './entity'
 
-export interface IHeart extends IEntity {
+export interface IObstacle extends IEntity {
   update: (xVelocity: number) => void
 }
 
-export class Heart extends Entity implements IHeart {
+export class Obstacle extends Entity implements IObstacle {
   constructor(
     x: number,
     y: number,

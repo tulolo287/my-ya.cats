@@ -1,8 +1,7 @@
 import { InputController } from '../controllers/input-controller'
 import { IGame } from '../engine/game'
 import { Butterfly, IButterfly } from '../entities/butterfly'
-import { IHeart } from '../entities/heart'
-import { IMushroom, Mushroom } from '../entities/mushroom'
+import { IObstacle, Obstacle } from '../entities/obstacle'
 import { IPlatform, Platform } from '../entities/platform'
 import { IPlayer, Player } from '../entities/player'
 import { Background, IBackground } from '../system/background'
@@ -16,8 +15,8 @@ export type TGameScreen = {
   parallaxBg: IBackground[]
   platforms: IPlatform[]
   butterflies: IButterfly[]
-  mushrooms: IMushroom[]
-  hearts: IHeart[]
+  mushrooms: IObstacle[]
+  hearts: IObstacle[]
   player: IPlayer
   update: (dt: number) => void
   draw: (ctx: CanvasRenderingContext2D) => void
@@ -38,8 +37,8 @@ export class GameScreen {
   platforms: IPlatform[]
   player: IPlayer
   butterflies: IButterfly[]
-  mushrooms: IMushroom[]
-  hearts: IHeart[]
+  mushrooms: IObstacle[]
+  hearts: IObstacle[]
   gameOver: boolean
 
   constructor(game: IGame) {
@@ -61,8 +60,8 @@ export class GameScreen {
     this.player = new Player(this)
     this.platforms = []
     this.butterflies = new Array<IButterfly>()
-    this.mushrooms = new Array<IMushroom>()
-    this.hearts = new Array<IHeart>()
+    this.mushrooms = new Array<IObstacle>()
+    this.hearts = new Array<IObstacle>()
     this.parallaxBg = new Array<IBackground>()
 
     const bg1 = new Background(
@@ -97,8 +96,8 @@ export class GameScreen {
     this.player = new Player(this)
     this.platforms = []
     this.butterflies = new Array<IButterfly>()
-    this.mushrooms = new Array<IMushroom>()
-    this.hearts = new Array<IHeart>()
+    this.mushrooms = new Array<IObstacle>()
+    this.hearts = new Array<IObstacle>()
   }
 
   draw(ctx: CanvasRenderingContext2D) {
@@ -270,13 +269,13 @@ export class GameScreen {
     const x =
       platform.x + 100 + Math.floor((platform.width - 200) * Math.random())
     const y = platform.y - platform.height + 20
-    this.mushrooms.push(new Mushroom(x, y, 40, 40, 40, 40, './mushroom_1.png'))
+    this.mushrooms.push(new Obstacle(x, y, 40, 40, 40, 40, './mushroom_1.png'))
   }
 
   private createHeart(platform: IPlatform) {
     const x =
       platform.x + 100 + Math.floor((platform.width - 200) * Math.random())
     const y = platform.y - platform.height + 10
-    this.hearts.push(new Mushroom(x, y, 40, 40, 40, 40, './heart.png'))
+    this.hearts.push(new Obstacle(x, y, 40, 40, 40, 40, './heart.png'))
   }
 }
