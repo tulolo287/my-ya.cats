@@ -32,7 +32,7 @@ export type TGameSettings = {
   runSpeed: number
   playerAnimation: TPlayerAnimation
   obstacle: {
-    mushroom: TObstacle
+    mushroom: Required<TObstacle>
     heart: TObstacle
   }
 }

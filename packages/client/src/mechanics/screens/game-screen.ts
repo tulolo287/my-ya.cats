@@ -242,7 +242,7 @@ export class GameScreen {
         this.createButterfly(this.platforms[i])
         if (
           this.platforms[i].width >
-            this.gameSettings.obstacle.mushroom.minPlatformWidth! &&
+            this.gameSettings.obstacle.mushroom.minPlatformWidth &&
           Math.random() > this.gameSettings.obstacle.mushroom.chanseAppearing
         )
           this.createMushroom(this.platforms[i])
