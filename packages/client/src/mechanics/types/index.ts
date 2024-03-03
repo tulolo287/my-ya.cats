@@ -17,6 +17,12 @@ export type TPlayerAnimation = {
   }
 }
 
+type TObstacle = {
+  chanseAppearing: number
+  additionalY: number
+  minPlatformWidth?: number
+}
+
 export type TGameSettings = {
   width: number
   height: number
@@ -25,4 +31,8 @@ export type TGameSettings = {
   walkSpeed: number
   runSpeed: number
   playerAnimation: TPlayerAnimation
+  obstacle: {
+    mushroom: TObstacle
+    heart: TObstacle
+  }
 }
