@@ -1,6 +1,7 @@
 import { InputController } from '../controllers/input-controller'
 import { IGame } from '../engine/game'
 import { Butterfly, IButterfly } from '../entities/butterfly'
+import { IObstacle, Obstacle } from '../entities/obstacle'
 import { IPlatform, Platform } from '../entities/platform'
 import { IPlayer, Player } from '../entities/player'
 import { Background, IBackground } from '../system/background'
@@ -16,6 +17,8 @@ export type TGameScreen = {
   parallaxBg: IBackground[]
   platforms: IPlatform[]
   butterflies: IButterfly[]
+  mushrooms: IObstacle[]
+  hearts: IObstacle[]
   butterflyParticles: IParticles[]
   player: IPlayer
   update: (dt: number) => void
@@ -37,6 +40,8 @@ export class GameScreen {
   platforms: IPlatform[]
   player: IPlayer
   butterflies: IButterfly[]
+  mushrooms: IObstacle[]
+  hearts: IObstacle[]
   butterflyParticles: IParticles[]
   gameOver: boolean
 
@@ -59,9 +64,11 @@ export class GameScreen {
 
     this.player = new Player(this)
     this.platforms = []
-    this.butterflies = new Array<IButterfly>()
-    this.parallaxBg = new Array<IBackground>()
-    this.butterflyParticles = new Array<IParticles>()
+    this.butterflies = []
+    this.mushrooms = []
+    this.hearts = []
+    this.parallaxBg = []
+    this.butterflyParticles = []
 
     const bg1 = new Background(
       0,
@@ -94,26 +101,24 @@ export class GameScreen {
     this.gameOver = false
     this.player = new Player(this)
     this.platforms = []
-    this.butterflies = new Array<IButterfly>()
+    this.butterflies = []
+    this.mushrooms = []
+    this.hearts = []
   }
 
   draw(ctx: CanvasRenderingContext2D) {
-    for (const bg of this.parallaxBg) {
-      bg.draw(ctx)
-    }
+    this.parallaxBg.forEach(e => e.draw(ctx))
+
     this.drawUI(ctx)
 
-    for (const platform of this.platforms) {
-      platform.draw(ctx)
-    }
-    for (const butterfly of this.butterflies) {
-      butterfly.draw(ctx)
-    }
+    this.platforms.forEach(e => e.draw(ctx))
+    this.butterflies.forEach(e => e.draw(ctx))
+    this.mushrooms.forEach(e => e.draw(ctx))
+    this.hearts.forEach(e => e.draw(ctx))
+
     this.player.draw(ctx)
 
-    for (const particle of this.butterflyParticles) {
-      particle.draw(ctx)
-    }
+    this.butterflyParticles.forEach(e => e.draw(ctx))
 
     if (this.player.lives < 1) {
       this.gameOver = true
@@ -132,9 +137,7 @@ export class GameScreen {
       }
 
       this.player.update(dt)
-      for (const bg of this.parallaxBg) {
-        bg.update(this.gameSettings.gameSpeed)
-      }
+      this.parallaxBg.forEach(e => e.update(this.gameSettings.gameSpeed))
 
       this.gameSettings.gameSpeed = InputController.KEYS.run
         ? this.runSpeed
@@ -162,6 +165,18 @@ export class GameScreen {
           }
         }
         butterfly.update()
+      }
+      for (const [idx, mushroom] of this.mushrooms.entries()) {
+        if (mushroom.delete) {
+          this.mushrooms.splice(idx, 1)
+        }
+        mushroom.update(Math.floor(this.bg3_xv * this.gameSettings.gameSpeed))
+      }
+      for (const [idx, heart] of this.hearts.entries()) {
+        if (heart.delete) {
+          this.hearts.splice(idx, 1)
+        }
+        heart.update(Math.floor(this.bg3_xv * this.gameSettings.gameSpeed))
       }
     }
     if (InputController.KEYS.jump && this.gameOver) {
@@ -225,6 +240,14 @@ export class GameScreen {
       )
       if (this.platforms[i].x > this.gameSettings.width) {
         this.createButterfly(this.platforms[i])
+        if (
+          this.platforms[i].width >
+            this.gameSettings.obstacle.mushroom.minPlatformWidth &&
+          Math.random() > this.gameSettings.obstacle.mushroom.chanseAppearing
+        )
+          this.createMushroom(this.platforms[i])
+        if (Math.random() > this.gameSettings.obstacle.heart.chanseAppearing)
+          this.createHeart(this.platforms[i])
       }
     }
   }
@@ -235,5 +258,17 @@ export class GameScreen {
     this.butterflies.push(
       new Butterfly(x, y, 50, 50, 50, 50, './butterfly.png')
     )
+  }
+
+  private createMushroom({ x: platX, y: platY, width, height }: IPlatform) {
+    const x = platX + 100 + ~~((width - 200) * Math.random())
+    const y = platY - height + this.gameSettings.obstacle.mushroom.additionalY
+    this.mushrooms.push(new Obstacle(x, y, 40, 40, 40, 40, './mushroom_1.png'))
+  }
+
+  private createHeart({ x: platX, y: platY, width, height }: IPlatform) {
+    const x = platX + 100 + ~~((width - 200) * Math.random())
+    const y = platY - height + this.gameSettings.obstacle.heart.additionalY
+    this.hearts.push(new Obstacle(x, y, 40, 40, 40, 40, './heart.png'))
   }
 }

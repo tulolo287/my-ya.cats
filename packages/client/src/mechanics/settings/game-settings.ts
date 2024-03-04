@@ -25,6 +25,17 @@ const gameSettings: TGameSettings = {
       totalFrames: 3,
     },
   },
+  obstacle: {
+    mushroom: {
+      chanseAppearing: 0.7,
+      additionalY: 20,
+      minPlatformWidth: 250,
+    },
+    heart: {
+      chanseAppearing: 0.9,
+      additionalY: 10,
+    },
+  },
 }
 
 export default gameSettings

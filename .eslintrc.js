@@ -20,5 +20,7 @@ module.exports = {
     'unicorn/prevent-abbreviations': 'off',
     'unicorn/no-null': 'off',
     'unicorn/prefer-module': 'off',
+    'unicorn/no-array-for-each': 'off',
+    'unicorn/prefer-math-trunc': 'off',
   },
 }
