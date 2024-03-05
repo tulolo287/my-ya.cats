@@ -122,6 +122,7 @@ export class GameScreen {
 
     if (this.player.lives < 1) {
       this.gameOver = true
+      InputController.KEYS.run = false
     }
   }
 
@@ -144,39 +145,47 @@ export class GameScreen {
         : this.walkSpeed
 
       for (let i = 0; i < this.platforms.length; i++) {
-        if (this.platforms[i].delete) {
-          this.platforms.splice(i, 1)
-        }
         this.platforms[i].update(
           Math.floor(this.bg3_xv * this.gameSettings.gameSpeed)
         )
+        if (this.platforms[i].delete) {
+          this.platforms.splice(i, 1)
+          i--
+        }
       }
 
       if (this.platforms.length < 8 || this.platforms.length === 0) {
         this.createPlatforms(8)
       }
-      for (const [idx, butterfly] of this.butterflies.entries()) {
-        if (butterfly.delete) {
-          this.butterflies.splice(idx, 1)
-          for (let i = 0; i < 10; i++) {
+      for (let i = 0; i < this.butterflies.length; i++) {
+        this.butterflies[i].update()
+        if (this.butterflies[i].delete) {
+          for (let j = 0; j < 10; j++) {
             this.butterflyParticles.push(
-              new Particles(butterfly.x, butterfly.y, 10)
+              new Particles(this.butterflies[i].x, this.butterflies[i].y, 10)
             )
           }
+          this.butterflies.splice(i, 1)
+          i--
         }
-        butterfly.update()
       }
-      for (const [idx, mushroom] of this.mushrooms.entries()) {
-        if (mushroom.delete) {
-          this.mushrooms.splice(idx, 1)
+      for (let i = 0; i < this.mushrooms.length; i++) {
+        this.mushrooms[i].update(
+          Math.floor(this.bg3_xv * this.gameSettings.gameSpeed)
+        )
+        if (this.mushrooms[i].delete) {
+          this.mushrooms.splice(i, 1)
+          i--
         }
-        mushroom.update(Math.floor(this.bg3_xv * this.gameSettings.gameSpeed))
       }
-      for (const [idx, heart] of this.hearts.entries()) {
-        if (heart.delete) {
-          this.hearts.splice(idx, 1)
+      for (let i = 0; i < this.hearts.length; i++) {
+        this.hearts[i].update(
+          Math.floor(this.bg3_xv * this.gameSettings.gameSpeed)
+        )
+        if (this.hearts[i].delete) {
+          this.hearts.splice(i, 1)
+          i--
         }
-        heart.update(Math.floor(this.bg3_xv * this.gameSettings.gameSpeed))
       }
     }
     if (InputController.KEYS.jump && this.gameOver) {
