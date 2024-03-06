@@ -21,7 +21,7 @@ export const Modal: FC<PropsWithChildren<Props>> = ({ onClose, children }) => {
   return createPortal(
     <div className={styles.overlay} onClick={closeByOverlayOnly}>
       <section className={styles.modal}>
-        <button className={styles.modal_close} onClick={onClose}>
+        <button className={styles.modalClose} onClick={onClose}>
           <Typography fontSize="xxl">&times;</Typography>
         </button>
         {children}
