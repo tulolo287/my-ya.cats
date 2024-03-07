@@ -55,6 +55,7 @@ export const AvatarUpload: FC = () => {
               </Typography>
 
               <input
+                autoFocus
                 name="avatar"
                 type="file"
                 accept="image/*"
