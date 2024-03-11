@@ -12,9 +12,8 @@ import ErrorPage from '@pages/ErrorPage'
 import ProtectedRoute from '@components/protected-route'
 import { routerPaths } from '@core/constants'
 import ErrorBoundary from '@components/error-boundary'
-import GameOverPage from '@pages/GamePage/GameOver'
 
-const router = createBrowserRouter([
+export const routes = [
   {
     path: '/',
     element: (
@@ -71,6 +70,8 @@ const router = createBrowserRouter([
     path: '*',
     element: <ErrorPage type="404" />,
   },
-])
+]
+
+const router = createBrowserRouter(routes)
 
 export default router

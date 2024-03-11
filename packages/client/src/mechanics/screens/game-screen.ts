@@ -224,39 +224,40 @@ export class GameScreen {
             './platform.png'
           )
         )
-      }
-      const lastPlatform = this.platforms.at(-1)
-      const diff = Math.floor(Math.random() * 170 + 10)
-      if (!lastPlatform) return
-      const up =
-        lastPlatform.y >= this.gameSettings.height - 50 - diff ? true : false
-      const down = lastPlatform.y <= 400 ? true : false
-
-      if (up) {
-        dir = -1
-      } else if (down) {
-        dir = 1
       } else {
-        dir = Math.random() < 0.5 ? 1 : -1
-      }
+        const lastPlatform = this.platforms.at(-1)
+        const diff = Math.floor(Math.random() * 170 + 10)
+        if (!lastPlatform) return
+        const up =
+          lastPlatform.y >= this.gameSettings.height - 50 - diff ? true : false
+        const down = lastPlatform.y <= 400 ? true : false
 
-      const y = lastPlatform.y + diff * dir
-      const x = lastPlatform.x + lastPlatform.width + getRandom(1, 280)
-      const width = getRandom(100, 500)
+        if (up) {
+          dir = -1
+        } else if (down) {
+          dir = 1
+        } else {
+          dir = Math.random() < 0.5 ? 1 : -1
+        }
 
-      this.platforms.push(
-        new Platform(x, y, width, 45, 500, 45, './platform.png')
-      )
-      if (this.platforms[i].x > this.gameSettings.width) {
-        this.createButterfly(this.platforms[i])
-        if (
-          this.platforms[i].width >
-            this.gameSettings.obstacle.mushroom.minPlatformWidth &&
-          Math.random() > this.gameSettings.obstacle.mushroom.chanseAppearing
+        const y = lastPlatform.y + diff * dir
+        const x = lastPlatform.x + lastPlatform.width + getRandom(1, 280)
+        const width = getRandom(100, 500)
+
+        this.platforms.push(
+          new Platform(x, y, width, 45, 500, 45, './platform.png')
         )
-          this.createMushroom(this.platforms[i])
-        if (Math.random() > this.gameSettings.obstacle.heart.chanseAppearing)
-          this.createHeart(this.platforms[i])
+        if (this.platforms[i].x > this.gameSettings.width) {
+          this.createButterfly(this.platforms[i])
+          if (
+            this.platforms[i].width >
+              this.gameSettings.obstacle.mushroom.minPlatformWidth &&
+            Math.random() > this.gameSettings.obstacle.mushroom.chanseAppearing
+          )
+            this.createMushroom(this.platforms[i])
+          if (Math.random() > this.gameSettings.obstacle.heart.chanseAppearing)
+            this.createHeart(this.platforms[i])
+        }
       }
     }
   }
