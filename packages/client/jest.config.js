@@ -21,4 +21,5 @@ export default {
     '@mechanics/(.*)$': '<rootDir>/src/mechanics/$1',
     '@store/(.*)$': '<rootDir>/src/store/$1',
   },
+  setupFiles: ['jest-canvas-mock'],
 }

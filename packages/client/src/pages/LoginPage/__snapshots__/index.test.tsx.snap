@@ -1,0 +1,116 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Login Page Должен верно отрисоваться 1`] = `
+<div>
+  <div
+    class="background "
+  >
+    <div
+      class="center "
+    >
+      <div
+        class="container"
+      >
+        <svg
+          class="spinner"
+          viewBox="0 0 50 50"
+        >
+          <circle
+            class="path"
+            cx="25"
+            cy="25"
+            fill="none"
+            r="20"
+            stroke-width="5"
+          />
+        </svg>
+      </div>
+      <div
+        class="paper "
+      >
+        <div
+          class="space "
+          style="flex-direction: column; gap: 62px; align-items: center;"
+        >
+          <h2
+            class="xxxl grey-with-shadow "
+            style="text-align: center;"
+          >
+            LOGIN
+          </h2>
+          <form>
+            <div
+              class="space "
+              style="flex-direction: column; gap: 62px; align-items: center;"
+            >
+              <div
+                class="space "
+                style="flex-direction: column; gap: 16px;"
+              >
+                <label
+                  class="label  m"
+                  style="width: 300px;"
+                >
+                  Login
+                  <input
+                    class="input"
+                    name="login"
+                    placeholder="Login"
+                    style="height: 48px;"
+                    type="text"
+                  />
+                  <span
+                    class="error"
+                  />
+                </label>
+                <label
+                  class="label  m"
+                  style="width: 300px;"
+                >
+                  Password
+                  <input
+                    class="input"
+                    name="password"
+                    placeholder="Password"
+                    style="height: 48px;"
+                    type="password"
+                  />
+                  <span
+                    class="error"
+                  />
+                </label>
+              </div>
+              <div
+                class="space "
+                style="flex-direction: column;"
+              >
+                <button
+                  class="button  orange l"
+                  color="orange"
+                  style="height: 41px; width: 300px;"
+                  type="submit"
+                  w="300px"
+                >
+                  LOG IN
+                </button>
+              </div>
+            </div>
+          </form>
+          <p
+            class="m grey "
+            style="text-align: center;"
+          >
+            Don’t have an account yet?
+            <a
+              class="link"
+              href="/signup"
+            >
+              Register
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
