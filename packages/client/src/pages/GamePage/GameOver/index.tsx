@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { Background } from '@components/background'
@@ -13,6 +13,8 @@ import { GAME_BACKGROUNDS } from '../constants'
 
 import styles from './styles.module.css'
 import { formatScoreNumber } from '@utils/format-score-number'
+import leaderboardController from '@controllers/leaderboard-controller'
+import { useAppSelector } from '@store/hooks'
 
 type GameOverProps = {
   score: number
@@ -21,6 +23,12 @@ type GameOverProps = {
 
 const GameOver: FC<GameOverProps> = ({ score, handleReplay }) => {
   const navigate = useNavigate()
+
+  const login = useAppSelector(state => state.user.currentUser?.login)
+
+  useEffect(() => {
+    if (login) leaderboardController.addRecord(score, login)
+  }, [score, login])
 
   return (
     <Background images={GAME_BACKGROUNDS}>

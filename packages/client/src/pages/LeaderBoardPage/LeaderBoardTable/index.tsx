@@ -10,9 +10,9 @@ const LeaderBoardTable: FC = () => {
   const [records, setRecords] = useState<LeaderboardRecord[]>([])
 
   const getRecords = async () => {
-    const data = await LeaderboardController.getRecords()
-    if (data) {
-      setRecords(data)
+    const response = await LeaderboardController.getRecords(0, 6)
+    if (response.data) {
+      setRecords(response.data)
     }
   }
 
@@ -23,7 +23,7 @@ const LeaderBoardTable: FC = () => {
   return (
     <ol className={styles.recordList}>
       {records.map(item => (
-        <TableItem key={item.login} {...item} />
+        <TableItem key={item.data.login} {...item} />
       ))}
     </ol>
   )

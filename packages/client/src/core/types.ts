@@ -34,8 +34,21 @@ export type Comment = {
 }
 
 export type LeaderboardRecord = {
-  login: string
-  score: number
+  data: {
+    login: string
+    yacatsScore: number
+  }
+}
+
+export type LeaderboardRequestAll = {
+  ratingFieldName: string
+  cursor: number
+  limit: number
+}
+
+export type LeaderboardRequestGet = LeaderboardRecord & {
+  ratingFieldName: string
+  teamName?: string
 }
 
 export type AuthLoginData = {
