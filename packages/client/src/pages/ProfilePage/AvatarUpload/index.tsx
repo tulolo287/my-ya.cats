@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from '@store/hooks'
 import { changeAvatar } from '@store/user/user-thunks'
 
 import styles from './styles.module.css'
+import { CatImage } from '@components/catImage'
 
 export const AvatarUpload: FC = () => {
   const [showModal, setShowModal] = useState(false)
@@ -37,13 +38,22 @@ export const AvatarUpload: FC = () => {
       <button
         className={styles.avatarUpload}
         onClick={() => setShowModal(true)}>
-        {avatarUrl && (
+        {avatarUrl ? (
           <img
             src={`${process.env.API_URL}/resources/${avatarUrl}`}
             className={styles.image}
             alt="user avatar"
           />
+        ) : (
+          <CatImage imageName="cat-image" />
         )}
+        <Typography
+          fontSize="l"
+          align="center"
+          color="white"
+          className={styles.load}>
+          Upload
+        </Typography>
       </button>
 
       {showModal && (
