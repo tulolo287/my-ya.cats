@@ -52,7 +52,7 @@ export const AvatarUpload: FC = () => {
           align="center"
           color="white"
           className={styles.load}>
-          Download
+          Upload
         </Typography>
       </button>
 
