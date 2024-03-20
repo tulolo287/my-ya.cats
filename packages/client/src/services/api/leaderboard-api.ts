@@ -1,4 +1,4 @@
-import { LeaderboardRequestAll } from '@core/types'
+import { LeaderboardRequestAll, LeaderboardRequestGet } from '@core/types'
 import { API } from '../api.service'
 
 export class LeaderboardAPI extends API {
@@ -6,11 +6,11 @@ export class LeaderboardAPI extends API {
     super('/leaderboard')
   }
 
-  public async addRecord<Response>(data: any) {
-    return await this.http.post<Response>('', { data })
+  public addRecord<Response>(data: LeaderboardRequestGet) {
+    return this.http.post<Response>('', { data })
   }
 
-  public async getRecords<Response>(data: LeaderboardRequestAll) {
-    return await this.http.post<Response>('/all', { data })
+  public getRecords<Response>(data: LeaderboardRequestAll) {
+    return this.http.post<Response>('/all', { data })
   }
 }
