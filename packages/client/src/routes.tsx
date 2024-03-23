@@ -1,5 +1,3 @@
-import { createBrowserRouter } from 'react-router-dom'
-
 import MainPage from '@pages/MainPage'
 import LoginPage from '@pages/LoginPage'
 import SignupPage from '@pages/SignupPage'
@@ -71,7 +69,3 @@ export const routes = [
     element: <ErrorPage type="404" />,
   },
 ]
-
-const router = createBrowserRouter(routes)
-
-export default router

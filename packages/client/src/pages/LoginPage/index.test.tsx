@@ -2,7 +2,7 @@ import { Provider } from 'react-redux'
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import { RouterProvider, createMemoryRouter } from 'react-router-dom'
 
-import { routes } from '../../router'
+import { routes } from '../../routes'
 import { routerPaths } from '@core/constants'
 import store from '@store/index'
 

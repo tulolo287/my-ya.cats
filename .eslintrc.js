@@ -23,4 +23,5 @@ module.exports = {
     'unicorn/no-array-for-each': 'off',
     'unicorn/prefer-math-trunc': 'off',
   },
+  "ignorePatterns": ["**/client/server/index.js", "dist"]
 }
