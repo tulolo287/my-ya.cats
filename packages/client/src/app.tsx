@@ -1,9 +1,11 @@
 import { useEffect } from 'react'
-import { RouterProvider } from 'react-router-dom'
+import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import './app.css'
-import router from './router'
 import store from '@store/index'
+import { routes } from './routes'
+
+const router = createBrowserRouter(routes)
 
 function App() {
   useEffect(() => {
