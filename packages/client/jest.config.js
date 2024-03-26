@@ -10,6 +10,7 @@ module.exports = {
   },
   moduleNameMapper: {
     '\\.(css|less)$': 'identity-obj-proxy',
+    '@/(.*)$': '<rootDir>/src/$1',
     '@components/(.*)$': '<rootDir>/src/components/$1',
     '@assets/(.*)$': '<rootDir>/src/assets/$1',
     '@core/(.*)$': '<rootDir>/src/core/$1',
