@@ -29,9 +29,11 @@ export default defineConfig({
   },
   build: {
     outDir: path.join(__dirname, 'dist/client'),
-  },
-  ssr: {
-    format: 'cjs',
+    rollupOptions: {
+      output: {
+        format: 'cjs',
+      },
+    },
   },
   resolve: {
     alias: {
