@@ -1,5 +1,5 @@
-import { usePage } from '@/hooks/use-page'
-import { PageInitArgs } from '@/routes'
+import { usePage } from '@hooks/use-page'
+import { PageInitArgs } from '@routes'
 import { Background } from '@components/background'
 import { Button } from '@components/button'
 import { CatImage } from '@components/catImage'

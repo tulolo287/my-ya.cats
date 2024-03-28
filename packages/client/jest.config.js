@@ -10,7 +10,6 @@ module.exports = {
   },
   moduleNameMapper: {
     '\\.(css|less)$': 'identity-obj-proxy',
-    '@/(.*)$': '<rootDir>/src/$1',
     '@components/(.*)$': '<rootDir>/src/components/$1',
     '@assets/(.*)$': '<rootDir>/src/assets/$1',
     '@core/(.*)$': '<rootDir>/src/core/$1',
@@ -21,6 +20,8 @@ module.exports = {
     '@utils/(.*)$': '<rootDir>/src/utils/$1',
     '@mechanics/(.*)$': '<rootDir>/src/mechanics/$1',
     '@store/(.*)$': '<rootDir>/src/store/$1',
+    '@hooks/(.*)$': '<rootDir>/src/hooks/$1',
+    '@routes': '<rootDir>/src/routes',
   },
   setupFiles: ['jest-canvas-mock'],
 }

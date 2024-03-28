@@ -10,10 +10,10 @@ import { Space } from '@components/space'
 import { Typography } from '@components/typography'
 import LeaderBoardTable from './LeaderBoardTable'
 
-import { usePage } from '@/hooks/use-page'
-import { PageInitArgs } from '@/routes'
-import { selectUser } from '@/store/user/user-slice'
-import { getUser } from '@/store/user/user-thunks'
+import { usePage } from '@hooks/use-page'
+import { PageInitArgs } from '@routes'
+import { selectUser } from '@store/user/user-slice'
+import { getUser } from '@store/user/user-thunks'
 import styles from './styles.module.css'
 
 const LeaderBoardPage: FC = () => {
