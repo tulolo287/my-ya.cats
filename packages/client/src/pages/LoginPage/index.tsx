@@ -89,7 +89,7 @@ const LoginPage: FC = () => {
                       <img
                         alt="log in with yandex"
                         src="/ya-icon.png"
-                        style={{ width: '100%' }}
+                        className={styles.oAuthButton}
                         onClick={onOAuthLogin}
                       />
                     </Button>
