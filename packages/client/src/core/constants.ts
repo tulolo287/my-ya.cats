@@ -60,3 +60,5 @@ export const validation: Record<
     required: 'Phone is required',
   },
 }
+
+export const redirectUri = 'http://localhost:3000'

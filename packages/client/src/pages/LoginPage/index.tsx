@@ -10,12 +10,25 @@ import { Background } from '@components/background'
 import { Center } from '@components/center'
 import { Paper } from '@components/paper'
 import { AuthLoginData, InputTypes, LoadStatus } from '@core/types'
-import { routerPaths, validation } from '@core/constants'
+import { redirectUri, routerPaths, validation } from '@core/constants'
 import { useAppDispatch, useAppSelector } from '@store/hooks'
 import { login } from '@store/user/user-thunks'
 import { Spinner } from '@components/spinner'
 
 import styles from './styles.module.css'
+import oauthController from '@controllers/oauth-controller'
+
+const onOAuthLogin = () =>
+  oauthController
+    .oAuthServiceId({
+      redirect_uri: redirectUri,
+    })
+    .then(({ data }) => {
+      window.open(
+        `https://oauth.yandex.ru/authorize?response_type=code&client_id=${data.service_id}&redirect_uri=${redirectUri}`,
+        '_self'
+      )
+    })
 
 const LoginPage: FC = () => {
   const dispatch = useAppDispatch()
@@ -68,9 +81,19 @@ const LoginPage: FC = () => {
                 </Space>
                 <Space>
                   {error && <Typography align="center">{error}</Typography>}
-                  <Button type="submit" color="orange" w="300px">
-                    LOG IN
-                  </Button>
+                  <Space direction="row" gap="12px">
+                    <Button type="submit" color="orange" w="240px">
+                      LOG IN
+                    </Button>
+                    <Button type="button" color="orange" w="41px">
+                      <img
+                        alt="log in with yandex"
+                        src="/ya-icon.png"
+                        style={{ width: '100%' }}
+                        onClick={onOAuthLogin}
+                      />
+                    </Button>
+                  </Space>
                 </Space>
               </Space>
             </form>

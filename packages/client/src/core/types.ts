@@ -89,3 +89,16 @@ export enum LoadStatus {
   SUCCESS = 'success',
   ERROR = 'error',
 }
+
+export type OAuthLoginRequest = {
+  code: string
+  redirect_uri: string
+}
+
+export type OAuthServiceIdRequest = {
+  redirect_uri?: string
+}
+
+export type OAuthServiceIdResponse = {
+  service_id: string
+}
