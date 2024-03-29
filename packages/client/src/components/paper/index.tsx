@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import styles from './styles.module.css'
 
 type PaperProps = {
@@ -16,13 +17,15 @@ enum backroundColors {
 }
 
 export const Paper = (props: PaperProps) => {
-  if (props.background) {
-    const root = document.documentElement
-    root.style.setProperty(
-      '--paper-background-color',
-      backroundColors[props.background]
-    )
-  }
+  useEffect(() => {
+    if (props.background) {
+      const root = document.documentElement
+      root.style.setProperty(
+        '--paper-background-color',
+        backroundColors[props.background]
+      )
+    }
+  }, [])
 
   return (
     <div className={`${styles.paper} ${props.className || ''}`}>

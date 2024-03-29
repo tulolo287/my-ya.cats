@@ -14,7 +14,7 @@ const SWPluginOptions: PluginOption = {
       minify: true,
       bundle: true,
       entryPoints: [path.join(process.cwd(), './src/services/sw.service.ts')],
-      outfile: path.join(process.cwd(), 'dist', 'sw.js'),
+      outfile: path.join(process.cwd(), 'dist', 'client/sw.js'),
     })
   },
 }
@@ -26,6 +26,12 @@ export default defineConfig({
   define: {
     'process.env.API_URL': JSON.stringify(process.env.API_URL),
     __SERVER_PORT__: process.env.SERVER_PORT,
+  },
+  build: {
+    outDir: path.join(__dirname, 'dist/client'),
+  },
+  ssr: {
+    format: 'cjs',
   },
   resolve: {
     alias: {

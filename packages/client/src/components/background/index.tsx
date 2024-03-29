@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import styles from './styles.module.css'
 
 type BackgroundProps = {
@@ -21,8 +22,11 @@ export const Background = ({
     .reduce((acc, el) => acc + `url(/${el}) `, '')
     .trim()
     .replaceAll(' ', ', ')
-  const root = document.documentElement
-  root.style.setProperty('--background-images', urls)
+
+  useEffect(() => {
+    const root = document.documentElement
+    root.style.setProperty('--background-images', urls)
+  }, [])
 
   return (
     <div className={`${styles.background} ${className || ''}`}>{children}</div>
