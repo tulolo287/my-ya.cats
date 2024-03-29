@@ -8,7 +8,8 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
-    "test": "jest ./"
+    "test": "jest ./",
+    "test:update:snapshot": "jest --updateSnapshot"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.1",
