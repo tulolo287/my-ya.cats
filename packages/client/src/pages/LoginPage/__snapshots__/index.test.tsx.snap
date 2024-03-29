@@ -106,8 +106,8 @@ exports[`Login Page Должен верно отрисоваться 1`] = `
                   >
                     <img
                       alt="log in with yandex"
+                      class="oAuthButton"
                       src="/ya-icon.png"
-                      style="width: 100%;"
                     />
                   </button>
                 </div>
