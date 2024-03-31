@@ -25,6 +25,12 @@ export default defineConfig({
   },
   define: {
     'process.env.API_URL': JSON.stringify(process.env.API_URL),
+    'process.env.OAUTH_REDIRECT_URI': JSON.stringify(
+      process.env.OAUTH_REDIRECT_URI
+    ),
+    'process.env.OAUTH_YANDEX_URL': JSON.stringify(
+      process.env.OAUTH_YANDEX_URL
+    ),
     __SERVER_PORT__: process.env.SERVER_PORT,
   },
   build: {

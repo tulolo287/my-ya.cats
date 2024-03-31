@@ -10,7 +10,12 @@ import { Background } from '@components/background'
 import { Center } from '@components/center'
 import { Paper } from '@components/paper'
 import { AuthLoginData, InputTypes, LoadStatus } from '@core/types'
-import { redirectUri, routerPaths, validation } from '@core/constants'
+import {
+  oAuthYandexUrl,
+  redirectUri,
+  routerPaths,
+  validation,
+} from '@core/constants'
 import { useAppDispatch, useAppSelector } from '@store/hooks'
 import { login } from '@store/user/user-thunks'
 import { Spinner } from '@components/spinner'
@@ -25,7 +30,7 @@ const onOAuthLogin = () =>
     })
     .then(({ data }) => {
       window.open(
-        `https://oauth.yandex.ru/authorize?response_type=code&client_id=${data.service_id}&redirect_uri=${redirectUri}`,
+        `${oAuthYandexUrl}?response_type=code&client_id=${data.service_id}&redirect_uri=${redirectUri}`,
         '_self'
       )
     })
