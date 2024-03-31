@@ -3,7 +3,7 @@ import { Navigate, Outlet, useSearchParams } from 'react-router-dom'
 
 import { redirectUri, routerPaths } from '@core/constants'
 import { useAppDispatch, useAppSelector } from '@store/hooks'
-import { getUser } from '@store/user/user-thunks'
+import { getUser, oAuthLogin } from '@store/user/user-thunks'
 import { LoadStatus } from '@core/types'
 import oauthController from '@controllers/oauth-controller'
 
@@ -23,9 +23,7 @@ const ProtectedRoute: FC<ProtectedRouteProps> = ({ authProtected }) => {
 
   useEffect(() => {
     if (code) {
-      oauthController
-        .oAuthLogin({ code, redirect_uri: redirectUri })
-        .then(() => dispatch(getUser()))
+      dispatch(oAuthLogin({ code, redirect_uri: redirectUri }))
     } else {
       dispatch(getUser())
     }
@@ -34,7 +32,10 @@ const ProtectedRoute: FC<ProtectedRouteProps> = ({ authProtected }) => {
   /**
    * пока происходит запрос пользователя отдает страницу
    */
-  if (status === LoadStatus.LOADING || status === LoadStatus.INITIAL) {
+  if (
+    (status === LoadStatus.LOADING || status === LoadStatus.INITIAL) &&
+    !code
+  ) {
     return <Outlet />
   }
 

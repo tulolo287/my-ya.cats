@@ -8,6 +8,7 @@ import {
   changeAvatar,
   changeProfileData,
   changePassword,
+  oAuthLogin,
 } from './user-thunks'
 import { RootState } from '..'
 
@@ -53,6 +54,7 @@ const userSlice = createSlice({
       .addCase(signup.fulfilled, onFulfilled)
       .addCase(changeProfileData.fulfilled, onFulfilled)
       .addCase(changeAvatar.fulfilled, onFulfilled)
+      .addCase(oAuthLogin.fulfilled, onFulfilled)
       .addCase(changePassword.fulfilled, state => {
         state.status = LoadStatus.SUCCESS
         state.error = null

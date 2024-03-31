@@ -4,10 +4,12 @@ import UserController from '@controllers/user-controller'
 import {
   AuthLoginData,
   AuthSignupData,
+  OAuthLoginRequest,
   UserData,
   UserPasswordData,
   UserProfileData,
 } from '@core/types'
+import oauthController from '@controllers/oauth-controller'
 
 export const getUser = createAsyncThunk<UserData, undefined>(
   'user/getUser',
@@ -86,6 +88,20 @@ export const changePassword = createAsyncThunk<boolean, UserPasswordData>(
       await UserController.changePassword(data)
       return true
     } catch (error) {
+      return rejectWithValue(error)
+    }
+  }
+)
+
+export const oAuthLogin = createAsyncThunk<UserData, OAuthLoginRequest>(
+  'user/oauth',
+  async (data, { rejectWithValue }) => {
+    try {
+      await oauthController.oAuthLogin(data)
+      const response = await AuthController.getUser()
+      return response.data
+    } catch (error) {
+      console.log(rejectWithValue(error))
       return rejectWithValue(error)
     }
   }
