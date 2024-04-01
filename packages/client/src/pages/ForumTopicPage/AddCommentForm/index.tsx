@@ -1,4 +1,5 @@
 import { FC, SyntheticEvent } from 'react'
+import { useParams } from 'react-router-dom'
 
 import { Button } from '@components/button'
 import { Space } from '@components/space'
@@ -12,26 +13,28 @@ const addComment = async (data: NewComment) => {
   await TopicController.addCommentToTopic(data)
 }
 
-const onSubmit = async (e: SyntheticEvent) => {
-  e.preventDefault()
-
-  const textareaValue = (
-    (e.target as HTMLFormElement)[0] as HTMLTextAreaElement
-  ).value
-  // todo: добавить username из стора (YAC-31)
-  const data = {
-    text: textareaValue,
-    username: 'test username',
-  }
-
-  try {
-    await addComment(data as NewComment)
-  } catch (error) {
-    console.log(error)
-  }
-}
-
 export const AddCommentForm: FC = () => {
+  const { topicId } = useParams()
+  const onSubmit = async (e: SyntheticEvent) => {
+    e.preventDefault()
+
+    const textareaValue = (
+      (e.target as HTMLFormElement)[0] as HTMLTextAreaElement
+    ).value
+    // todo: добавить username из стора (YAC-31)
+    const data = {
+      topicId,
+      text: textareaValue,
+      username: 'test_username',
+    }
+
+    try {
+      await addComment(data as NewComment)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <form onSubmit={onSubmit} className={styles.form}>
       <Space gap="16px" align="center">

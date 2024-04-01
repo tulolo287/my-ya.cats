@@ -11,7 +11,10 @@ export class TopicAPI extends API {
   }
 
   public async addNewTopic<Response>(data: NewTopic) {
-    return await this.http.post<Response>('/add', JSON.stringify(data))
+    return await this.http.post<Response>('/add', {
+      data: JSON.stringify(data),
+      headers: { 'Content-Type': 'application/json' },
+    })
   }
 
   public async getTopicById<Response>(id: string) {
@@ -19,6 +22,9 @@ export class TopicAPI extends API {
   }
 
   public async addCommentToTopic<Response>(data: NewComment) {
-    return await this.http.post<Response>('/comment/add', data)
+    return await this.http.post<Response>('/comment/add', {
+      data: JSON.stringify(data),
+      headers: { 'Content-Type': 'application/json' },
+    })
   }
 }
