@@ -84,15 +84,33 @@ exports[`Login Page Должен верно отрисоваться 1`] = `
                 class="space "
                 style="flex-direction: column;"
               >
-                <button
-                  class="button  orange l"
-                  color="orange"
-                  style="height: 41px; width: 300px;"
-                  type="submit"
-                  w="300px"
+                <div
+                  class="space "
+                  style="flex-direction: row; gap: 12px;"
                 >
-                  LOG IN
-                </button>
+                  <button
+                    class="button  orange l"
+                    color="orange"
+                    style="height: 41px; width: 240px;"
+                    type="submit"
+                    w="240px"
+                  >
+                    LOG IN
+                  </button>
+                  <button
+                    class="button  orange l"
+                    color="orange"
+                    style="height: 41px; width: 41px;"
+                    type="button"
+                    w="41px"
+                  >
+                    <img
+                      alt="log in with yandex"
+                      class="oAuthButton"
+                      src="/ya-icon.png"
+                    />
+                  </button>
+                </div>
               </div>
             </div>
           </form>

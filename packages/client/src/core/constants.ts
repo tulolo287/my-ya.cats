@@ -60,3 +60,7 @@ export const validation: Record<
     required: 'Phone is required',
   },
 }
+
+export const redirectUri =
+  process.env.OAUTH_REDIRECT_URI || 'http://localhost:3000'
+export const oAuthYandexUrl = process.env.OAUTH_YANDEX_URL

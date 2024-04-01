@@ -10,9 +10,9 @@ import { Background } from '@components/background'
 import { Center } from '@components/center'
 import { Paper } from '@components/paper'
 import { AuthLoginData, InputTypes, LoadStatus } from '@core/types'
-import { routerPaths, validation } from '@core/constants'
+import { redirectUri, routerPaths, validation } from '@core/constants'
 import { useAppDispatch, useAppSelector } from '@store/hooks'
-import { login } from '@store/user/user-thunks'
+import { login, oAuthServiceId } from '@store/user/user-thunks'
 import { Spinner } from '@components/spinner'
 
 import styles from './styles.module.css'
@@ -29,6 +29,14 @@ const LoginPage: FC = () => {
 
   const onSubmit: SubmitHandler<AuthLoginData> = data => {
     dispatch(login(data))
+  }
+
+  const onOAuthLogin = () => {
+    dispatch(
+      oAuthServiceId({
+        redirect_uri: redirectUri,
+      })
+    )
   }
 
   return (
@@ -68,9 +76,19 @@ const LoginPage: FC = () => {
                 </Space>
                 <Space>
                   {error && <Typography align="center">{error}</Typography>}
-                  <Button type="submit" color="orange" w="300px">
-                    LOG IN
-                  </Button>
+                  <Space direction="row" gap="12px">
+                    <Button type="submit" color="orange" w="240px">
+                      LOG IN
+                    </Button>
+                    <Button type="button" color="orange" w="41px">
+                      <img
+                        alt="log in with yandex"
+                        src="/ya-icon.png"
+                        className={styles.oAuthButton}
+                        onClick={onOAuthLogin}
+                      />
+                    </Button>
+                  </Space>
                 </Space>
               </Space>
             </form>

@@ -1,10 +1,11 @@
 import { FC, useEffect } from 'react'
-import { Navigate, Outlet } from 'react-router-dom'
+import { Navigate, Outlet, useSearchParams } from 'react-router-dom'
 
-import { routerPaths } from '@core/constants'
+import { redirectUri, routerPaths } from '@core/constants'
 import { useAppDispatch, useAppSelector } from '@store/hooks'
-import { getUser } from '@store/user/user-thunks'
+import { getUser, oAuthLogin } from '@store/user/user-thunks'
 import { LoadStatus } from '@core/types'
+import oauthController from '@controllers/oauth-controller'
 
 type ProtectedRouteProps = {
   /**
@@ -16,15 +17,25 @@ type ProtectedRouteProps = {
 const ProtectedRoute: FC<ProtectedRouteProps> = ({ authProtected }) => {
   const dispatch = useAppDispatch()
   const { currentUser, status } = useAppSelector(state => state.user)
+  const [searchParams] = useSearchParams()
+
+  const code = searchParams.get('code')
 
   useEffect(() => {
-    dispatch(getUser())
+    if (code) {
+      dispatch(oAuthLogin({ code, redirect_uri: redirectUri }))
+    } else {
+      dispatch(getUser())
+    }
   }, [dispatch])
 
   /**
    * пока происходит запрос пользователя отдает страницу
    */
-  if (status === LoadStatus.LOADING || status === LoadStatus.INITIAL) {
+  if (
+    (status === LoadStatus.LOADING || status === LoadStatus.INITIAL) &&
+    !code
+  ) {
     return <Outlet />
   }
 
