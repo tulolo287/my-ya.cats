@@ -33,6 +33,8 @@ export type Comment = {
   text: string
 }
 
+export type NewComment = Omit<Comment, 'id'> & { topicId: string }
+
 export type LeaderboardRecord = {
   data: {
     login: string

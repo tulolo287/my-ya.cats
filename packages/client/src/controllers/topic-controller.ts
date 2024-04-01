@@ -1,69 +1,27 @@
 import { TopicAPI } from '@services/api/topic-api'
-import { Comment, NewTopic, Topic } from '@core/types'
-
-const mockData: Topic[] = [
-  {
-    id: 1,
-    topicName: '34lldks',
-    comments: [{ id: 1, username: 'sdjk 3', text: 'conooas erwr werw ssc' }],
-  },
-  {
-    id: 2,
-    topicName: 'wie pewowe',
-    comments: [{ id: 2, username: 'dsdfdsfdf', text: 'conooas erwr werw ssc' }],
-  },
-  {
-    id: 3,
-    topicName: '32 werkdk',
-    comments: [
-      { id: 3, username: 'sdf dsf', text: 'conooas erwr werw ssc' },
-      { id: 4, username: 'ddf df', text: 'conooas erwr werw ssc' },
-    ],
-  },
-  {
-    id: 4,
-    topicName: 'klew owwooew wrwrw',
-    comments: [{ id: 5, username: '3er33', text: 'conooas erwr werw ssc' }],
-  },
-  {
-    id: 5,
-    topicName: 'wrp ere 324 dd',
-    comments: [{ id: 6, username: 'sdf sfd', text: 'conooas erwr werw ssc' }],
-  },
-  { id: 6, topicName: '34lldks', comments: [] },
-]
-
-const mockTopic: Topic = {
-  id: 7,
-  topicName: 'new created topic',
-  comments: [],
-}
+import { NewComment, NewTopic, Topic } from '@core/types'
 
 class TopicController {
   private api = new TopicAPI()
 
   async getTopics() {
-    // todo: убрать моковые данные (YAC-31)
-    return mockData
+    const { data } = await this.api.getTopics()
+    return data as Topic[]
   }
 
-  async addNewTopic(data: NewTopic) {
-    // todo: убрать моковые данные (YAC-31)
-    console.log('addNewTopic |', data)
-    return mockTopic
+  async addNewTopic(topic: NewTopic) {
+    const { data } = await this.api.addNewTopic(topic)
+    return data as Topic[]
   }
 
-  async getTopicById(id: number) {
-    // todo: убрать моковые данные (YAC-31)
-    console.log('getTopicById |', id)
-    const currentTopic = mockData.find(topic => topic.id === id)
-    return currentTopic ?? mockTopic
+  async getTopicById(id: string) {
+    const { data } = await this.api.getTopicById(id)
+    return data as Topic | undefined
   }
 
-  async addCommentToTopic(data: Omit<Comment, 'id'>) {
-    // todo: убрать моковые данные (YAC-31)
-    console.log('addCommentToTopic |', data)
-    return data
+  async addCommentToTopic(comment: NewComment) {
+    const { data } = await this.api.addCommentToTopic(comment)
+    return data as Topic[]
   }
 }
 

@@ -1,4 +1,4 @@
-import { FC, SyntheticEvent } from 'react'
+import { FC, SyntheticEvent, useState } from 'react'
 
 import { Button } from '@components/button'
 import { Input } from '@components/input'
@@ -13,22 +13,30 @@ const addNewTopic = async (data: NewTopic) => {
   await TopicController.addNewTopic(data)
 }
 
-const onSubmit = async (e: SyntheticEvent) => {
-  e.preventDefault()
-
-  const form = e.target as HTMLFormElement
-  const formData = new FormData(form)
-
-  const formJson = Object.fromEntries(formData.entries())
-
-  try {
-    await addNewTopic(formJson as NewTopic)
-  } catch (error) {
-    console.log(error)
-  }
-}
-
 export const AddTopicModalContent: FC = () => {
+  const [status, setStatus] = useState('')
+
+  const onSubmit = async (e: SyntheticEvent) => {
+    e.preventDefault()
+
+    const form = e.target as HTMLFormElement
+    const formData = new FormData(form)
+
+    const formJson = Object.fromEntries(formData.entries())
+
+    try {
+      await addNewTopic(formJson as NewTopic)
+      form.reset()
+      setStatus('Topic has been added. You can close modal now :)')
+    } catch (error) {
+      if (typeof error === 'string') {
+        setStatus(error)
+      } else {
+        console.log(error)
+      }
+    }
+  }
+
   return (
     <Space gap="32px">
       <Typography align="center" tag="h2" fontSize="xl" color="white">
@@ -46,6 +54,7 @@ export const AddTopicModalContent: FC = () => {
           />
 
           <Button color="orange">Create</Button>
+          {status && <b>{status}</b>}
         </Space>
       </form>
     </Space>

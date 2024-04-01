@@ -26,7 +26,7 @@ const ForumTopicPage: FC = () => {
 
   const getTopic = async () => {
     if (topicId) {
-      const data = await TopicController.getTopicById(+topicId)
+      const data = await TopicController.getTopicById(topicId)
 
       if (data) {
         setTopic(data)

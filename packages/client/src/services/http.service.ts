@@ -11,10 +11,10 @@ const enum HTTPMethodEnum {
 }
 
 export class HTTPService {
-  protected endpoint: string
+  endpoint: string
 
-  constructor(endpoint: string) {
-    this.endpoint = `${process.env.API_URL}${endpoint}`
+  constructor(endpoint: string, uri?: string) {
+    this.endpoint = `${uri ?? process.env.API_URL}${endpoint}`
   }
 
   private request = <Response>(

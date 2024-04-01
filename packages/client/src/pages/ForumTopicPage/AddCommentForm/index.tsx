@@ -4,13 +4,11 @@ import { Button } from '@components/button'
 import { Space } from '@components/space'
 import { Typography } from '@components/typography'
 import TopicController from '@controllers/topic-controller'
-import { Comment } from '@core/types'
+import { NewComment } from '@core/types'
 
 import styles from './styles.module.css'
 
-type CommentData = Omit<Comment, 'id'>
-
-const addComment = async (data: CommentData) => {
+const addComment = async (data: NewComment) => {
   await TopicController.addCommentToTopic(data)
 }
 
@@ -25,8 +23,9 @@ const onSubmit = async (e: SyntheticEvent) => {
     text: textareaValue,
     username: 'test username',
   }
+
   try {
-    await addComment(data as CommentData)
+    await addComment(data as NewComment)
   } catch (error) {
     console.log(error)
   }
