@@ -5,11 +5,13 @@ import {
   AuthLoginData,
   AuthSignupData,
   OAuthLoginRequest,
+  OAuthServiceIdRequest,
   UserData,
   UserPasswordData,
   UserProfileData,
 } from '@core/types'
 import oauthController from '@controllers/oauth-controller'
+import { oAuthYandexUrl, redirectUri } from '@core/constants'
 
 export const getUser = createAsyncThunk<UserData, undefined>(
   'user/getUser',
@@ -101,7 +103,22 @@ export const oAuthLogin = createAsyncThunk<UserData, OAuthLoginRequest>(
       const response = await AuthController.getUser()
       return response.data
     } catch (error) {
-      console.log(rejectWithValue(error))
+      return rejectWithValue(error)
+    }
+  }
+)
+
+export const oAuthServiceId = createAsyncThunk<boolean, OAuthServiceIdRequest>(
+  'user/oauth/serviceId',
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await oauthController.oAuthServiceId(data)
+      window.open(
+        `${oAuthYandexUrl}?response_type=code&client_id=${response.data.service_id}&redirect_uri=${redirectUri}`,
+        '_self'
+      )
+      return true
+    } catch (error) {
       return rejectWithValue(error)
     }
   }

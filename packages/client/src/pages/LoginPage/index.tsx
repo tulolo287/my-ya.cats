@@ -10,30 +10,12 @@ import { Background } from '@components/background'
 import { Center } from '@components/center'
 import { Paper } from '@components/paper'
 import { AuthLoginData, InputTypes, LoadStatus } from '@core/types'
-import {
-  oAuthYandexUrl,
-  redirectUri,
-  routerPaths,
-  validation,
-} from '@core/constants'
+import { redirectUri, routerPaths, validation } from '@core/constants'
 import { useAppDispatch, useAppSelector } from '@store/hooks'
-import { login } from '@store/user/user-thunks'
+import { login, oAuthServiceId } from '@store/user/user-thunks'
 import { Spinner } from '@components/spinner'
 
 import styles from './styles.module.css'
-import oauthController from '@controllers/oauth-controller'
-
-const onOAuthLogin = () =>
-  oauthController
-    .oAuthServiceId({
-      redirect_uri: redirectUri,
-    })
-    .then(({ data }) => {
-      window.open(
-        `${oAuthYandexUrl}?response_type=code&client_id=${data.service_id}&redirect_uri=${redirectUri}`,
-        '_self'
-      )
-    })
 
 const LoginPage: FC = () => {
   const dispatch = useAppDispatch()
@@ -47,6 +29,14 @@ const LoginPage: FC = () => {
 
   const onSubmit: SubmitHandler<AuthLoginData> = data => {
     dispatch(login(data))
+  }
+
+  const onOAuthLogin = () => {
+    dispatch(
+      oAuthServiceId({
+        redirect_uri: redirectUri,
+      })
+    )
   }
 
   return (
