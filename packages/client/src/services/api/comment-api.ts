@@ -7,7 +7,7 @@ export class CommentAPI extends API {
   }
 
   public async addCommentToTopic<Response>(data: NewComment) {
-    return await this.http.post<Response>(`${data.topicId}`, {
+    return await this.http.post<Response>('', {
       data: JSON.stringify(data),
       headers: { 'Content-Type': 'application/json' },
     })

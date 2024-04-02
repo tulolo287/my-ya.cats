@@ -21,9 +21,12 @@ class CommentController {
   async addComment(req: any, res: any) {
     try {
       if (req.body.text) {
-        const { text } = req.body
-        const { id } = req.params
-        const newComment = await Comment.create({ text, topicId: id })
+        const { text, topicId, username } = req.body
+        const newComment = await Comment.create({
+          text,
+          topicId,
+          userName: username,
+        })
         res.json(newComment)
       }
     } catch (error) {

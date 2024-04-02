@@ -5,4 +5,4 @@ export const commentRoutes = express.Router()
 
 commentRoutes.get('/', commentController.getComments)
 commentRoutes.get('/:id', commentController.getComments)
-commentRoutes.post('/:id', commentController.addComment)
+commentRoutes.post('/', commentController.addComment)
