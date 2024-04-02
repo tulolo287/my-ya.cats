@@ -1,10 +1,14 @@
 import { Comment } from '../models/comment'
 import { Topic } from '../models/topic'
+import { User } from '../models/user'
 
 class TopicController {
   async getTopics(_req: any, res: any) {
     const topics = await Topic.findAll({
-      include: [{ model: Comment, as: 'comments' }],
+      include: [
+        { model: Comment, as: 'comments' },
+        { model: User, as: 'user' },
+      ],
     })
     res.json(topics)
   }
@@ -22,7 +26,6 @@ class TopicController {
     try {
       if (req.body.topicName) {
         const { topicName } = req.body
-        //topicName = JSON.parse(topicName)
         const newTopic = await Topic.create({ topicName })
         res.json(newTopic)
       }

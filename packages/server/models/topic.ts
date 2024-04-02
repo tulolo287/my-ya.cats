@@ -1,6 +1,7 @@
 import { DataTypes } from 'sequelize'
 import { sequelize } from '../db/index'
 import { Comment } from './comment'
+import { User } from './user'
 
 export const Topic = sequelize.define('topic', {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
@@ -8,4 +9,4 @@ export const Topic = sequelize.define('topic', {
 })
 
 Topic.hasMany(Comment)
-Comment.belongsTo(Topic)
+Topic.belongsTo(User)

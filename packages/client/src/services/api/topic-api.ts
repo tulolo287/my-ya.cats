@@ -3,7 +3,7 @@ import { API } from '../api.service'
 
 export class TopicAPI extends API {
   constructor() {
-    super('/api/topic', `http://localhost:${__SERVER_PORT__}`)
+    super('/api/topics', `http://localhost:${__SERVER_PORT__}`)
   }
 
   public async getTopics<Response>() {

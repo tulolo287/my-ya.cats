@@ -4,4 +4,5 @@ import express from 'express'
 export const commentRoutes = express.Router()
 
 commentRoutes.get('/', commentController.getComments)
-commentRoutes.post('/', commentController.addComment)
+commentRoutes.get('/:id', commentController.getComments)
+commentRoutes.post('/:id', commentController.addComment)
