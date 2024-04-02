@@ -4,28 +4,31 @@ import { useParams } from 'react-router-dom'
 import { Button } from '@components/button'
 import { Space } from '@components/space'
 import { Typography } from '@components/typography'
-import TopicController from '@controllers/topic-controller'
+import CommentController from '@controllers/comment-controller'
 import { NewComment } from '@core/types'
+import { useAppSelector } from '@store/hooks'
 
 import styles from './styles.module.css'
 
 const addComment = async (data: NewComment) => {
-  await TopicController.addCommentToTopic(data)
+  await CommentController.addCommentToTopic(data)
 }
 
 export const AddCommentForm: FC = () => {
   const { topicId } = useParams()
+  const { currentUser } = useAppSelector(state => state.user)
+
   const onSubmit = async (e: SyntheticEvent) => {
     e.preventDefault()
 
     const textareaValue = (
       (e.target as HTMLFormElement)[0] as HTMLTextAreaElement
     ).value
-    // todo: добавить username из стора (YAC-31)
+
     const data = {
       topicId,
       text: textareaValue,
-      username: 'test_username',
+      username: currentUser?.login,
     }
 
     try {

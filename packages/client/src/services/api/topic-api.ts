@@ -1,4 +1,4 @@
-import { NewComment, NewTopic } from '@core/types'
+import { NewTopic } from '@core/types'
 import { API } from '../api.service'
 
 export class TopicAPI extends API {
@@ -7,11 +7,11 @@ export class TopicAPI extends API {
   }
 
   public async getTopics<Response>() {
-    return await this.http.get<Response>('/all')
+    return await this.http.get<Response>('')
   }
 
   public async addNewTopic<Response>(data: NewTopic) {
-    return await this.http.post<Response>('/add', {
+    return await this.http.post<Response>('', {
       data: JSON.stringify(data),
       headers: { 'Content-Type': 'application/json' },
     })
@@ -19,12 +19,5 @@ export class TopicAPI extends API {
 
   public async getTopicById<Response>(id: string) {
     return await this.http.get<Response>(id)
-  }
-
-  public async addCommentToTopic<Response>(data: NewComment) {
-    return await this.http.post<Response>('/comment/add', {
-      data: JSON.stringify(data),
-      headers: { 'Content-Type': 'application/json' },
-    })
   }
 }

@@ -1,5 +1,5 @@
 import { TopicAPI } from '@services/api/topic-api'
-import { NewComment, NewTopic, Topic } from '@core/types'
+import { NewTopic, Topic } from '@core/types'
 
 class TopicController {
   private api = new TopicAPI()
@@ -17,11 +17,6 @@ class TopicController {
   async getTopicById(id: string) {
     const { data } = await this.api.getTopicById(id)
     return data as Topic | undefined
-  }
-
-  async addCommentToTopic(comment: NewComment) {
-    const { data } = await this.api.addCommentToTopic(comment)
-    return data as Topic[]
   }
 }
 
