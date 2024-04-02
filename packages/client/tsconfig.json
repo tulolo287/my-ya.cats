@@ -30,7 +30,8 @@
       "@mechanics/*": ["src/mechanics/*"],
       "@store/*": ["src/store/*"],
       "@hooks/*": ["src/hooks/*"],
-      "@routes": ["src/routes"]
+      "@routes": ["src/routes"],
+      "@context/*": ["src/context/*"]
     }
   },
   "include": ["src"],

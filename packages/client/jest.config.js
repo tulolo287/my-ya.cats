@@ -6,7 +6,7 @@ module.exports = {
   testEnvironment: 'jsdom',
   testMatch: ['<rootDir>/src/**/*.test.{ts,tsx}'],
   globals: {
-    __SERVER_PORT__: process.env.SERVER_PORT,
+    __SERVER_PORT__: true,
   },
   moduleNameMapper: {
     '\\.(css|less)$': 'identity-obj-proxy',
@@ -22,6 +22,7 @@ module.exports = {
     '@store/(.*)$': '<rootDir>/src/store/$1',
     '@hooks/(.*)$': '<rootDir>/src/hooks/$1',
     '@routes': '<rootDir>/src/routes',
+    '@context/(.*)$': '<rootDir>/src/context/$1',
   },
   setupFiles: ['jest-canvas-mock'],
 }
