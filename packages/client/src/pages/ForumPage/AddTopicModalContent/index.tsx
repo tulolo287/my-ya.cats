@@ -46,6 +46,7 @@ export const AddTopicModalContent: FC = () => {
       <form onSubmit={onSubmit}>
         <Space gap="24px" className={styles.content} align="center">
           <Input
+            autoFocus
             type={InputTypes.text}
             label="Topic name"
             name="topicName"

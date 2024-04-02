@@ -43,6 +43,7 @@ export const AddCommentForm: FC = () => {
             <label htmlFor="comment-textarea">Enter your comment</label>
           </Typography>
           <textarea
+            autoFocus
             className={styles.textarea}
             rows={5}
             id="comment-textarea"></textarea>

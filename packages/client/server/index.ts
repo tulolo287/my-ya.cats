@@ -1,6 +1,7 @@
 import dotenv from 'dotenv'
 dotenv.config()
 import express, { Request as ExpressRequest } from 'express'
+import cors from 'cors'
 import path from 'node:path'
 import fs from 'node:fs/promises'
 import { createServer as createViteServer, ViteDevServer } from 'vite'
@@ -12,6 +13,7 @@ const isDev = process.env.NODE_ENV === 'development'
 
 async function createServer() {
   const app = express()
+  app.use(cors())
 
   let vite: ViteDevServer | undefined
 
