@@ -1,5 +1,11 @@
 class UserController {
-  async test(_req: any, res: any) {
+  async login(_req: any, res: any) {
+    return res.json('TTTTTTT')
+  }
+  async register(_req: any, res: any) {
+    return res.json('TTTTTTT')
+  }
+  async getUser(_req: any, res: any) {
     return res.json('TTTTTTT')
   }
 }

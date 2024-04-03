@@ -25,7 +25,7 @@ class CommentController {
         const newComment = await Comment.create({
           text,
           topicId,
-          userName: username,
+          username,
         })
         res.json(newComment)
       }

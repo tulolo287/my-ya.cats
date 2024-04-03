@@ -3,4 +3,6 @@ import express from 'express'
 
 export const userRoutes = express.Router()
 
-userRoutes.get('/test', userController.test)
+userRoutes.get('/login', userController.login)
+userRoutes.get('/register', userController.register)
+userRoutes.get('/', userController.getUser)
