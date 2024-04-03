@@ -12,6 +12,8 @@ import { Typography } from '@components/typography'
 import { AddTopicModalContent } from './AddTopicModalContent'
 import { TopicList } from './TopicList'
 
+import { TopicsContext } from '@context/topics-context'
+import { Topic } from '@core/types'
 import { usePage } from '@hooks/use-page'
 import { PageInitArgs } from '@routes'
 import { selectUser } from '@store/user/user-slice'
@@ -21,42 +23,45 @@ import styles from './styles.module.css'
 const ForumPage: FC = () => {
   const navigate = useNavigate()
   const [showModal, setShowModal] = useState(false)
+  const [topics, setTopics] = useState<Topic[]>([])
 
   usePage({ initPage: initForumPage })
 
   return (
-    <Background>
-      <Center>
-        <Space gap="40px" className={styles.container} align="center">
-          <CatImage />
-          <Typography
-            tag="h1"
-            fontSize="xxl"
-            align="center"
-            color="grey-with-shadow">
-            Forum
-          </Typography>
+    <TopicsContext.Provider value={{ topics, setTopics }}>
+      <Background>
+        <Center>
+          <Space gap="40px" className={styles.container} align="center">
+            <CatImage />
+            <Typography
+              tag="h1"
+              fontSize="xxl"
+              align="center"
+              color="grey-with-shadow">
+              Forum
+            </Typography>
 
-          <Paper className={styles.topicsWrapper}>
-            <Space gap="32px" align="center">
-              <TopicList />
+            <Paper className={styles.topicsWrapper}>
+              <Space gap="32px" align="center">
+                <TopicList />
 
-              <Button color="orange" onClick={() => setShowModal(true)}>
-                New topic
-              </Button>
-            </Space>
-          </Paper>
+                <Button color="orange" onClick={() => setShowModal(true)}>
+                  New topic
+                </Button>
+              </Space>
+            </Paper>
 
-          <Button onClick={() => navigate(-1)}>Back</Button>
-        </Space>
-      </Center>
+            <Button onClick={() => navigate(-1)}>Back</Button>
+          </Space>
+        </Center>
 
-      {showModal && (
-        <Modal onClose={() => setShowModal(false)}>
-          <AddTopicModalContent />
-        </Modal>
-      )}
-    </Background>
+        {showModal && (
+          <Modal onClose={() => setShowModal(false)}>
+            <AddTopicModalContent />
+          </Modal>
+        )}
+      </Background>
+    </TopicsContext.Provider>
   )
 }
 

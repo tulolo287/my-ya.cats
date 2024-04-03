@@ -1,12 +1,12 @@
 import { Typography } from '@components/typography'
 import { Paper } from '@components/paper'
 import { Space } from '@components/space'
-import { Comment } from '@core/types'
+import { TopicComment } from '@core/types'
 
 import styles from './styles.module.css'
 
 type Props = {
-  comments: Comment[]
+  comments: TopicComment[]
 }
 
 export const TopicCommentsList = ({ comments }: Props) => {

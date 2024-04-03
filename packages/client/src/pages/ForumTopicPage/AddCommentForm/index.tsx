@@ -1,10 +1,12 @@
-import { FC, SyntheticEvent } from 'react'
+import { FC, SyntheticEvent, useContext } from 'react'
 import { useParams } from 'react-router-dom'
 
 import { Button } from '@components/button'
 import { Space } from '@components/space'
 import { Typography } from '@components/typography'
+import { CurrentTopicContext } from '@context/topics-context'
 import CommentController from '@controllers/comment-controller'
+import TopicController from '@controllers/topic-controller'
 import { NewComment } from '@core/types'
 import { useAppSelector } from '@store/hooks'
 
@@ -17,6 +19,7 @@ const addComment = async (data: NewComment) => {
 export const AddCommentForm: FC = () => {
   const { topicId } = useParams()
   const { currentUser } = useAppSelector(state => state.user)
+  const { setTopic } = useContext(CurrentTopicContext)
 
   const onSubmit = async (e: SyntheticEvent) => {
     e.preventDefault()
@@ -33,6 +36,17 @@ export const AddCommentForm: FC = () => {
 
     try {
       await addComment(data as NewComment)
+
+      if (!topicId) {
+        return
+      }
+
+      const topic = await TopicController.getTopicById(topicId)
+      if (topic) {
+        setTopic(topic)
+      }
+
+      ;((e.target as HTMLFormElement)[0] as HTMLTextAreaElement).value = ''
     } catch (error) {
       console.log(error)
     }

@@ -1,10 +1,11 @@
-import { FC, SyntheticEvent, useState } from 'react'
+import { FC, SyntheticEvent, useState, useContext } from 'react'
 
 import { Button } from '@components/button'
 import { Input } from '@components/input'
 import { Space } from '@components/space'
 import { Typography } from '@components/typography'
 import TopicController from '@controllers/topic-controller'
+import { TopicsContext } from '@context/topics-context'
 import { InputTypes, NewTopic } from '@core/types'
 
 import styles from './styles.module.css'
@@ -15,6 +16,7 @@ const addNewTopic = async (data: NewTopic) => {
 
 export const AddTopicModalContent: FC = () => {
   const [status, setStatus] = useState('')
+  const { setTopics } = useContext(TopicsContext)
 
   const onSubmit = async (e: SyntheticEvent) => {
     e.preventDefault()
@@ -26,6 +28,11 @@ export const AddTopicModalContent: FC = () => {
 
     try {
       await addNewTopic(formJson as NewTopic)
+      const data = await TopicController.getTopics()
+      if (data) {
+        setTopics(data)
+      }
+
       form.reset()
       setStatus('Topic has been added. You can close modal now :)')
     } catch (error) {
