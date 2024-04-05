@@ -3,7 +3,7 @@ import { UserProfileData, UserPasswordData } from '@core/types'
 
 export class UserAPI extends API {
   constructor() {
-    super('/user')
+    super('/yandex-api/user')
   }
 
   public changeUserAvatar<Response>(data: FormData) {
