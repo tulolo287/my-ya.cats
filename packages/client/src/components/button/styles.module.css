@@ -22,8 +22,3 @@
   text-underline-position: under;
   cursor: pointer;
 }
-
-.link > a,
-.link > a:visited {
-  color: var(--primary-text-color);
-}

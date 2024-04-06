@@ -6,7 +6,6 @@ import { Space } from '@components/space'
 import { Typography } from '@components/typography'
 import { routerPaths } from '@core/constants'
 import { FC } from 'react'
-import { Link } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '@store/hooks'
 import { signup } from '@store/user/user-thunks'
 import { Spinner } from '@components/spinner'
@@ -106,8 +105,8 @@ const SignupPage: FC = () => {
                 </Space>
               </Space>
             </form>
-            <Button displayStyle="link" fontSize="m">
-              <Link to={routerPaths.login}>Log in</Link>
+            <Button displayStyle="link" to={routerPaths.login} fontSize="m">
+              Log in
             </Button>
           </Space>
         </Paper>

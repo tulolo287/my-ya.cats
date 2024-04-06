@@ -2,6 +2,7 @@ import { DimensionsProp, TFontSize } from '@core/types'
 import styles from './styles.module.css'
 import stylesFontSize from '@style/font-size.module.css'
 import classNames from 'classnames'
+import { Link } from 'react-router-dom'
 
 type ButtonProps = {
   /**
@@ -29,6 +30,11 @@ type ButtonProps = {
    * @default '41px'
    */
   h?: DimensionsProp
+  /**
+   * react router to
+   * навигация по роутеру
+   */
+  to?: string
 }
 
 export const Button: React.FC<
@@ -41,11 +47,20 @@ export const Button: React.FC<
   fontSize = 'l',
   h = '41px',
   w = '200px',
+  to,
   ...props
 }) => {
   const styleButton = {
     height: h,
     width: w,
+  }
+
+  if (to) {
+    return (
+      <Link to={to} className={styles.link}>
+        {children}
+      </Link>
+    )
   }
 
   const defaultClassNames = () => {
