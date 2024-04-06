@@ -3,7 +3,7 @@ import { API } from '../api.service'
 
 export class LeaderboardAPI extends API {
   constructor() {
-    super('/leaderboard')
+    super('/yandex-api/leaderboard')
   }
 
   public addRecord<Response>(data: LeaderboardRequestGet) {

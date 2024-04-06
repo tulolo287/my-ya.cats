@@ -3,7 +3,7 @@ import { API } from '@services/api.service'
 
 export class OAuthAPI extends API {
   constructor() {
-    super('/oauth/yandex')
+    super('/yandex-api/oauth/yandex')
   }
 
   public oAuthLogin = <Response>(data: OAuthLoginRequest) => {

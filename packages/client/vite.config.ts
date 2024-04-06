@@ -32,6 +32,7 @@ export default defineConfig({
       process.env.OAUTH_YANDEX_URL
     ),
     __SERVER_PORT__: process.env.SERVER_PORT,
+    'process.env.SERVER_URL': JSON.stringify(process.env.SERVER_URL),
   },
   build: {
     outDir: path.join(__dirname, 'dist/client'),
@@ -40,6 +41,9 @@ export default defineConfig({
         format: 'cjs',
       },
     },
+  },
+  ssr: {
+    format: 'cjs',
   },
   resolve: {
     alias: {

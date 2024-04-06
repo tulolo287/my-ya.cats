@@ -14,7 +14,7 @@ export class HTTPService {
   protected endpoint: string
 
   constructor(endpoint: string) {
-    this.endpoint = `${process.env.API_URL}${endpoint}`
+    this.endpoint = `${process.env.SERVER_URL}${endpoint}`
   }
 
   private request = <Response>(

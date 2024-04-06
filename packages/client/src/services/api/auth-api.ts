@@ -3,7 +3,7 @@ import { AuthLoginData, AuthSignupData } from '@core/types'
 
 export class AuthAPI extends API {
   constructor() {
-    super('/auth')
+    super('/yandex-api/auth')
   }
 
   public login = <Response>(data: AuthLoginData) => {
