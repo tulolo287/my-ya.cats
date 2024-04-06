@@ -12,3 +12,18 @@
 .white {
   background-color: var(--white);
 }
+
+.link {
+  color: var(--primary-text-color);
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+  text-underline-position: under;
+  cursor: pointer;
+}
+
+.link > a,
+.link > a:visited {
+  color: var(--primary-text-color);
+}
