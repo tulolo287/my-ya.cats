@@ -12,7 +12,6 @@ import { signup } from '@store/user/user-thunks'
 import { Spinner } from '@components/spinner'
 import { AuthSignupData, InputTypes, LoadStatus } from '@core/types'
 
-import styles from './styles.module.css'
 import { InputProps, InputRow } from './input-row'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
@@ -107,11 +106,9 @@ const SignupPage: FC = () => {
                 </Space>
               </Space>
             </form>
-            <Typography align="center" color="grey" fontSize="m">
-              <Link to={routerPaths.login} className={styles.link}>
-                Log in
-              </Link>
-            </Typography>
+            <Button displayStyle="link" fontSize="m">
+              <Link to={routerPaths.login}>Log in</Link>
+            </Button>
           </Space>
         </Paper>
       </Center>

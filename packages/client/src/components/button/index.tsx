@@ -1,6 +1,7 @@
 import { DimensionsProp, TFontSize } from '@core/types'
 import styles from './styles.module.css'
 import stylesFontSize from '@style/font-size.module.css'
+import classNames from 'classnames'
 
 type ButtonProps = {
   /**
@@ -14,6 +15,11 @@ type ButtonProps = {
    */
   fontSize?: TFontSize
   /**
+   * стиль кпопки
+   * @default 'button'
+   */
+  displayStyle?: 'button' | 'link'
+  /**
    * ширина кнопки
    * @default '200px'
    */
@@ -25,36 +31,37 @@ type ButtonProps = {
   h?: DimensionsProp
 }
 
-export const Button = (
-  props: React.ComponentPropsWithoutRef<'button'> & ButtonProps
-) => {
-  const {
-    children,
-    className,
-    color = 'white',
-    fontSize = 'l',
-    h = '41px',
-    w = '200px',
-  } = props
-
-  Object.fromEntries(
-    Object.entries(props).filter(
-      el => !['color', 'fontSize', 'h', 'w'].includes(el[0])
-    )
-  )
-
+export const Button: React.FC<
+  React.ComponentPropsWithoutRef<'button'> & ButtonProps
+> = ({
+  children,
+  className,
+  displayStyle = 'button',
+  color = 'white',
+  fontSize = 'l',
+  h = '41px',
+  w = '200px',
+  ...props
+}) => {
   const styleButton = {
     height: h,
     width: w,
   }
 
+  const defaultClassNames = () => {
+    if (displayStyle === 'link') {
+      return classNames(styles.link, stylesFontSize[fontSize])
+    }
+    return classNames(
+      styles.button,
+      className,
+      styles[color],
+      stylesFontSize[fontSize]
+    )
+  }
+
   return (
-    <button
-      {...props}
-      className={`${styles.button} ${className || ''} ${styles[color]} ${
-        stylesFontSize[fontSize]
-      }`}
-      style={styleButton}>
+    <button {...props} className={defaultClassNames()} style={styleButton}>
       {children}
     </button>
   )

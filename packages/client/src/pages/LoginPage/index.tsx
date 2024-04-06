@@ -93,10 +93,12 @@ const LoginPage: FC = () => {
               </Space>
             </form>
             <Typography align="center" color="grey" fontSize="m">
-              Don’t have an account yet?
-              <Link to={routerPaths.signup} className={styles.link}>
-                Register
-              </Link>
+              Don’t have an account yet?{' '}
+              <Button displayStyle="link" fontSize="m" w="auto">
+                <Link to={routerPaths.signup} className={styles.link}>
+                  Register
+                </Link>
+              </Button>
             </Typography>
           </Space>
         </Paper>
