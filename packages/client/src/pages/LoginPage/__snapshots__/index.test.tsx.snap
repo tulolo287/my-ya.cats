@@ -116,17 +116,12 @@ exports[`Login Page Должен верно отрисоваться 1`] = `
           >
             Don’t have an account yet?
              
-            <button
-              class="link m"
-              style="height: 41px; width: auto;"
+            <a
+              class="link"
+              href="/signup"
             >
-              <a
-                class="link"
-                href="/signup"
-              >
-                Register
-              </a>
-            </button>
+              Register
+            </a>
           </p>
         </div>
       </div>
