@@ -102,3 +102,7 @@ export type OAuthServiceIdRequest = {
 export type OAuthServiceIdResponse = {
   service_id: string
 }
+
+export type Headers = {
+  headers: { Cookie: string | undefined }
+}

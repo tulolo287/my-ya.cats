@@ -60,9 +60,9 @@ const ForumPage: FC = () => {
   )
 }
 
-export const initForumPage = async ({ dispatch, state }: PageInitArgs) => {
+export const initForumPage = async ({ dispatch, state, ctx }: PageInitArgs) => {
   if (!selectUser(state)) {
-    return dispatch(getUser())
+    dispatch(getUser(ctx))
   }
 }
 

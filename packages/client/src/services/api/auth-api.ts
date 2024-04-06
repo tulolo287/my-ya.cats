@@ -1,5 +1,5 @@
 import { API } from '../api.service'
-import { AuthLoginData, AuthSignupData } from '@core/types'
+import { AuthLoginData, AuthSignupData, Headers } from '@core/types'
 
 export class AuthAPI extends API {
   constructor() {
@@ -18,7 +18,7 @@ export class AuthAPI extends API {
     return this.http.post<Response>('/signup', { data })
   }
 
-  public getUser = <Response>() => {
-    return this.http.get<Response>('/user')
+  public getUser = <Response>(data?: Headers) => {
+    return this.http.get<Response>('/user', data)
   }
 }

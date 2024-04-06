@@ -1,5 +1,9 @@
 import { setPageHasBeenInitializedOnServer } from '@store/ssr/ssr-slice'
-import { createFetchRequest, createUrl } from '@utils/entry-server.utils'
+import {
+  createContext,
+  createFetchRequest,
+  createUrl,
+} from '@utils/entry-server.utils'
 import { Request as ExpressRequest } from 'express'
 import ReactDOM from 'react-dom/server'
 import { Provider } from 'react-redux'
@@ -9,9 +13,8 @@ import {
   createStaticHandler,
   createStaticRouter,
 } from 'react-router-dom/server'
-import { routes } from './routes'
+import { initRoutes, routes } from './routes'
 import store from './store'
-import { getUser } from './store/user/user-thunks'
 
 export const render = async (req: ExpressRequest) => {
   const { query, dataRoutes } = createStaticHandler(routes)
@@ -28,24 +31,20 @@ export const render = async (req: ExpressRequest) => {
 
   const foundRoutes = matchRoutes(routes, url)
 
+  const initRoute = initRoutes.find(route => route.path === url.pathname)
+
   if (!foundRoutes) {
     throw new Error('Страница не найдена!')
   }
 
-  const [
-    {
-      route: { fetchData },
-    },
-  ] = foundRoutes
-
   store.dispatch(setPageHasBeenInitializedOnServer(true))
-  store.dispatch(getUser())
 
-  if (typeof fetchData === 'function') {
+  if (initRoute?.fetchData) {
     try {
-      await fetchData({
+      await initRoute.fetchData({
         dispatch: store.dispatch,
         state: store.getState(),
+        ctx: createContext(req),
       })
     } catch (error) {
       console.log('Инициализация страницы произошла с ошибкой', error)

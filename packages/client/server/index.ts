@@ -1,10 +1,12 @@
+import cookieParser from 'cookie-parser'
+import cors from 'cors'
 import dotenv from 'dotenv'
-dotenv.config()
 import express, { Request as ExpressRequest } from 'express'
-import path from 'node:path'
+import { createProxyMiddleware } from 'http-proxy-middleware'
 import fs from 'node:fs/promises'
-import { createServer as createViteServer, ViteDevServer } from 'vite'
-import serialize from 'serialize-javascript'
+import path from 'node:path'
+import { ViteDevServer, createServer as createViteServer } from 'vite'
+dotenv.config()
 
 const port = process.env.PORT || 3000
 const clientPath = path.join(__dirname, '..')
@@ -12,6 +14,7 @@ const isDev = process.env.NODE_ENV === 'development'
 
 async function createServer() {
   const app = express()
+  app.use(cors())
 
   let vite: ViteDevServer | undefined
 
@@ -29,7 +32,29 @@ async function createServer() {
     )
   }
 
-  app.get('*', async (req, res, next) => {
+  app.use(
+    '/api/v2',
+    createProxyMiddleware({
+      changeOrigin: true,
+      cookieDomainRewrite: {
+        '*': '',
+      },
+      target: 'https://ya-praktikum.tech/api/v2',
+    })
+  )
+
+  app.use(
+    '/authorize',
+    createProxyMiddleware({
+      changeOrigin: true,
+      cookieDomainRewrite: {
+        '*': '',
+      },
+      target: 'https://oauth.yandex.ru/authorize',
+    })
+  )
+
+  app.use('*', cookieParser(), async (req, res, next) => {
     const url = req.originalUrl
 
     try {
@@ -68,16 +93,21 @@ async function createServer() {
 
       const { html: appHtml, initialState } = await render(req)
 
-      const html = template.replace(`<!--ssr-outlet-->`, appHtml).replace(
-        `<!--ssr-initial-state-->`,
-        `<script>window.APP_INITIAL_STATE = ${serialize(initialState, {
-          isJSON: true,
-        })}</script>`
+      const initStateSerialized = JSON.stringify(initialState).replaceAll(
+        '<',
+        '\\u003c'
       )
+
+      const html = template
+        .replace(`<!--ssr-outlet-->`, appHtml)
+        .replace(
+          `<!--ssr-initial-state-->`,
+          `<script>window.APP_INITIAL_STATE = ${initStateSerialized}</script>`
+        )
 
       res.status(200).set({ 'Content-Type': 'text/html' }).end(html)
     } catch (error) {
-      vite!.ssrFixStacktrace(error as Error)
+      vite.ssrFixStacktrace(error as Error)
       next(error)
     }
   })

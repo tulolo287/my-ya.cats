@@ -12,11 +12,13 @@ import {
 } from '@core/types'
 import oauthController from '@controllers/oauth-controller'
 import { oAuthYandexUrl, redirectUri } from '@core/constants'
+import { PageInitContext } from '@routes'
 
-export const getUser = createAsyncThunk<UserData, undefined>(
+export const getUser = createAsyncThunk<UserData, PageInitContext | undefined>(
   'user/getUser',
-  async () => {
-    const response = await AuthController.getUser()
+  async (ctx?) => {
+    const data = { headers: { Cookie: ctx?.authCookie } }
+    const response = await AuthController.getUser(data)
     return response.data
   }
 )

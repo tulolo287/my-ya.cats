@@ -1,9 +1,14 @@
+import { PageInitContext } from '@routes'
 import { Request as ExpressRequest } from 'express'
 
 export const createUrl = (req: ExpressRequest) => {
   const origin = `${req.protocol}://${req.get('host')}`
 
   return new URL(req.originalUrl || req.url, origin)
+}
+
+export const createContext = (req: ExpressRequest): PageInitContext => {
+  return { authCookie: req.headers['cookie'] }
 }
 
 export const createFetchRequest = (req: ExpressRequest) => {

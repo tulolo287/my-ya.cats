@@ -1,20 +1,31 @@
-import MainPage, { initMainPage } from '@pages/MainPage'
-import LoginPage from '@pages/LoginPage'
-import SignupPage from '@pages/SignupPage'
-import ProfilePage, { initProfilePage } from '@pages/ProfilePage'
-import GamePage, { initGamePage } from '@pages/GamePage'
-import LeaderBoardPage, { initLeaderBoardPage } from '@pages/LeaderBoardPage'
-import ForumPage, { initForumPage } from '@pages/ForumPage'
-import ForumTopicPage, { initForumTopicPage } from '@pages/ForumTopicPage'
-import ErrorPage from '@pages/ErrorPage'
+import ErrorBoundary from '@components/error-boundary'
 import ProtectedRoute from '@components/protected-route'
 import { routerPaths } from '@core/constants'
-import ErrorBoundary from '@components/error-boundary'
+import ErrorPage from '@pages/ErrorPage'
+import ForumPage, { initForumPage } from '@pages/ForumPage'
+import ForumTopicPage, { initForumTopicPage } from '@pages/ForumTopicPage'
+import GamePage, { initGamePage } from '@pages/GamePage'
+import LeaderBoardPage, { initLeaderBoardPage } from '@pages/LeaderBoardPage'
+import LoginPage from '@pages/LoginPage'
+import MainPage, { initMainPage } from '@pages/MainPage'
+import ProfilePage, { initProfilePage } from '@pages/ProfilePage'
+import SignupPage from '@pages/SignupPage'
 import { AppDispatch, RootState } from './store'
+
+export type PageInitContext = {
+  authCookie?: string
+  uuid?: string
+}
 
 export type PageInitArgs = {
   dispatch: AppDispatch
   state: RootState
+  ctx: PageInitContext
+}
+
+export type InitRoutes = {
+  path: string
+  fetchData: ({ dispatch, state, ctx }: PageInitArgs) => void
 }
 
 export const routes = [
@@ -47,37 +58,58 @@ export const routes = [
       {
         index: true,
         element: <MainPage />,
-        fetchData: initMainPage,
       },
       {
         path: routerPaths.profile,
         element: <ProfilePage />,
-        fetchData: initProfilePage,
       },
       {
         path: routerPaths.game,
         element: <GamePage />,
-        fetchData: initGamePage,
       },
       {
         path: routerPaths.leaderBoard,
         element: <LeaderBoardPage />,
-        fetchData: initLeaderBoardPage,
       },
       {
         path: routerPaths.forum,
         element: <ForumPage />,
-        fetchData: initForumPage,
       },
       {
         path: routerPaths.forumTopic,
         element: <ForumTopicPage />,
-        fetchData: initForumTopicPage,
       },
     ],
   },
   {
     path: '*',
     element: <ErrorPage type="404" />,
+  },
+]
+
+export const initRoutes: InitRoutes[] = [
+  {
+    path: routerPaths.main,
+    fetchData: initMainPage,
+  },
+  {
+    path: routerPaths.profile,
+    fetchData: initProfilePage,
+  },
+  {
+    path: routerPaths.game,
+    fetchData: initGamePage,
+  },
+  {
+    path: routerPaths.leaderBoard,
+    fetchData: initLeaderBoardPage,
+  },
+  {
+    path: routerPaths.forum,
+    fetchData: initForumPage,
+  },
+  {
+    path: routerPaths.forumTopic,
+    fetchData: initForumTopicPage,
   },
 ]

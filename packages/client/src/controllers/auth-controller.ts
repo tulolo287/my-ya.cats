@@ -1,5 +1,5 @@
 import { AuthAPI } from '@services/api/auth-api'
-import { AuthLoginData, AuthSignupData, UserData } from '@core/types'
+import { AuthLoginData, AuthSignupData, Headers, UserData } from '@core/types'
 
 class AuthController {
   private api = new AuthAPI()
@@ -16,8 +16,8 @@ class AuthController {
     return this.api.signup(data)
   }
 
-  getUser() {
-    return this.api.getUser<UserData>()
+  getUser(data?: Headers) {
+    return this.api.getUser<UserData>(data)
   }
 }
 
