@@ -53,7 +53,6 @@ export class ReactionController {
     response: Response
   ) => {
     try {
-      console.log(request.body)
       const { commentId, emojiId } = request.body
       const { currentUser } = request as RequestWithUser
       const userId = currentUser.id

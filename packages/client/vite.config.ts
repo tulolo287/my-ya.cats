@@ -42,6 +42,9 @@ export default defineConfig({
       },
     },
   },
+  ssr: {
+    format: 'cjs',
+  },
   resolve: {
     alias: {
       '@assets': path.resolve(__dirname, './src/assets'),
