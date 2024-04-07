@@ -4,6 +4,7 @@ import { Space } from '@components/space'
 import { Comment } from '@core/types'
 
 import styles from './styles.module.css'
+import { Reaction } from './Reaction'
 
 type Props = {
   comments: Comment[]
@@ -18,8 +19,8 @@ export const TopicCommentsList = ({ comments }: Props) => {
             <Typography fontSize="l" color="orange">
               {username}
             </Typography>
-
             <Typography fontSize="m">{text}</Typography>
+            <Reaction isCurrentUserReaction={false} emojiId={''} count={1} />
           </Space>
         </Paper>
       ))}
