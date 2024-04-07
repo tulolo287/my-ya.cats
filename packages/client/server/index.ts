@@ -1,8 +1,7 @@
-import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import dotenv from 'dotenv'
+import cookieParser from 'cookie-parser'
 import express, { Request as ExpressRequest } from 'express'
-import { createProxyMiddleware } from 'http-proxy-middleware'
 import fs from 'node:fs/promises'
 import path from 'node:path'
 import { ViteDevServer, createServer as createViteServer } from 'vite'
@@ -31,28 +30,6 @@ async function createServer() {
       express.static(path.join(clientPath, 'dist/client'), { index: false })
     )
   }
-
-  app.use(
-    '/api/v2',
-    createProxyMiddleware({
-      changeOrigin: true,
-      cookieDomainRewrite: {
-        '*': '',
-      },
-      target: 'https://ya-praktikum.tech/api/v2',
-    })
-  )
-
-  app.use(
-    '/authorize',
-    createProxyMiddleware({
-      changeOrigin: true,
-      cookieDomainRewrite: {
-        '*': '',
-      },
-      target: 'https://oauth.yandex.ru/authorize',
-    })
-  )
 
   app.use('*', cookieParser(), async (req, res, next) => {
     const url = req.originalUrl

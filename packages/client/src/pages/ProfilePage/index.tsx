@@ -156,7 +156,7 @@ export const initProfilePage = async ({
   ctx,
 }: PageInitArgs) => {
   if (!selectUser(state)) {
-    dispatch(getUser(ctx))
+    return dispatch(getUser(ctx))
   }
 }
 

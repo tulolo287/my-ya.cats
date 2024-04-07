@@ -40,9 +40,9 @@ const GamePage: FC = () => {
   )
 }
 
-export const initGamePage = async ({ dispatch, state }: PageInitArgs) => {
+export const initGamePage = async ({ dispatch, state, ctx }: PageInitArgs) => {
   if (!selectUser(state)) {
-    return dispatch(getUser())
+    return dispatch(getUser(ctx))
   }
 }
 

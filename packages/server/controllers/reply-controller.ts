@@ -8,24 +8,35 @@ class ReplyController {
   }
 
   async getReplyById(req: Request, res: Response) {
-    const { id } = req.params
-    const data = await Reply.findOne({
-      where: { id },
-    })
-    res.json(data)
+    if (req.params.id) {
+      const { id } = req.params
+      try {
+        const data = await Reply.findOne({
+          where: { id },
+        })
+        res.json(data)
+      } catch (error) {
+        res.status(500).send(error)
+      }
+    } else {
+      res.status(403).send('No data')
+    }
   }
 
   async addReply(req: Request, res: Response) {
-    try {
-      if (req.body.data) {
-        const { text } = req.body
-        const { id } = req.params
+    if (req.body.data && req.params.id) {
+      const { text } = req.body
+      const { id } = req.params
+      try {
         const newReply = await Reply.create({ text, commentId: id })
         res.json(newReply)
+      } catch (error) {
+        res.status(500).send(error)
       }
-    } catch (error) {
-      console.error(error)
+    } else {
+      res.status(403).send('No data')
     }
   }
 }
+
 export const replyController = new ReplyController()

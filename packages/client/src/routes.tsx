@@ -25,7 +25,7 @@ export type PageInitArgs = {
 
 export type InitRoutes = {
   path: string
-  fetchData: ({ dispatch, state, ctx }: PageInitArgs) => void
+  fetchData: ({ dispatch, state, ctx }: PageInitArgs) => Promise<unknown>
 }
 
 export const routes = [

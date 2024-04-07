@@ -1,10 +1,14 @@
-import cors from 'cors'
 import dotenv from 'dotenv'
-import express from 'express'
-import { sequelize } from './db/index'
-import { router } from './router'
-import { auth } from './middleware/auth'
 dotenv.config()
+import cookieParser from 'cookie-parser'
+import cors from 'cors'
+import express, { RequestHandler } from 'express'
+import { createProxyMiddleware } from 'http-proxy-middleware'
+import { sequelize } from './db/index'
+import { auth } from './middlewares/auth'
+import { router } from './router'
+
+const port = Number(process.env.SERVER_PORT) || 3001
 
 const app = express()
 
@@ -16,13 +20,20 @@ const corsOptions = {
 }
 app.use(cors(corsOptions))
 
+app.use(
+  '/api/v2',
+  createProxyMiddleware({
+    changeOrigin: true,
+    cookieDomainRewrite: {
+      '*': '',
+    },
+    target: 'https://ya-praktikum.tech/api/v2',
+  })
+)
+
+app.use(cookieParser() as RequestHandler)
 app.use(express.json())
-
-const port = Number(process.env.SERVER_PORT) || 3001
-
-app.use(auth)
-app.use('/api', router)
-
+app.use('/api', auth, router)
 app.get('/', (_, res) => {
   res.json('👋 Howdy from the server :)')
 })

@@ -5,34 +5,48 @@ import { User } from '../models/user'
 
 class TopicController {
   async getTopics(_req: Request, res: Response) {
-    const topics = await Topic.findAll({
-      include: [
-        { model: Comment, as: 'comments' },
-        { model: User, as: 'user' },
-      ],
-    })
-    res.json(topics)
+    try {
+      const topics = await Topic.findAll({
+        include: [
+          { model: Comment, as: 'comments' },
+          { model: User, as: 'user' },
+        ],
+      })
+      res.json(topics)
+    } catch (error) {
+      res.status(500).send(error)
+    }
   }
 
   async getTopicById(req: Request, res: Response) {
-    const { id } = req.params
-    const data = await Topic.findOne({
-      where: { id },
-      include: [{ model: Comment, as: 'comments' }],
-    })
-    res.json(data)
+    if (req.params.id) {
+      const { id } = req.params
+      try {
+        const data = await Topic.findOne({
+          where: { id },
+          include: [{ model: Comment, as: 'comments' }],
+        })
+        res.json(data)
+      } catch (error) {
+        res.status(500).send(error)
+      }
+    } else {
+      res.status(403).send('No id available')
+    }
   }
 
   async addTopic(req: Request, res: Response) {
-    try {
-      if (req.body.topicName) {
-        const { topicName } = req.body
+    if (req.body.topicName) {
+      const { topicName } = req.body
+      try {
         const newTopic = await Topic.create({ topicName })
         res.json(newTopic)
+      } catch (error) {
+        console.error(error)
+        res.status(500).send(error)
       }
-    } catch (error) {
-      console.error(error)
     }
+    res.status(403).send('No topic name')
   }
 }
 export const topicController = new TopicController()

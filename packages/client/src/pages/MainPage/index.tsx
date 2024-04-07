@@ -65,7 +65,7 @@ const MainPage: FC = () => {
 
 export const initMainPage = async ({ dispatch, state, ctx }: PageInitArgs) => {
   if (!selectUser(state)) {
-    dispatch(getUser(ctx))
+    return dispatch(getUser(ctx))
   }
 }
 
