@@ -12,3 +12,18 @@
   padding: 20px;
   box-sizing: border-box;
 }
+
+.addEmojiButton {
+  all: unset;
+  cursor: pointer;
+  /* position: relative; */
+}
+
+.addEmojiImg {
+  width: 26px;
+  height: auto;
+}
+
+.emojiPicker {
+  --epr-emoji-size: 25px !important;
+}
