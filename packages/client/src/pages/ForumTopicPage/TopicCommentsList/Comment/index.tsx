@@ -40,8 +40,7 @@ export const Comment: FC<CommentProps> = ({ id, username, text }) => {
   }
 
   const toggleReaction = (emojiId: string) => {
-    const reactions = reactionList // переложила в переменную чтоб обновился стейт
-    if (reactions.some(el => el.emojiId === emojiId && el.currentUser)) {
+    if (reactionList.some(el => el.emojiId === emojiId && el.currentUser)) {
       deleteReaction(emojiId)
     } else {
       addReaction(emojiId)
