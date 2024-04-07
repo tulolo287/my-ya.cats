@@ -6,13 +6,11 @@ import { Space } from '@components/space'
 import { Typography } from '@components/typography'
 import { routerPaths } from '@core/constants'
 import { FC } from 'react'
-import { Link } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '@store/hooks'
 import { signup } from '@store/user/user-thunks'
 import { Spinner } from '@components/spinner'
 import { AuthSignupData, InputTypes, LoadStatus } from '@core/types'
 
-import styles from './styles.module.css'
 import { InputProps, InputRow } from './input-row'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
@@ -107,11 +105,9 @@ const SignupPage: FC = () => {
                 </Space>
               </Space>
             </form>
-            <Typography align="center" color="grey" fontSize="m">
-              <Link to={routerPaths.login} className={styles.link}>
-                Log in
-              </Link>
-            </Typography>
+            <Button displayStyle="link" to={routerPaths.login} fontSize="m">
+              Log in
+            </Button>
           </Space>
         </Paper>
       </Center>

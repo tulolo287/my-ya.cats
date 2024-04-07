@@ -1,5 +1,5 @@
 import { DataTypes } from 'sequelize'
-import { sequelize } from '../db/index'
+import { sequelize } from '../db'
 import { User } from './user'
 
 export const Reply = sequelize.define('reply', {

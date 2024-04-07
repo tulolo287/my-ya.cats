@@ -1,5 +1,5 @@
 import { DataTypes } from 'sequelize'
-import { sequelize } from '../db/index'
+import { sequelize } from '../db'
 
 import { Reply } from './reply'
 import { User } from './user'
