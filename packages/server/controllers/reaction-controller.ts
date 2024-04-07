@@ -66,7 +66,7 @@ export class ReactionController {
       }
 
       const res = await this.service.addReactionToTopic(
-        commentId,
+        Number.parseInt(commentId),
         emojiId,
         userId
       )
@@ -102,7 +102,7 @@ export class ReactionController {
       }
 
       const res = await this.service.deleteReactionFromTopic(
-        commentId,
+        Number.parseInt(commentId),
         emojiId,
         userId
       )
