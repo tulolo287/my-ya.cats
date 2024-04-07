@@ -23,27 +23,28 @@ export const Comment: FC<CommentProps> = ({ id, username, text }) => {
     setReactionList(data)
   }
 
-  const addReaction = async (emojiId: string, commentId: number) => {
+  const addReaction = async (emojiId: string) => {
     await reactionController.addReaction({
       emojiId,
-      commentId,
+      commentId: id,
     })
     getReactions()
   }
 
-  const deleteReaction = async (emojiId: string, commentId: number) => {
+  const deleteReaction = async (emojiId: string) => {
     await reactionController.deleteReaction({
       emojiId,
-      commentId,
+      commentId: id,
     })
     getReactions()
   }
 
-  const toggleReaction = (emojiId: string, currentUser: boolean) => {
-    if (currentUser) {
-      deleteReaction(emojiId, id)
+  const toggleReaction = (emojiId: string) => {
+    const reactions = reactionList // переложила в переменную чтоб обновился стейт
+    if (reactions.some(el => el.emojiId === emojiId && el.currentUser)) {
+      deleteReaction(emojiId)
     } else {
-      addReaction(emojiId, id)
+      addReaction(emojiId)
     }
   }
 
@@ -65,7 +66,7 @@ export const Comment: FC<CommentProps> = ({ id, username, text }) => {
               isCurrentUserReaction={currentUser}
               emojiId={emojiId}
               count={count}
-              onClick={() => toggleReaction(emojiId, currentUser)}
+              onClick={() => toggleReaction(emojiId)}
             />
           ))}
           <EmojiPicker
@@ -73,7 +74,7 @@ export const Comment: FC<CommentProps> = ({ id, username, text }) => {
             allowExpandReactions={false}
             className={styles.emojiPicker}
             onReactionClick={emoji => {
-              addReaction(emoji.unified, id)
+              toggleReaction(emoji.unified)
             }}
           />
         </Space>
