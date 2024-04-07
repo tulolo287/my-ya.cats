@@ -1,0 +1,22 @@
+.addEmojiButton {
+  all: unset;
+  cursor: pointer;
+}
+
+.addEmojiImg {
+  width: 26px;
+  height: auto;
+}
+
+.emojiPicker {
+  /* без !important перекрывают стили компонента пикера */
+  --epr-emoji-size: 20px !important;
+  height: 29px !important;
+}
+
+.container {
+  width: 100%;
+  max-width: 1400px;
+  padding: 20px;
+  box-sizing: border-box;
+}
