@@ -34,6 +34,7 @@
     "@typescript-eslint/eslint-plugin": "^5.35.1",
     "@typescript-eslint/parser": "^5.35.1",
     "@vitejs/plugin-react": "^2.0.1",
+    "classnames": "^2.5.1",
     "eslint": "^8.49.0",
     "eslint-plugin-unicorn": "^51.0.1",
     "identity-obj-proxy": "^3.0.0",

@@ -1,5 +1,4 @@
 import { FC } from 'react'
-import { Link } from 'react-router-dom'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 import { Button } from '@components/button'
@@ -93,10 +92,14 @@ const LoginPage: FC = () => {
               </Space>
             </form>
             <Typography align="center" color="grey" fontSize="m">
-              Don’t have an account yet?
-              <Link to={routerPaths.signup} className={styles.link}>
+              Don’t have an account yet?{' '}
+              <Button
+                displayStyle="link"
+                to={routerPaths.signup}
+                fontSize="m"
+                w="auto">
                 Register
-              </Link>
+              </Button>
             </Typography>
           </Space>
         </Paper>
