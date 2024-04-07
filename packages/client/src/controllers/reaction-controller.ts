@@ -4,9 +4,8 @@ import { ReactionAPI } from '@services/api/reaction-api'
 class ReactionController {
   private api = new ReactionAPI()
 
-  async getReactions(commentId: number) {
-    const { data } = await this.api.getReactions<ReactionList>(commentId)
-    return data
+  getReactions(commentId: number) {
+    return this.api.getReactions<ReactionList>(commentId)
   }
 
   addReaction(data: Reaction) {
@@ -14,7 +13,7 @@ class ReactionController {
   }
 
   deleteReaction(data: Reaction) {
-    return this.api.addReaction(data)
+    return this.api.deleteReaction(data)
   }
 }
 

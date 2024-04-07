@@ -6,15 +6,15 @@ export class ReactionAPI extends API {
     super('/api')
   }
 
-  public async getReactions<Response>(commentId: number) {
-    return await this.http.get<Response>('/reactions', commentId)
+  public getReactions<Response>(commentId: number) {
+    return this.http.get<Response>(`/reactions/${commentId}`)
   }
 
-  public async addReaction<Response>(data: Reaction) {
-    return await this.http.post<Response>('/reaction', { data })
+  public addReaction<Response>(data: Reaction) {
+    return this.http.post<Response>('/reaction', { data })
   }
 
-  public async deleteReaction<Response>(data: Reaction) {
-    return await this.http.delete<Response>('/reaction', { data })
+  public deleteReaction<Response>(data: Reaction) {
+    return this.http.delete<Response>('/reaction', { data })
   }
 }

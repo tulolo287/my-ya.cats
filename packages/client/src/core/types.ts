@@ -103,7 +103,11 @@ export type OAuthServiceIdResponse = {
   service_id: string
 }
 
-export type ReactionList = { emojiId: string; count: number }[]
+export type ReactionList = {
+  emojiId: string
+  count: number
+  currentUser: boolean
+}[]
 
 export type Reaction = {
   commentId: number
