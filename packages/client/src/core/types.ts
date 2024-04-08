@@ -106,3 +106,14 @@ export type OAuthServiceIdResponse = {
 export type Headers = {
   headers: { Cookie: string | undefined }
 }
+
+export type ReactionList = {
+  emojiId: string
+  count: number
+  currentUser: boolean
+}[]
+
+export type Reaction = {
+  commentId: number
+  emojiId: string
+}
