@@ -45,8 +45,9 @@ class TopicController {
         console.error(error)
         res.status(500).send(error)
       }
+    } else {
+      res.status(403).send('No topic name')
     }
-    res.status(403).send('No topic name')
   }
 }
 export const topicController = new TopicController()

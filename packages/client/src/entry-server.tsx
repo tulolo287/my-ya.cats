@@ -1,3 +1,4 @@
+import { configureStore } from '@reduxjs/toolkit'
 import { setPageHasBeenInitializedOnServer } from '@store/ssr/ssr-slice'
 import {
   createContext,
@@ -14,19 +15,19 @@ import {
   createStaticRouter,
 } from 'react-router-dom/server'
 import { initRoutes, routes } from './routes'
-import store from './store'
+import { reducer } from './store'
 
 export const render = async (req: ExpressRequest) => {
   const { query, dataRoutes } = createStaticHandler(routes)
-
   const fetchRequest = createFetchRequest(req)
-
   const context = await query(fetchRequest)
 
   if (context instanceof Response) {
     throw context
   }
-
+  const store = configureStore({
+    reducer,
+  })
   const url = createUrl(req)
 
   const foundRoutes = matchRoutes(routes, url)
@@ -35,7 +36,6 @@ export const render = async (req: ExpressRequest) => {
   }
 
   const initRoute = initRoutes.find(route => route.path === url.pathname)
-
   if (initRoute?.fetchData) {
     try {
       await initRoute.fetchData({

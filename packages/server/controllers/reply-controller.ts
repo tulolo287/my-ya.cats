@@ -24,11 +24,10 @@ class ReplyController {
   }
 
   async addReply(req: Request, res: Response) {
-    if (req.body.data && req.params.id) {
-      const { text } = req.body
-      const { id } = req.params
+    if (req.body.text && req.body.commentId) {
+      const { text, commentId } = req.body
       try {
-        const newReply = await Reply.create({ text, commentId: id })
+        const newReply = await Reply.create({ text, commentId })
         res.json(newReply)
       } catch (error) {
         res.status(500).send(error)

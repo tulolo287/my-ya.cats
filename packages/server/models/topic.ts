@@ -12,8 +12,7 @@ export const Topic = sequelize.define(
   {
     indexes: [
       {
-        unique: true,
-        fields: ['topicName'],
+        fields: ['userId'],
       },
     ],
   }

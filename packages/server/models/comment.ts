@@ -9,13 +9,12 @@ export const Comment = sequelize.define(
   {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     text: { type: DataTypes.STRING, unique: false },
-    username: { type: DataTypes.STRING, unique: true },
+    username: { type: DataTypes.STRING },
   },
   {
     indexes: [
       {
-        unique: true,
-        fields: ['username'],
+        fields: ['topicId', 'userId'],
       },
     ],
   }
