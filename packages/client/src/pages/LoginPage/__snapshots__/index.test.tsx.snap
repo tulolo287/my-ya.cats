@@ -89,20 +89,16 @@ exports[`Login Page Должен верно отрисоваться 1`] = `
                   style="flex-direction: row; gap: 12px;"
                 >
                   <button
-                    class="button  orange l"
-                    color="orange"
+                    class="button orange l"
                     style="height: 41px; width: 240px;"
                     type="submit"
-                    w="240px"
                   >
                     LOG IN
                   </button>
                   <button
-                    class="button  orange l"
-                    color="orange"
+                    class="button orange l"
                     style="height: 41px; width: 41px;"
                     type="button"
-                    w="41px"
                   >
                     <img
                       alt="log in with yandex"
@@ -119,6 +115,7 @@ exports[`Login Page Должен верно отрисоваться 1`] = `
             style="text-align: center;"
           >
             Don’t have an account yet?
+             
             <a
               class="link"
               href="/signup"

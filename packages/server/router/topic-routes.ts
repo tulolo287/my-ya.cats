@@ -1,5 +1,5 @@
-import { topicController } from '../controllers/topic-controller'
 import express from 'express'
+import { topicController } from '../controllers/topic-controller'
 
 export const topicRoutes = express.Router()
 

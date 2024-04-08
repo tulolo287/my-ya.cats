@@ -128,14 +128,12 @@ const ProfilePage: FC = () => {
               </Button>
             </form>
             <Space className={styles.links} gap="8px" align="center">
-              <button
-                className={styles.link}
-                onClick={() => setShowModal(true)}>
+              <Button displayStyle="link" onClick={() => setShowModal(true)}>
                 Change password
-              </button>
-              <a className={styles.link} onClick={() => navigate(-1)}>
+              </Button>
+              <Button displayStyle="link" onClick={() => navigate(-1)}>
                 Back
-              </a>
+              </Button>
             </Space>
           </Space>
         </Paper>
@@ -150,9 +148,13 @@ const ProfilePage: FC = () => {
   )
 }
 
-export const initProfilePage = async ({ dispatch, state }: PageInitArgs) => {
+export const initProfilePage = async ({
+  dispatch,
+  state,
+  ctx,
+}: PageInitArgs) => {
   if (!selectUser(state)) {
-    return dispatch(getUser())
+    return dispatch(getUser(ctx))
   }
 }
 

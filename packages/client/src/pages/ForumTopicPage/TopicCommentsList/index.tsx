@@ -1,27 +1,19 @@
-import { Typography } from '@components/typography'
 import { Paper } from '@components/paper'
 import { Space } from '@components/space'
-import { TopicComment } from '@core/types'
+import { Comment } from './Comment'
+import { Comment as CommentType } from '@core/types'
 
 import styles from './styles.module.css'
 
 type Props = {
-  comments: TopicComment[]
+  comments: CommentType[]
 }
 
 export const TopicCommentsList = ({ comments }: Props) => {
   return comments.length > 0 ? (
     <Space gap="24px" align="center" className={styles.wrapper}>
       {comments.map(({ id, username, text }) => (
-        <Paper key={id} className={styles.container}>
-          <Space gap="16px">
-            <Typography fontSize="l" color="orange">
-              {username}
-            </Typography>
-
-            <Typography fontSize="m">{text}</Typography>
-          </Space>
-        </Paper>
+        <Comment key={id} id={id} username={username} text={text} />
       ))}
     </Space>
   ) : (

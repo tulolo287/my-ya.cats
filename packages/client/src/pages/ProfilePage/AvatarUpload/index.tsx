@@ -40,7 +40,7 @@ export const AvatarUpload: FC = () => {
         onClick={() => setShowModal(true)}>
         {avatarUrl ? (
           <img
-            src={`${process.env.API_URL}/resources/${avatarUrl}`}
+            src={`${process.env.SERVER_URL}/yandex-api/resources/${avatarUrl}`}
             className={styles.image}
             alt="user avatar"
           />

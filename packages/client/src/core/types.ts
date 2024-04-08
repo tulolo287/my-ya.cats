@@ -1,7 +1,7 @@
 export type TFontSize = '4xl' | 'xxxl' | 'xxl' | 'xl' | 'l' | 'm' | 's' | 'xs'
 
 type DimensionsUnit = '%' | 'px' | 'em' | 'vh' | 'vw' | 'rem'
-export type DimensionsProp = `${number}${DimensionsUnit}`
+export type DimensionsProp = `${number}${DimensionsUnit}` | 'auto'
 
 export type ServerError = {
   reason: string
@@ -103,4 +103,19 @@ export type OAuthServiceIdRequest = {
 
 export type OAuthServiceIdResponse = {
   service_id: string
+}
+
+export type Headers = {
+  headers: { Cookie: string | undefined }
+}
+
+export type ReactionList = {
+  emojiId: string
+  count: number
+  currentUser: boolean
+}[]
+
+export type Reaction = {
+  commentId: number
+  emojiId: string
 }
