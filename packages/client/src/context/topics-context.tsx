@@ -7,7 +7,7 @@ type AllTopicsContext = {
 }
 
 type CurrentTopicContext = {
-  topic: Topic | undefined
+  topic?: Topic
   setTopic: (topic: Topic) => void
 }
 
