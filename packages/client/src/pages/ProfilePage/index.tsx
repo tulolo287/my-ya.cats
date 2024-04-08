@@ -148,9 +148,13 @@ const ProfilePage: FC = () => {
   )
 }
 
-export const initProfilePage = async ({ dispatch, state }: PageInitArgs) => {
+export const initProfilePage = async ({
+  dispatch,
+  state,
+  ctx,
+}: PageInitArgs) => {
   if (!selectUser(state)) {
-    return dispatch(getUser())
+    return dispatch(getUser(ctx))
   }
 }
 

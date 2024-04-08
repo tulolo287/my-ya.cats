@@ -1,5 +1,10 @@
+import { configureStore } from '@reduxjs/toolkit'
 import { setPageHasBeenInitializedOnServer } from '@store/ssr/ssr-slice'
-import { createFetchRequest, createUrl } from '@utils/entry-server.utils'
+import {
+  createContext,
+  createFetchRequest,
+  createUrl,
+} from '@utils/entry-server.utils'
 import { Request as ExpressRequest } from 'express'
 import ReactDOM from 'react-dom/server'
 import { Provider } from 'react-redux'
@@ -9,49 +14,41 @@ import {
   createStaticHandler,
   createStaticRouter,
 } from 'react-router-dom/server'
-import { routes } from './routes'
-import store from './store'
-import { getUser } from './store/user/user-thunks'
+import { initRoutes, routes } from './routes'
+import { reducer } from './store'
 
 export const render = async (req: ExpressRequest) => {
   const { query, dataRoutes } = createStaticHandler(routes)
-
   const fetchRequest = createFetchRequest(req)
-
   const context = await query(fetchRequest)
 
   if (context instanceof Response) {
     throw context
   }
-
+  const store = configureStore({
+    reducer,
+  })
   const url = createUrl(req)
 
   const foundRoutes = matchRoutes(routes, url)
-
   if (!foundRoutes) {
     throw new Error('Страница не найдена!')
   }
 
-  const [
-    {
-      route: { fetchData },
-    },
-  ] = foundRoutes
-
-  store.dispatch(setPageHasBeenInitializedOnServer(true))
-  store.dispatch(getUser())
-
-  if (typeof fetchData === 'function') {
+  const initRoute = initRoutes.find(route => route.path === url.pathname)
+  if (initRoute?.fetchData) {
     try {
-      await fetchData({
+      await initRoute.fetchData({
         dispatch: store.dispatch,
         state: store.getState(),
+        ctx: createContext(req),
       })
     } catch (error) {
       console.log('Инициализация страницы произошла с ошибкой', error)
     }
   }
 
+  store.dispatch(setPageHasBeenInitializedOnServer(true))
   const router = createStaticRouter(dataRoutes, context)
 
   return {

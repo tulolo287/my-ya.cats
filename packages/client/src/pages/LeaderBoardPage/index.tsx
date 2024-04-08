@@ -50,9 +50,10 @@ const LeaderBoardPage: FC = () => {
 export const initLeaderBoardPage = async ({
   dispatch,
   state,
+  ctx,
 }: PageInitArgs) => {
   if (!selectUser(state)) {
-    return dispatch(getUser())
+    return dispatch(getUser(ctx))
   }
 }
 

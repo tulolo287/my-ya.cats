@@ -22,6 +22,7 @@ module.exports = {
     'unicorn/prefer-module': 'off',
     'unicorn/no-array-for-each': 'off',
     'unicorn/prefer-math-trunc': 'off',
+    'unicorn/no-abusive-eslint-disable': 'off',
   },
   "ignorePatterns": ["**/client/server/index.js", "dist"]
 }

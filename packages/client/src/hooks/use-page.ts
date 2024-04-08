@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { PageInitArgs } from '../routes'
+import { PageInitArgs, PageInitContext } from '../routes'
 import { useAppDispatch, useAppSelector, useAppStore } from '@store/hooks'
 import {
   selectPageHasBeenInitializedOnServer,
@@ -9,6 +9,21 @@ import {
 type PageProps = {
   initPage: (data: PageInitArgs) => Promise<unknown>
 }
+const getCookie = (name: string) => {
+  const matches = document.cookie.match(
+    new RegExp(
+      '(?:^|; )' +
+        // eslint-disable-next-line
+        name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') +
+        '=([^;]*)'
+    )
+  )
+  return matches ? decodeURIComponent(matches[1]) : undefined
+}
+
+const createContext = (): PageInitContext => ({
+  authCookie: getCookie('authCookie'),
+})
 
 export const usePage = ({ initPage }: PageProps) => {
   const dispatch = useAppDispatch()
@@ -22,6 +37,6 @@ export const usePage = ({ initPage }: PageProps) => {
       dispatch(setPageHasBeenInitializedOnServer(false))
       return
     }
-    initPage({ dispatch, state: store.getState() })
+    initPage({ dispatch, state: store.getState(), ctx: createContext() })
   }, [])
 }

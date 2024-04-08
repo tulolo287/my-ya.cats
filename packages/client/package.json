@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.1",
+    "cookie-parser": "^1.4.6",
     "dotenv": "^16.0.2",
     "emoji-picker-react": "^4.9.2",
     "eslint-config-prettier": "^8.5.0",

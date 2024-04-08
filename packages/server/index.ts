@@ -1,6 +1,5 @@
 import dotenv from 'dotenv'
 dotenv.config()
-
 import express, { RequestHandler } from 'express'
 import cors from 'cors'
 import { json } from 'body-parser'
