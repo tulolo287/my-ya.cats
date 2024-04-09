@@ -1,3 +1,7 @@
+### Видео с результатами 7-8 спринтов
+
+[`YouTube`](https://youtu.be/b7qBvZX2EXE)
+
 ### Видео с результатами 5-6 спринтов
 
 [`YouTube`](https://youtu.be/oXLztciAs6g)
