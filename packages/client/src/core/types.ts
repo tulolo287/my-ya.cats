@@ -24,14 +24,16 @@ export type UserData = UserProfileData & {
 export type Topic = {
   id: number
   topicName: string
-  comments: Comment[]
+  comments: TopicComment[]
 }
 
-export type Comment = {
+export type TopicComment = {
   id: number
   username: string
   text: string
 }
+
+export type NewComment = Omit<TopicComment, 'id'> & { topicId: string }
 
 export type LeaderboardRecord = {
   data: {

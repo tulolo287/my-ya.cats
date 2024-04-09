@@ -11,7 +11,7 @@ const enum HTTPMethodEnum {
 }
 
 export class HTTPService {
-  protected endpoint: string
+  endpoint: string
 
   constructor(endpoint: string) {
     this.endpoint = `${process.env.SERVER_URL}${endpoint}`

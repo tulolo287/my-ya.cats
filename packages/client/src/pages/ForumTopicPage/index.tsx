@@ -11,6 +11,7 @@ import { Topic } from '@core/types'
 import { AddCommentForm } from './AddCommentForm'
 import { TopicCommentsList } from './TopicCommentsList'
 
+import { CurrentTopicContext } from '@context/topics-context'
 import { usePage } from '@hooks/use-page'
 import { PageInitArgs } from '@routes'
 import { selectUser } from '@store/user/user-slice'
@@ -26,7 +27,7 @@ const ForumTopicPage: FC = () => {
 
   const getTopic = async () => {
     if (topicId) {
-      const data = await TopicController.getTopicById(+topicId)
+      const data = await TopicController.getTopicById(topicId)
 
       if (data) {
         setTopic(data)
@@ -41,20 +42,22 @@ const ForumTopicPage: FC = () => {
   return (
     <Background>
       <Center>
-        {topic && (
-          <Space gap="40px" className={styles.container} align="center">
-            <Typography
-              tag="h1"
-              fontSize="xxl"
-              align="center"
-              color="grey-with-shadow">
-              {topic.topicName}
-            </Typography>
-            <TopicCommentsList comments={topic.comments} />
-            <AddCommentForm />
-            <Button onClick={() => navigate(-1)}>Back</Button>
-          </Space>
-        )}
+        <CurrentTopicContext.Provider value={{ topic, setTopic }}>
+          {topic && (
+            <Space gap="40px" className={styles.container} align="center">
+              <Typography
+                tag="h1"
+                fontSize="xxl"
+                align="center"
+                color="grey-with-shadow">
+                {topic.topicName}
+              </Typography>
+              <TopicCommentsList comments={topic.comments} />
+              <AddCommentForm />
+              <Button onClick={() => navigate(-1)}>Back</Button>
+            </Space>
+          )}
+        </CurrentTopicContext.Provider>
       </Center>
     </Background>
   )

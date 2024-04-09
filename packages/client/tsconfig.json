@@ -15,6 +15,8 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "baseUrl": ".",
     "paths": {
       "@components/*": ["src/components/*"],
@@ -28,7 +30,8 @@
       "@mechanics/*": ["src/mechanics/*"],
       "@store/*": ["src/store/*"],
       "@hooks/*": ["src/hooks/*"],
-      "@routes": ["src/routes"]
+      "@routes": ["src/routes"],
+      "@context/*": ["src/context/*"]
     }
   },
   "include": ["src"],
