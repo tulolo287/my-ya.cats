@@ -3,7 +3,7 @@ import { HTTPService } from './http.service'
 export abstract class API {
   protected http: HTTPService
 
-  protected constructor(endpoint: string, uri?: string) {
-    this.http = new HTTPService(endpoint, uri)
+  protected constructor(endpoint: string) {
+    this.http = new HTTPService(endpoint)
   }
 }
