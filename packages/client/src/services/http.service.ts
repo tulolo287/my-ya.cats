@@ -13,8 +13,8 @@ const enum HTTPMethodEnum {
 export class HTTPService {
   endpoint: string
 
-  constructor(endpoint: string, uri?: string) {
-    this.endpoint = `${uri ?? process.env.API_URL}${endpoint}`
+  constructor(endpoint: string) {
+    this.endpoint = `${process.env.SERVER_URL}${endpoint}`
   }
 
   private request = <Response>(

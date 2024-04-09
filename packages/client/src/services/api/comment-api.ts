@@ -3,7 +3,7 @@ import { API } from '../api.service'
 
 export class CommentAPI extends API {
   constructor() {
-    super('/api/comments', `http://localhost:${__SERVER_PORT__}`)
+    super('/api/comments')
   }
 
   public async addCommentToTopic<Response>(data: NewComment) {
