@@ -2,6 +2,7 @@
 
 const CACHE_NAME = 'ya-cats-cache-v1'
 const URLS = [
+  '/index.html',
   '/sw.js',
   '/background_layer_1.png',
   '/background_layer_2.png',
