@@ -8,6 +8,7 @@ import { dbConnect } from './db'
 import router from './router/index'
 import { auth } from './middlewares/auth'
 import { yandexApiProxy } from './middlewares/yandex-api-proxy'
+import { cspMiddleware } from './middlewares/csp'
 
 const CLIENT_URL = process.env.CLIENT_URL
 
@@ -23,6 +24,7 @@ async function startServer() {
 
   const port = Number(process.env.SERVER_PORT)
 
+  app.use(cspMiddleware)
   app.use('/yandex-api', yandexApiProxy)
   app.use(json())
   app.use(cookieParser() as RequestHandler)
