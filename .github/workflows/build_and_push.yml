@@ -27,6 +27,14 @@ jobs:
       - name: Create .env
         run: cp .env.cloud .env
 
+      - name: Build and push nginx image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./nginx/Dockerfile
+          push: true
+          tags: ghcr.io/${{ env.OWNER_LC }}/${{ github.event.repository.name }}/nginx:${{ github.sha }}
+
       - name: Build and push client image
         uses: docker/build-push-action@v2
         with:
