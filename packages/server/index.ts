@@ -24,6 +24,10 @@ async function startServer() {
 
   const port = Number(process.env.SERVER_PORT)
 
+  app.get('/api', (_, res) => {
+    res.json('👋 Howdy from the server :)')
+  })
+
   app.use(cspMiddleware)
   app.use('/yandex-api', yandexApiProxy)
   app.use(json())
@@ -31,10 +35,6 @@ async function startServer() {
   app.use('/api', auth, router)
 
   await dbConnect()
-
-  app.get('/', (_, res) => {
-    res.json('👋 Howdy from the server :)')
-  })
 
   app.listen(port, () => {
     console.log(`  ➜ 🎸 Server is listening on port: ${port}`)

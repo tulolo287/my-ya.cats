@@ -5,6 +5,7 @@ import {
   InferCreationAttributes,
 } from 'sequelize'
 import { sequelize } from '../db'
+import { Comment } from './comment'
 
 export interface IReaction
   extends Model<
@@ -42,6 +43,5 @@ export const Reaction = sequelize.define<IReaction>(
   }
 )
 
-// TODO: добавить связи с Comment
-// Comment.hasMany(Reaction, { foreignKey: 'commentId' })
-// Reaction.belongsTo(Comment, { foreignKey: 'commentId' })
+Comment.hasMany(Reaction, { foreignKey: 'commentId' })
+Reaction.belongsTo(Comment, { foreignKey: 'commentId' })
