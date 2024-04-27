@@ -11,6 +11,6 @@ export class OAuthAPI extends API {
   }
 
   public oAuthServiceId = <Response>(data: OAuthServiceIdRequest) => {
-    return this.http.get<Response>('/service-id', { data })
+    return this.http.get<Response>('/service-id', { params: { ...data } })
   }
 }

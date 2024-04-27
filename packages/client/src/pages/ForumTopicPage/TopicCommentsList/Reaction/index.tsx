@@ -1,7 +1,7 @@
 import { Space } from '@components/space'
 import styles from './styles.module.css'
 import { FC, memo } from 'react'
-import { Emoji } from 'emoji-picker-react'
+import { Emoji, EmojiStyle } from 'emoji-picker-react'
 import { Typography } from '@components/typography'
 
 type ReactionProps = {
@@ -20,7 +20,7 @@ export const Reaction: FC<ReactionProps> = memo(
         }`}
         onClick={onClick}>
         <Space direction="row" gap="4px">
-          <Emoji unified={emojiId} size={20} />
+          <Emoji unified={emojiId} size={20} emojiStyle={EmojiStyle.NATIVE} />
           <Typography fontSize="m">{count}</Typography>
         </Space>
       </button>

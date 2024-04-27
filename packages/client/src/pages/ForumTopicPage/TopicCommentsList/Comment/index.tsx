@@ -6,7 +6,7 @@ import { Reaction } from '../Reaction'
 import reactionController from '@controllers/reaction-controller'
 
 import styles from './styles.module.css'
-import EmojiPicker from 'emoji-picker-react'
+import EmojiPicker, { EmojiStyle } from 'emoji-picker-react'
 import { ReactionList } from '@core/types'
 
 type CommentProps = {
@@ -71,6 +71,7 @@ export const Comment: FC<CommentProps> = ({ id, username, text }) => {
           <EmojiPicker
             reactionsDefaultOpen={true}
             allowExpandReactions={false}
+            emojiStyle={EmojiStyle.NATIVE}
             className={styles.emojiPicker}
             onReactionClick={emoji => {
               toggleReaction(emoji.unified)
