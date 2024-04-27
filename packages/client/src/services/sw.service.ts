@@ -29,27 +29,17 @@ sw.addEventListener('install', (event: ExtendableEvent) => {
   )
 })
 
-sw.addEventListener('fetch', event => {
-  event.respondWith(
-    caches.match(event.request).then(response => {
-      if (response) {
-        return response
-      }
+sw.addEventListener('fetch', async (event: FetchEvent) => {
+  if (event.request.method !== 'GET') {
+    return
+  }
 
-      const fetchRequest = event.request.clone()
-      return fetch(fetchRequest).then(response => {
-        if (!response || response.status !== 200 || response.type !== 'basic') {
-          return response
-        }
-
-        const responseToCache = response.clone()
-        caches.open(CACHE_NAME).then(cache => {
-          cache.put(event.request, responseToCache)
-        })
-        return response
-      })
-    })
-  )
+  const { request } = event
+  if (request.url.includes('/api') || request.url.includes('/yandex-api')) {
+    event.respondWith(fetchFromNet(request))
+  } else {
+    event.respondWith(fetchFromCache(request))
+  }
 })
 
 sw.addEventListener('activate', async event => {
@@ -61,5 +51,28 @@ sw.addEventListener('activate', async event => {
     })
   )
 })
+
+const fetchFromCache = async (request: Request): Promise<Response> => {
+  const cashedRequest = await caches.match(request)
+  return cashedRequest || fetchFromNet(request)
+}
+
+const fetchFromNet = async (request: Request): Promise<Response> => {
+  const cache = await caches.open(CACHE_NAME)
+  try {
+    const response = await fetch(request)
+    if (!response || response.status !== 200 || response.type !== 'basic') {
+      return response
+    }
+    cache.put(request, response.clone())
+    return response
+  } catch {
+    const response = await cache.match(request)
+    if (response) {
+      return response
+    }
+    throw new Error(`No cached or network response for ${request.url}`)
+  }
+}
 
 export {}
