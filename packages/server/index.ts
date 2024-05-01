@@ -9,6 +9,7 @@ import router from './router/index'
 import { auth } from './middlewares/auth'
 import { yandexApiProxy } from './middlewares/yandex-api-proxy'
 import { cspMiddleware } from './middlewares/csp'
+import xssShield from 'xss-shield/build/main/lib/xssShield'
 
 const CLIENT_URL = process.env.CLIENT_URL
 
@@ -33,6 +34,7 @@ async function startServer() {
   app.use(json())
   app.use(cookieParser() as RequestHandler)
   app.use('/api', auth, router)
+  app.use(xssShield())
 
   await dbConnect()
 
