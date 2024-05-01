@@ -33,9 +33,6 @@ export class GameScreen {
   runSpeed: number
   width: number
   height: number
-  private bg1_xv: number
-  private bg2_xv: number
-  private bg3_xv: number
   parallaxBg: IBackground[]
   platforms: IPlatform[]
   player: IPlayer
@@ -52,9 +49,6 @@ export class GameScreen {
     this.height = this.gameSettings.height
     this.walkSpeed = this.gameSettings.walkSpeed
     this.runSpeed = this.gameSettings.runSpeed
-    this.bg1_xv = 2
-    this.bg2_xv = 3
-    this.bg3_xv = 5
     this.parallaxBg = []
     this.butterflies = []
     this.platforms = []
@@ -75,8 +69,8 @@ export class GameScreen {
       0,
       this.width,
       this.height,
-      './background_layer_1.png',
-      this.bg1_xv
+      './background_layer_3.png',
+      1
     )
     const bg2 = new Background(
       0,
@@ -84,17 +78,17 @@ export class GameScreen {
       this.width,
       this.height,
       './background_layer_2.png',
-      this.bg2_xv
+      0.5
     )
     const bg3 = new Background(
       0,
       0,
       this.width,
       this.height,
-      './background_layer_3.png',
-      this.bg3_xv
+      './background_layer_1.png',
+      0.3
     )
-    this.parallaxBg.push(bg1, bg2, bg3)
+    this.parallaxBg.push(bg3, bg2, bg1)
   }
 
   private restart() {
@@ -127,6 +121,11 @@ export class GameScreen {
   }
 
   update(dt: number) {
+    this.gameSettings.gameSpeed = InputController.KEYS.run
+      ? this.runSpeed
+      : this.walkSpeed
+    this.gameSettings.gameSpeed = Math.floor(this.gameSettings.gameSpeed * dt)
+
     if (!this.gameOver) {
       if (this.butterflyParticles.length > 0) {
         for (const [idx, particle] of this.butterflyParticles.entries()) {
@@ -138,16 +137,10 @@ export class GameScreen {
       }
 
       this.player.update(dt)
-      this.parallaxBg.forEach(e => e.update(this.gameSettings.gameSpeed))
-
-      this.gameSettings.gameSpeed = InputController.KEYS.run
-        ? this.runSpeed
-        : this.walkSpeed
+      this.parallaxBg.forEach(bg => bg.update(this.gameSettings.gameSpeed))
 
       for (let i = 0; i < this.platforms.length; i++) {
-        this.platforms[i].update(
-          Math.floor(this.bg3_xv * this.gameSettings.gameSpeed)
-        )
+        this.platforms[i].update(this.gameSettings.gameSpeed)
         if (this.platforms[i].delete) {
           this.platforms.splice(i, 1)
           i--
@@ -158,7 +151,7 @@ export class GameScreen {
         this.createPlatforms(8)
       }
       for (let i = 0; i < this.butterflies.length; i++) {
-        this.butterflies[i].update()
+        this.butterflies[i].update(this.gameSettings.gameSpeed)
         if (this.butterflies[i].delete) {
           for (let j = 0; j < 10; j++) {
             this.butterflyParticles.push(
@@ -170,18 +163,14 @@ export class GameScreen {
         }
       }
       for (let i = 0; i < this.mushrooms.length; i++) {
-        this.mushrooms[i].update(
-          Math.floor(this.bg3_xv * this.gameSettings.gameSpeed)
-        )
+        this.mushrooms[i].update(this.gameSettings.gameSpeed)
         if (this.mushrooms[i].delete) {
           this.mushrooms.splice(i, 1)
           i--
         }
       }
       for (let i = 0; i < this.hearts.length; i++) {
-        this.hearts[i].update(
-          Math.floor(this.bg3_xv * this.gameSettings.gameSpeed)
-        )
+        this.hearts[i].update(this.gameSettings.gameSpeed)
         if (this.hearts[i].delete) {
           this.hearts.splice(i, 1)
           i--
