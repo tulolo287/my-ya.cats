@@ -226,7 +226,6 @@ export class Player implements IPlayer {
         if (this.y + 70 < obstacle.y) {
           this.yVelocity = 0
           this.collisionArea.y = obstacle.y - this.collisionArea.height
-          console.log(this.gameSettings.gameSpeed)
           this.currentAnimation =
             this.gameSettings.gameSpeed > 5 ? 'run' : 'walk'
         }
