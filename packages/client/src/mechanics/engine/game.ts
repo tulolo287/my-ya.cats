@@ -77,7 +77,7 @@ export class Game implements IGame {
       if (!this.prevTime) {
         this.prevTime = timestamp
       }
-      const delta = Math.floor(timestamp - this.prevTime) / 1000
+      const delta = Math.floor(timestamp - this.prevTime) / 100
       this.prevTime = timestamp
 
       this.update(delta)

@@ -107,20 +107,20 @@ export class Player implements IPlayer {
       jumpOffset: 20,
     }
 
-    this.gravity = 40
+    this.gravity = 5
     this.yVelocity = 0
     this.frameX = 0
     this.frameY = 0
     this.maxY_velocity = 17
-    this.jumpHeight = 17
+    this.jumpHeight = 20
     this.jumpFriction = 0.1
     this.isJump = false
 
     this.image = new Image()
     this.image.src = './Cat-Sheet.png'
     this.animationSpeedFactor = 0
-    this.animationWalkSpeed = 200
-    this.animationRunSpeed = 200
+    this.animationWalkSpeed = 20
+    this.animationRunSpeed = 20
     this.animationSpeed = 1
     this.frameCount = 0
     this.currentAnimation = 'walk'
@@ -227,7 +227,7 @@ export class Player implements IPlayer {
           this.yVelocity = 0
           this.collisionArea.y = obstacle.y - this.collisionArea.height
           this.currentAnimation =
-            this.gameSettings.gameSpeed > 5 ? 'run' : 'walk'
+            this.gameSettings.gameSpeed > 7 ? 'run' : 'walk'
         }
         return true
       }

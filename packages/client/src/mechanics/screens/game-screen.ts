@@ -211,6 +211,15 @@ export class GameScreen {
             500,
             40,
             './platform.png'
+          ),
+          new Platform(
+            this.player.x + 500,
+            this.gameSettings.height - 50,
+            500,
+            40,
+            500,
+            40,
+            './platform.png'
           )
         )
       } else {
