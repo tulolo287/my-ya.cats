@@ -99,7 +99,7 @@ export class Player implements IPlayer {
 
     this.collisionArea = {
       y: this.y + 30,
-      x: this.x + 35,
+      x: this.x + 40,
       width: this.scaleWidth * 0.4,
       height: this.scaleHeight * 0.4,
       initialOffset: 73,
@@ -151,7 +151,14 @@ export class Player implements IPlayer {
 
     if (this.y > this.gameSettings.height) {
       this.lives--
-      this.collisionArea.y = 300
+      const targetPlatform = this.gameScreen.getMiddlePlatform()
+      if (targetPlatform) {
+        this.x = targetPlatform.x - this.collisionArea.width
+        this.collisionArea.x = this.x + 40
+        this.collisionArea.y = targetPlatform.y - this.collisionArea.height
+      } else {
+        this.collisionArea.y = 100
+      }
     }
 
     this.isGround()
@@ -164,7 +171,6 @@ export class Player implements IPlayer {
         ? this.animationRunSpeed / this.gameSettings.gameSpeed
         : this.animationWalkSpeed / this.gameSettings.gameSpeed
     this.animationSpeed = this.animationSpeedFactor
-    console.log(this.animationSpeed)
     if (this.yVelocity > 0) {
       this.currentAnimation = 'fall'
     }

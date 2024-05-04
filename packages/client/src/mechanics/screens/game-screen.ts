@@ -23,6 +23,7 @@ export type TGameScreen = {
   player: IPlayer
   update: (dt: number) => void
   draw: (ctx: CanvasRenderingContext2D) => void
+  getMiddlePlatform: () => IPlatform | undefined
   gameOver: boolean
 }
 
@@ -280,5 +281,15 @@ export class GameScreen {
     const x = platX + 100 + ~~((width - 200) * Math.random())
     const y = platY - height + this.gameSettings.obstacle.heart.additionalY
     this.hearts.push(new Obstacle(x, y, 40, 40, 40, 40, './heart.png'))
+  }
+
+  getMiddlePlatform() {
+    const screenCenter = this.gameSettings.width / 2
+    const distance = 300
+    return this.platforms.find(
+      platform =>
+        platform.x > screenCenter - distance &&
+        platform.x < screenCenter + distance
+    )
   }
 }
