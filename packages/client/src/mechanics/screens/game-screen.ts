@@ -223,6 +223,7 @@ export class GameScreen {
             './platform.png'
           )
         )
+        i++
       } else {
         const lastPlatform = this.platforms.at(-1)
         const diff = Math.floor(Math.random() * 170 + 10)
