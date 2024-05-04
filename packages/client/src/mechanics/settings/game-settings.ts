@@ -4,9 +4,9 @@ const gameSettings: TGameSettings = {
   width: 1920,
   height: 1080,
   debug: false,
-  gameSpeed: 1.5,
-  walkSpeed: 1.5,
-  runSpeed: 2,
+  gameSpeed: 40,
+  walkSpeed: 40,
+  runSpeed: 60,
   playerAnimation: {
     walk: {
       frameY: 4,

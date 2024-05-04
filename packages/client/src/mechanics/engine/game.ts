@@ -9,10 +9,7 @@ export interface IGame {
   context: CanvasRenderingContext2D | null | undefined
   gameSettings: TGameSettings
   gameScreen: TGameScreen
-  prevTime: number
-  accTime: number
-  msPerFrame: number
-  maxMsFrame: number
+  prevTime: number | undefined
   loopId: number
   destroy: () => void
   handleEnd: () => void
@@ -29,10 +26,7 @@ export class Game implements IGame {
   context: CanvasRenderingContext2D | null | undefined
   gameSettings: TGameSettings
   gameScreen: TGameScreen
-  prevTime: number
-  accTime: number
-  msPerFrame: number
-  maxMsFrame: number
+  prevTime: number | undefined
   loopId: number
   handleEnd: () => void
   handleScore: (points: number) => void
@@ -49,10 +43,7 @@ export class Game implements IGame {
 
     this.gameSettings = gameSettings
 
-    this.prevTime = 0
-    this.accTime = 0
-    this.msPerFrame = 16
-    this.maxMsFrame = 32
+    this.prevTime = undefined
     this.loopId = 0
 
     InputController.init()
@@ -78,20 +69,17 @@ export class Game implements IGame {
     this.gameScreen?.draw(ctx)
   }
 
-  private loop = () => {
+  private loop = (timestamp: number) => {
     if (this.gameScreen.gameOver) {
       this.handleScore(this.getScore())
       this.handleEnd()
     } else {
-      const nowTime = performance.now()
-      const delta = nowTime - this.prevTime
-      this.prevTime = nowTime
-      this.accTime = delta
-
-      while (this.accTime > this.maxMsFrame) {
-        this.accTime -= this.msPerFrame
-        this.update(delta)
+      if (!this.prevTime) {
+        this.prevTime = timestamp
       }
+      const delta = Math.floor(timestamp - this.prevTime) / 100
+      this.prevTime = timestamp
+
       this.update(delta)
       this.draw(this.context!)
 
@@ -100,7 +88,6 @@ export class Game implements IGame {
   }
 
   start() {
-    this.prevTime = performance.now()
-    this.loop()
+    this.loop(0)
   }
 }

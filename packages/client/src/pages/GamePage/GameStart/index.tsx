@@ -31,7 +31,7 @@ export const GameStart: FC<GameStartProps> = ({ handleStart }) => (
               color="grey"
             />
             <Typography
-              children={'press R or ARROW UP to speed up'}
+              children={'press R to speed up'}
               fontSize="xl"
               color="grey"
             />

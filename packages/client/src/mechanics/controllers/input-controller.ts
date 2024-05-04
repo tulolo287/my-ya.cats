@@ -26,8 +26,7 @@ export class InputController {
         }
         break
       }
-      case 'KeyR':
-      case 'ArrowUp': {
+      case 'KeyR': {
         if (!e.repeat) {
           InputController.KEYS.run = true
         }
@@ -42,8 +41,7 @@ export class InputController {
         InputController.KEYS.jump = false
         break
       }
-      case 'KeyR':
-      case 'ArrowUp': {
+      case 'KeyR': {
         InputController.KEYS.run = false
         break
       }
