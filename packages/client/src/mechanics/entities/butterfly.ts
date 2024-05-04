@@ -8,7 +8,7 @@ export interface IButterfly extends IEntity {
   curve: number
   angle: number
   angleSpeed: number
-  update: (dt: number) => void
+  update: (gameSpeed: number, dt: number) => void
   initial_x_velocity: number
   wiggle: number
 }
@@ -43,10 +43,10 @@ export class Butterfly extends Entity implements IButterfly {
     this.wiggle = 0
   }
 
-  update(speed: number) {
+  update(gameSpeed: number, dt: number) {
     this.wiggle = getRandom(-10, 10)
     this.yVelocity = this.wiggle
-    this.xVelocity = -speed + this.initial_x_velocity
+    this.xVelocity = -gameSpeed + this.initial_x_velocity
     if (this.y < 0) {
       this.yVelocity += 10
     }
@@ -55,7 +55,7 @@ export class Butterfly extends Entity implements IButterfly {
     }
 
     this.x += this.xVelocity
-    this.y += this.curve * Math.sin(this.angle) + this.yVelocity
+    this.y += this.curve * dt * Math.sin(this.angle) + this.yVelocity
     this.angle += this.angleSpeed
     if (this.x + this.width < 0) {
       this.delete = true

@@ -72,8 +72,8 @@ export class Background implements IBackground {
     this.bg2.image.src = this.src
   }
 
-  update(speed: number) {
-    this.xVelocity = Math.floor(this.x_offset * speed)
+  update(gameSpeed: number) {
+    this.xVelocity = Math.floor(this.x_offset * gameSpeed)
     this.bg1.x -= this.xVelocity
     this.bg2.x -= this.xVelocity
     if (this.bg1.x <= -this.bg1.width) {

@@ -124,7 +124,8 @@ export class GameScreen {
     this.gameSettings.gameSpeed = InputController.KEYS.run
       ? this.runSpeed
       : this.walkSpeed
-    this.gameSettings.gameSpeed = Math.floor(this.gameSettings.gameSpeed * dt)
+
+    const speedDelta = Math.floor(this.gameSettings.gameSpeed * dt)
 
     if (!this.gameOver) {
       if (this.butterflyParticles.length > 0) {
@@ -137,10 +138,10 @@ export class GameScreen {
       }
 
       this.player.update(dt)
-      this.parallaxBg.forEach(bg => bg.update(this.gameSettings.gameSpeed))
+      this.parallaxBg.forEach(bg => bg.update(speedDelta))
 
       for (let i = 0; i < this.platforms.length; i++) {
-        this.platforms[i].update(this.gameSettings.gameSpeed)
+        this.platforms[i].update(speedDelta)
         if (this.platforms[i].delete) {
           this.platforms.splice(i, 1)
           i--
@@ -151,7 +152,7 @@ export class GameScreen {
         this.createPlatforms(8)
       }
       for (let i = 0; i < this.butterflies.length; i++) {
-        this.butterflies[i].update(this.gameSettings.gameSpeed)
+        this.butterflies[i].update(speedDelta, dt)
         if (this.butterflies[i].delete) {
           for (let j = 0; j < 10; j++) {
             this.butterflyParticles.push(
@@ -163,14 +164,14 @@ export class GameScreen {
         }
       }
       for (let i = 0; i < this.mushrooms.length; i++) {
-        this.mushrooms[i].update(this.gameSettings.gameSpeed)
+        this.mushrooms[i].update(speedDelta)
         if (this.mushrooms[i].delete) {
           this.mushrooms.splice(i, 1)
           i--
         }
       }
       for (let i = 0; i < this.hearts.length; i++) {
-        this.hearts[i].update(this.gameSettings.gameSpeed)
+        this.hearts[i].update(speedDelta)
         if (this.hearts[i].delete) {
           this.hearts.splice(i, 1)
           i--
