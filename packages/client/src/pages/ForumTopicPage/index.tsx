@@ -12,18 +12,12 @@ import { AddCommentForm } from './AddCommentForm'
 import { TopicCommentsList } from './TopicCommentsList'
 
 import { CurrentTopicContext } from '@context/topics-context'
-import { usePage } from '@hooks/use-page'
-import { PageInitArgs } from '@routes'
-import { selectUser } from '@store/user/user-slice'
-import { getUser } from '@store/user/user-thunks'
 import styles from './styles.module.css'
 
 const ForumTopicPage: FC = () => {
   const [topic, setTopic] = useState<Topic>()
   const { topicId } = useParams()
   const navigate = useNavigate()
-
-  usePage({ initPage: initForumTopicPage })
 
   const getTopic = async () => {
     if (topicId) {
@@ -61,16 +55,6 @@ const ForumTopicPage: FC = () => {
       </Center>
     </Background>
   )
-}
-
-export const initForumTopicPage = async ({
-  dispatch,
-  state,
-  ctx,
-}: PageInitArgs) => {
-  if (!selectUser(state)) {
-    return dispatch(getUser(ctx))
-  }
 }
 
 export default ForumTopicPage

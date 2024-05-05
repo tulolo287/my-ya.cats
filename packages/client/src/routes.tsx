@@ -3,7 +3,6 @@ import ProtectedRoute from '@components/protected-route'
 import { routerPaths } from '@core/constants'
 import ErrorPage from '@pages/ErrorPage'
 import ForumPage, { initForumPage } from '@pages/ForumPage'
-import ForumTopicPage, { initForumTopicPage } from '@pages/ForumTopicPage'
 import GamePage, { initGamePage } from '@pages/GamePage'
 import LeaderBoardPage, { initLeaderBoardPage } from '@pages/LeaderBoardPage'
 import LoginPage from '@pages/LoginPage'
@@ -75,10 +74,6 @@ export const routes = [
         path: routerPaths.forum,
         element: <ForumPage />,
       },
-      {
-        path: routerPaths.forumTopic,
-        element: <ForumTopicPage />,
-      },
     ],
   },
   {
@@ -107,9 +102,5 @@ export const initRoutes: InitRoutes[] = [
   {
     path: routerPaths.forum,
     fetchData: initForumPage,
-  },
-  {
-    path: routerPaths.forumTopic,
-    fetchData: initForumTopicPage,
   },
 ]
