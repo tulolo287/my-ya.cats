@@ -87,21 +87,21 @@ export class Player implements IPlayer {
     this.lives = 3
     this.score = 0
 
-    this.width = 1236 / 8
-    this.height = 7880 / 51
+    this.width = Math.ceil(1236 / 8)
+    this.height = Math.ceil(7880 / 51)
     this.scaleFactor = 0.9
 
-    this.scaleWidth = this.width * this.scaleFactor
-    this.scaleHeight = this.height * this.scaleFactor
+    this.scaleWidth = Math.floor(this.width * this.scaleFactor)
+    this.scaleHeight = Math.floor(this.height * this.scaleFactor)
 
-    this.x = this.gameSettings.width / 2 - this.width / 2
-    this.y = this.gameSettings.height / 2 - this.height
+    this.x = Math.floor(this.gameSettings.width / 2 - this.width / 2)
+    this.y = Math.floor(this.gameSettings.height / 2 - this.height)
 
     this.collisionArea = {
       y: this.y + 30,
-      x: this.x + 40,
-      width: this.scaleWidth * 0.4,
-      height: this.scaleHeight * 0.4,
+      x: this.x + 35,
+      width: Math.floor(this.scaleWidth * 0.4),
+      height: Math.floor(this.scaleHeight * 0.4),
       initialOffset: 73,
       offset: 73,
       jumpOffset: 20,
@@ -119,7 +119,7 @@ export class Player implements IPlayer {
     this.image = new Image()
     this.image.src = './Cat-Sheet.png'
     this.animationSpeedFactor = 0
-    this.animationWalkSpeed = 15
+    this.animationWalkSpeed = 13
     this.animationRunSpeed = 25
     this.animationSpeed = 1
     this.animationTime = 0
@@ -146,22 +146,21 @@ export class Player implements IPlayer {
       this.yVelocity *= this.jumpFriction
     }
 
-    this.collisionArea.y += this.yVelocity * dt
+    this.collisionArea.y += Math.floor(this.yVelocity * dt)
+    this.isGround()
     this.y = this.collisionArea.y - this.collisionArea.offset
 
-    if (this.y > this.gameSettings.height) {
+    if (this.collisionArea.y > this.gameSettings.height) {
       this.lives--
       const targetPlatform = this.gameScreen.getMiddlePlatform()
       if (targetPlatform) {
         this.x = targetPlatform.x - this.collisionArea.width
-        this.collisionArea.x = this.x + 40
-        this.collisionArea.y = targetPlatform.y - this.collisionArea.height
+        this.collisionArea.x = this.x + 35
+        this.collisionArea.y = targetPlatform.y - this.collisionArea.height - 50
       } else {
         this.collisionArea.y = 100
       }
     }
-
-    this.isGround()
   }
 
   animate = (dt: number) => {
@@ -231,12 +230,10 @@ export class Player implements IPlayer {
     for (let i = 0; i < this.gameScreen.platforms.length; i++) {
       const obstacle = isCollided(this, this.gameScreen.platforms[i])
       if (obstacle) {
-        if (this.y + 70 < obstacle.y) {
-          this.yVelocity = 0
-          this.collisionArea.y = obstacle.y - this.collisionArea.height
-          this.currentAnimation =
-            this.gameSettings.gameSpeed > 50 ? 'run' : 'walk'
-        }
+        this.yVelocity = 0
+        this.collisionArea.y = obstacle.y - this.collisionArea.height
+        this.currentAnimation =
+          this.gameSettings.gameSpeed > 50 ? 'run' : 'walk'
         return true
       }
     }
@@ -262,8 +259,8 @@ export class Player implements IPlayer {
       this.frameY * this.height,
       this.width,
       this.height,
-      Math.floor(this.x),
-      Math.floor(this.y),
+      this.x,
+      this.y,
       this.scaleWidth,
       this.scaleHeight
     )

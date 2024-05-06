@@ -226,7 +226,7 @@ export class GameScreen {
         )
         i++
       } else {
-        const lastPlatform = this.platforms.at(-1)
+        const [lastPlatform] = this.platforms.slice(-1)
         const diff = Math.floor(Math.random() * 170 + 10)
         if (!lastPlatform) return
         const up =
