@@ -16,12 +16,8 @@ export class InputController {
 
     window.addEventListener('keydown', InputController.keyDown)
     window.addEventListener('keyup', InputController.keyUp)
-    document
-      .querySelector('#canvas')!
-      .addEventListener('touchstart', InputController.touchStart)
-    document
-      .querySelector('#canvas')!
-      .addEventListener('touchend', InputController.touchEnd)
+    window.addEventListener('touchstart', InputController.touchStart)
+    window.addEventListener('touchend', InputController.touchEnd)
   }
 
   static keyDown(e: KeyboardEvent): void {
