@@ -1,22 +1,21 @@
-import { FC, SyntheticEvent, useState, useContext } from 'react'
+import { FC, SyntheticEvent, useState } from 'react'
 
 import { Button } from '@components/button'
 import { Input } from '@components/input'
 import { Space } from '@components/space'
 import { Typography } from '@components/typography'
 import TopicController from '@controllers/topic-controller'
-import { TopicsContext } from '@context/topics-context'
-import { InputTypes, NewTopic } from '@core/types'
+import { InputTypes, NewTopic, Topic } from '@core/types'
 
+import { useAppDispatch, useAppSelector } from '@store/hooks'
 import styles from './styles.module.css'
-
-const addNewTopic = async (data: NewTopic) => {
-  await TopicController.addNewTopic(data)
-}
+import { addTopic } from '@store/topics/topics-slice'
+import { addNewTopic } from '@store/topics/topics-thunks'
 
 export const AddTopicModalContent: FC = () => {
   const [status, setStatus] = useState('')
-  const { setTopics } = useContext(TopicsContext)
+  const dispatch = useAppDispatch()
+  const { allTopics } = useAppSelector(state => state.topics)
 
   const onSubmit = async (e: SyntheticEvent) => {
     e.preventDefault()
@@ -27,11 +26,10 @@ export const AddTopicModalContent: FC = () => {
     const formJson = Object.fromEntries(formData.entries())
 
     try {
-      await addNewTopic(formJson as NewTopic)
-      const data = await TopicController.getTopics()
-      if (data) {
-        setTopics(data)
-      }
+      // await addNewTopic(formJson as NewTopic).then(() => dispatch(getTopics()))
+      dispatch(addNewTopic(formJson as NewTopic)).then(topic =>
+        dispatch(addTopic(topic))
+      )
 
       form.reset()
       setStatus('Topic has been added. You can close modal now :)')

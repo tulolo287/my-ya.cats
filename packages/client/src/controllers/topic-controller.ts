@@ -1,17 +1,15 @@
-import { TopicAPI } from '@services/api/topic-api'
 import { NewTopic, Topic } from '@core/types'
+import { TopicAPI } from '@services/api/topic-api'
 
 class TopicController {
   private api = new TopicAPI()
 
-  async getTopics() {
-    const { data } = await this.api.getTopics()
-    return data as Topic[]
+  async getTopics(data?: Headers) {
+    return this.api.getTopics<Topic[]>(data)
   }
 
   async addNewTopic(topic: NewTopic) {
-    const { data } = await this.api.addNewTopic(topic)
-    return data as Topic[]
+    return this.api.addNewTopic(topic)
   }
 
   async getTopicById(id: string) {

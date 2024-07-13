@@ -1,7 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { combineReducers } from 'redux'
-import { userReducer } from './user/user-slice'
 import { ssrReducer } from './ssr/ssr-slice'
+import { topicsReducer } from './topics/topics-slice'
+import { userReducer } from './user/user-slice'
 
 declare global {
   interface Window {
@@ -12,6 +13,7 @@ declare global {
 export const reducer = combineReducers({
   user: userReducer,
   ssr: ssrReducer,
+  topics: topicsReducer,
 })
 
 const store = configureStore({

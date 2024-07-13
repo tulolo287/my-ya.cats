@@ -2,10 +2,9 @@ import { FC, useEffect } from 'react'
 import { Navigate, Outlet, useSearchParams } from 'react-router-dom'
 
 import { redirectUri, routerPaths } from '@core/constants'
+import { LoadStatus } from '@core/types'
 import { useAppDispatch, useAppSelector } from '@store/hooks'
 import { getUser, oAuthLogin } from '@store/user/user-thunks'
-import { LoadStatus } from '@core/types'
-import oauthController from '@controllers/oauth-controller'
 
 type ProtectedRouteProps = {
   /**
@@ -22,10 +21,12 @@ const ProtectedRoute: FC<ProtectedRouteProps> = ({ authProtected }) => {
   const code = searchParams.get('code')
 
   useEffect(() => {
-    if (code) {
-      dispatch(oAuthLogin({ code, redirect_uri: redirectUri }))
-    } else {
-      dispatch(getUser())
+    if (!currentUser) {
+      if (code) {
+        dispatch(oAuthLogin({ code, redirect_uri: redirectUri }))
+      } else {
+        dispatch(getUser())
+      }
     }
   }, [dispatch])
 

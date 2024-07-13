@@ -1,4 +1,4 @@
-import { NewTopic } from '@core/types'
+import { Headers, NewTopic } from '@core/types'
 import { API } from '../api.service'
 
 export class TopicAPI extends API {
@@ -6,12 +6,12 @@ export class TopicAPI extends API {
     super('/api/topics')
   }
 
-  public async getTopics<Response>() {
-    return await this.http.get<Response>('')
+  public getTopics = <Response>(data?: Headers) => {
+    return this.http.get<Response>('/', data)
   }
 
-  public async addNewTopic<Response>(data: NewTopic) {
-    return await this.http.post<Response>('', {
+  public addNewTopic<Response>(data: NewTopic) {
+    return this.http.post<Response>('', {
       data: JSON.stringify(data),
       headers: { 'Content-Type': 'application/json' },
     })

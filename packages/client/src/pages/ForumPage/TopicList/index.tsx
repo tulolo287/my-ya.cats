@@ -1,32 +1,20 @@
-import { FC, useContext, useEffect } from 'react'
+import { FC } from 'react'
 
 import { Space } from '@components/space'
-import TopicController from '@controllers/topic-controller'
-import { TopicsContext } from '@context/topics-context'
 import { TopicItem } from './TopicItem'
 
+import { LoadStatus } from '@core/types'
+import { useAppSelector } from '@store/hooks'
 import styles from './styles.module.css'
 
 export const TopicList: FC = () => {
-  const { topics, setTopics } = useContext(TopicsContext)
-
-  const getTopics = async () => {
-    const data = await TopicController.getTopics()
-
-    if (data) {
-      setTopics(data)
-    }
-  }
-
-  useEffect(() => {
-    getTopics()
-  }, [])
+  const { allTopics, status } = useAppSelector(state => state.topics)
 
   return (
     <Space gap="24px" className={styles.topicList}>
-      {topics.map(item => (
-        <TopicItem key={item.id} {...item} />
-      ))}
+      {status === LoadStatus.LOADING && 'Loading...'}
+      {allTopics?.length &&
+        allTopics.map(topic => <TopicItem key={topic.id} {...topic} />)}
     </Space>
   )
 }

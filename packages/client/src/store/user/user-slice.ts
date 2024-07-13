@@ -81,5 +81,4 @@ const userSlice = createSlice({
 })
 
 export const selectUser = (state: RootState) => state.user.currentUser
-
 export const userReducer = userSlice.reducer
